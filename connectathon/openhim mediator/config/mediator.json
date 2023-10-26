@@ -1,0 +1,40 @@
+{
+    "urn": "urn:uuid:1a73b240-e513-11e9-98a9-7d914542d225",
+    "version": "0.0.1",
+    "name": "openhim-mediator-fhir-dhis2-ug",
+    "description": "Moves Aggregate FHIR Data to DHIS2",
+    "defaultChannelConfig": [
+      {
+        "name": "openhim-mediator-fhir-dhis2-ug",
+        "urlPattern": "/dhis/.*",
+        "alerts": [],
+        "txRerunAcl": [],
+        "txViewFullAcl": [],
+        "txViewAcl": [],
+        "properties": [],
+        "matchContentTypes": [],
+        "routes": [
+          {
+            "name": "openhim-mediator-fhir-dhis2-ug Route",
+            "host": "localhost",
+            "port": "3000",
+            "primary": true,
+            "type": "http"
+          }
+        ],
+        "allow": ["dhis2"],
+        "type": "http"
+      }
+    ],
+    "endpoints": [
+      {
+        "name": "openhim-mediator-fhir-dhis2-ug Route",
+        "host": "https://play.dhis2.org",
+        "path": "/40.1.0/api/dataValueSets",
+        "primary": true,
+        "forwardAuthHeader": false,
+        "status": "enabled",
+        "type": "http"
+      }
+    ]
+  }
