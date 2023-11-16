@@ -1,0 +1,20 @@
+{
+    "name": "Create FHIR Patient ID Mapper",
+    "description": "Map FHIR Patient ID",
+    "endpoint": {
+      "pattern": "/patient-mapper-id"
+    },
+    "transformation": {
+      "input": "JSON",
+      "output": "JSON"
+    },
+   "inputMapping": {
+          "requestBody.entry[].resource.id": "patient[].id"
+      },
+    "constants": {
+          "patient Id": {
+              "id": "id"
+          }
+      }
+  }
+  
