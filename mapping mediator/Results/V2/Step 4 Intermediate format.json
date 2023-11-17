@@ -1,0 +1,10 @@
+{
+    "patient": {
+        "name": "Chamari",
+        "gender": "female",
+        "birthDate": "1987-09-02"
+    },
+    "riskAssessment": {
+        "riskPrediction": "High"
+    }
+}

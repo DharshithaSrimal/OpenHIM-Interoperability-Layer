@@ -1,0 +1,109 @@
+{
+    "patient": [
+        {
+            "name": "Emmanuel",
+            "surname": "Macron",
+            "gender": "male",
+            "birthDate": "1989-06-21"
+        },
+        {
+            "name": "Dharshitha",
+            "surname": "Senevirathne",
+            "gender": "male",
+            "birthDate": "1989-06-21"
+        },
+        {
+            "name": "John",
+            "surname": "Silva",
+            "gender": "male",
+            "birthDate": "1990-01-01"
+        },
+        {
+            "name": "Kasun",
+            "surname": "Gunasekara",
+            "gender": "male",
+            "birthDate": "1990-01-01"
+        },
+        {
+            "name": "John",
+            "surname": "Silva",
+            "gender": "male",
+            "birthDate": "1990-01-01"
+        },
+        {
+            "name": "John",
+            "surname": "Anderson",
+            "gender": "male",
+            "birthDate": "1990-01-01"
+        },
+        {
+            "name": "Lasith",
+            "surname": "Malinga",
+            "gender": "male",
+            "birthDate": "1990-01-01"
+        },
+        {
+            "name": "Lasith Dilshan",
+            "surname": "Malinga"
+        },
+        {
+            "name": "John",
+            "surname": "Anderson",
+            "gender": "male",
+            "birthDate": "1990-01-01"
+        },
+        {
+            "name": "Niroshan",
+            "gender": "male",
+            "birthDate": "1990-09-02"
+        },
+        {
+            "name": "Yamuna",
+            "gender": "female",
+            "birthDate": "1990-09-02"
+        },
+        {
+            "name": "Jayarathna",
+            "gender": "male",
+            "birthDate": "1989-09-02"
+        },
+        {
+            "name": "Kalani",
+            "gender": "female",
+            "birthDate": "1989-09-02"
+        },
+        {
+            "name": "Madushan",
+            "gender": "male",
+            "birthDate": "1987-09-02"
+        },
+        {
+            "name": "Nisansala",
+            "gender": "female",
+            "birthDate": "1988-09-02"
+        },
+        {
+            "name": "Chamari",
+            "gender": "female",
+            "birthDate": "1987-09-02"
+        },
+        {
+            "name": "Mendis",
+            "gender": "male",
+            "birthDate": "1988-09-02"
+        },
+        {
+            "gender": "male",
+            "birthDate": "1973-06-15"
+        },
+        {
+            "gender": "male",
+            "birthDate": "1973-06-15"
+        },
+        {
+            "name": "Kasun Kalhara",
+            "gender": "male",
+            "birthDate": "1970-09-08"
+        }
+    ]
+}
