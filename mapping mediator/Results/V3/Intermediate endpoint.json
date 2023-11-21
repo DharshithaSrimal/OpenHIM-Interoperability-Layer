@@ -1,0 +1,32 @@
+{
+    "name": "Map FHIR Patient and RiskAssessment test",
+    "description": "Map patient details from FHIR bundle",
+    "endpoint": {
+        "pattern": "/patient-risk-test"
+    },
+    "transformation": {
+        "input": "JSON",
+        "output": "JSON"
+    },
+    "inputMapping": {
+        "requestBody.entry[1].resource.identifier[0].value": "patient.phn",
+        "requestBody.entry[1].resource.name[0].given[0]": "patient.name",
+        "requestBody.entry[1].resource.name[0].family": "patient.surname",
+        "requestBody.entry[1].resource.gender": "patient.gender",
+        "requestBody.entry[1].resource.birthDate": "patient.birthDate",
+        "requestBody.entry[0].resource.prediction[0].qualitativeRisk.text": "riskAssessment.riskPrediction"
+    },
+    "constants": {
+        "patient": {
+            "phn": "phn",
+            "name": "name",
+            "surname": "surname",
+            "gender": "gender",
+            "birthDate": "birthDate"
+        },
+        "screening": {
+            "practitioner": "practitioner",
+            "riskPrediction": "riskPrediction"
+        }
+    }
+}

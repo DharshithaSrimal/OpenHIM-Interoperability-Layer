@@ -1,0 +1,104 @@
+{
+    "name": "Map FHIR Patient and RiskAssessment",
+    "description": "Map patient details from FHIR bundle",
+    "endpoint": {
+        "pattern": "/patient-risk"
+    },
+    "transformation": {
+        "input": "JSON",
+        "output": "JSON"
+    },
+    "inputMapping": {
+        "requestBody.entry[1].resource.name[0].given[0]": "dataValues[0].value",
+        "requestBody.entry[1].resource.name[0].family": "patient.surname",
+        "requestBody.entry[1].resource.gender": "patient.gender",
+        "requestBody.entry[1].resource.birthDate": "patient.birthDate",
+        "requestBody.entry[0].resource.prediction[0].qualitativeRisk.text": "riskAssessment.riskPrediction"
+    },
+    "constants": {
+        "program": "dPNAzfaYz4e",
+        "programStage": "I4pe52OYiNS",
+        "orgUnit": "F1q1Z5FOeeP",
+        "status": "COMPLETED",
+        "eventDate": "2023-11-03T00:00:00.000",
+        "attributeCategoryOptions": "xYerKDKCefk",
+        "completedDate": "2023-11-14T00:00:00.000",
+        "deleted": false,
+        "attributeOptionCombo": "HllvX50cXC0",
+        "completedBy": "admin",
+        "dataValues": [
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "OXXpeUqLryp",
+                "value": "Gunawardhana",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "P2T75hKyE4l",
+                "value": "Senevirathne",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "jc0LABQPhOn",
+                "value": "true",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "pg4TmJyQgGT",
+                "value": "Gayal",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "XRcV3VfK4cY",
+                "value": "1985-04-15",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "giN6DRnx0Z9",
+                "value": "true",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "kAKroC6WGON",
+                "value": "Gonnaduwa facility",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "E45QoIvx0TU",
+                "value": "Male",
+                "providedElsewhere": false
+            },
+            {
+                "lastUpdated": "2023-11-20T18:22:57.913",
+                "storedBy": "admin",
+                "created": "2023-11-20T18:22:57.913",
+                "dataElement": "GqJW7WVV5Dp",
+                "value": "100020042342568",
+                "providedElsewhere": false
+            }
+        ]
+    }
+}
