@@ -16,6 +16,15 @@
         "requestBody.entry[1].resource.birthDate": "patient.birthDate",
         "requestBody.entry[0].resource.prediction[0].qualitativeRisk.text": "riskAssessment.riskPrediction"
     },
+    "inputValidation": {
+        "type": "object",
+        "properties": {
+          "requestBody": {
+            "type": "object"
+          }
+        },
+        "required": ["requestBody"]
+      },
     "constants": {
         "patient": {
             "phn": "phn",
