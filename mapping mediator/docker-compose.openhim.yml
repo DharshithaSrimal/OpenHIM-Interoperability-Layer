@@ -8,7 +8,7 @@ networks:
 services:
   openhim-core:
     container_name: openhim-core
-    image: jembi/openhim-core:5
+    image: jembi/openhim-core:v8.2.0
     networks:
       - mapper-cluster-network
     environment:
@@ -27,7 +27,7 @@ services:
 
   openhim-console:
     container_name: openhim-console
-    image: jembi/openhim-console:1.14
+    image: jembi/openhim-console:1.15.0
     networks:
       - mapper-cluster-network
     ports:
