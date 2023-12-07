@@ -7,11 +7,9 @@ FHIR_SERVER_URL="http://188.166.213.172:8082"
 CLIENT_ID="cHIMS Client"
 CLIENT_SECRET="lvUTECeWLcHfyj0UZ5AI0q0t4X67vOaS"
 GRANT_TYPE="client_credentials"
-PASSWORD="your-password"
 
-CURRENTDATE=`date +"%Y-%m-%d %T"`
-echo $CURRENTDATE
-END_DATE=$(date)
+START_DATE=`date +"%Y-%m-%dT00:00:00Z"`
+END_DATE=`date +"%Y-%m-%dT23:59:59Z"`
 
 # Get Keycloak token
 TOKEN_RESPONSE=$(curl -X POST \
@@ -23,10 +21,28 @@ TOKEN_RESPONSE=$(curl -X POST \
 # Extract access token from the response
 ACCESS_TOKEN=$(echo $TOKEN_RESPONSE | jq -r '.access_token')
 
-# Send FHIR request using the obtained token
-FHIR_RESPONSE=$(curl -s -X GET \
+# Send FHIR request to get clients registered per the day
+CLIENTS_REGISTERED=$(curl -s -X GET \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
-  $FHIR_SERVER_URL/fhir/_lastUpdated:gt=2023-07-05T00:00:00.000Z&_lastUpdated:lt=2023-09-07T00:00:00.000Z)
+  $FHIR_SERVER_URL/fhir/Patient?_lastUpdated=ge2023-07-20T00:00:00Z&_lastUpdated=le2023-10-11T00:00:00)
 
-# Print FHIR response
-echo $FHIR_RESPONSE
+# Save FHIR response to a temporary file
+TMP_FILE=$(mktemp)
+echo "$CLIENTS_REGISTERED" > "$TMP_FILE"
+
+# Loop through each patient ID and fetch patient resource
+while IFS= read -r patient_id; do
+  echo "Patient Resource for ID $patient_id:"
+  # Send request to get patient resource
+  PATIENT_RESOURCE=$(curl -s -X GET \
+    -H "Authorization: Bearer $ACCESS_TOKEN" \
+    "$FHIR_SERVER_URL/fhir/Patient/$patient_id")
+
+  # Process the patient resource as needed (you can print or manipulate it)
+  echo $PATIENT_RESOURCE
+done < <(jq -r '.entry[].resource.id' "$TMP_FILE")
+
+# Remove temporary file
+rm "$TMP_FILE"
+
+echo $CLIENTS_IDS

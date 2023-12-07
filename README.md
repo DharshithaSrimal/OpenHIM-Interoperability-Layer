@@ -3,6 +3,11 @@
 ## FHIR-DHIS2 Mapping
 This project provides a comprehensive mapping between FHIR (Fast Healthcare Interoperability Resources) and DHIS2 (District Health Information System 2), enabling seamless data exchange between these two widely used healthcare platforms. The mapping encompasses the conversion of various FHIR resources into human-readable intermediate formats and the transformation of FHIR bundles into a format compatible with the DHIS2 REST API.
 
+### Solution
+![Solution](static/solution.PNG)
+* Mapping mediator: Responsible for mapping FHIR data to DHIS2
+* Shell script mdeiator: Executes an script to query FHIR data, send fhir data to maping mediator and send mapped data to DHIS2
+
 ### Key Features
 * Comprehensive FHIR-DHIS2 mapping for data interoperability
 * Conversion of FHIR resources into human-readable intermediate formats
