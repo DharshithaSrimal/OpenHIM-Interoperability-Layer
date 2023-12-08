@@ -31,16 +31,27 @@ TMP_FILE=$(mktemp)
 echo "$CLIENTS_REGISTERED" > "$TMP_FILE"
 
 # Loop through each patient ID and fetch patient resource
-while IFS= read -r patient_id; do
-  echo "Patient Resource for ID $patient_id:"
+jq -r '.entry[].resource.id' "$TMP_FILE" | while IFS= read -r patient_id; do
+  # Remove leading/trailing whitespaces if any
+  patient_id=$(echo "$patient_id" | xargs)
+
   # Send request to get patient resource
   PATIENT_RESOURCE=$(curl -s -X GET \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     "$FHIR_SERVER_URL/fhir/Patient/$patient_id")
 
-  # Process the patient resource as needed (you can print or manipulate it)
-  echo $PATIENT_RESOURCE
-done < <(jq -r '.entry[].resource.id' "$TMP_FILE")
+  # Print information for debugging
+  echo "$PATIENT_RESOURCE"
+
+  # Check if the patient resource is empty or contains an error message
+  if [ -z "$PATIENT_RESOURCE" ] || [ "$(echo "$PATIENT_RESOURCE" | jq -r '.issue')" != "null" ]; then
+    echo "Error fetching patient resource for ID $patient_id"
+  else
+    # Process the patient resource as needed (you can print or manipulate it)
+    echo "Patient Resource for ID $patient_id:"
+    echo "$PATIENT_RESOURCE"
+  fi
+done
 
 # Remove temporary file
 rm "$TMP_FILE"
