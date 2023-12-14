@@ -6,7 +6,7 @@ This project provides a comprehensive mapping between FHIR (Fast Healthcare Inte
 ### Solution
 ![Solution](static/solution.PNG)
 * Mapping mediator: Responsible for mapping FHIR data to DHIS2
-* Shell script mdeiator: Executes an script to query FHIR data, send fhir data to maping mediator and send mapped data to DHIS2
+* Shell script mediator: Executes an script to query FHIR data, send FHIR data to mapping mediator and send mapped data to DHIS2
 
 ### Key Features
 * Comprehensive FHIR-DHIS2 mapping for data interoperability
