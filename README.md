@@ -47,7 +47,7 @@ This project provides a comprehensive mapping between FHIR (Fast Healthcare Inte
       "host": "mapper-mongo-3:27017"
     }
   ]
-}
+}`
 
 rs.initiate(config)`
 * Exit the shell and run following command.
