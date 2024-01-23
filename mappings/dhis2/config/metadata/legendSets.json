@@ -1,0 +1,886 @@
+{
+    "legendSets": [
+        {
+            "href": "https://hisptz.com/diabetes/api/29/legendSets/OKmx0OczW6p",
+            "name": "DM/HTM -Glycemic",
+            "created": "2023-10-20T09:59:30.439",
+            "lastUpdated": "2023-10-20T09:59:30.439",
+            "translations": [],
+            "externalAccess": false,
+            "publicAccess": "rw------",
+            "userGroupAccesses": [],
+            "userAccesses": [],
+            "access": {
+                "manage": true,
+                "externalize": true,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "legends": [
+                {
+                    "name": "Low",
+                    "created": "2023-10-20T09:59:30.439",
+                    "lastUpdated": "2023-10-20T09:59:30.439",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 0.0,
+                    "endValue": 30.0,
+                    "color": "#FC0411",
+                    "displayName": "Low",
+                    "favorite": false,
+                    "id": "OOupDbEA491",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Medium",
+                    "created": "2023-10-20T09:59:30.439",
+                    "lastUpdated": "2023-10-20T09:59:30.439",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 30.0,
+                    "endValue": 60.0,
+                    "color": "#feb24c",
+                    "displayName": "Medium",
+                    "favorite": false,
+                    "id": "bs9EN39hsKW",
+                    "attributeValues": []
+                },
+                {
+                    "name": "High",
+                    "created": "2023-10-20T09:59:30.439",
+                    "lastUpdated": "2023-10-20T09:59:30.439",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 60.0,
+                    "endValue": 100.0,
+                    "color": "#269D09",
+                    "displayName": "High",
+                    "favorite": false,
+                    "id": "INDTAWbViAY",
+                    "attributeValues": []
+                }
+            ],
+            "displayName": "DM/HTM -Glycemic",
+            "favorite": false,
+            "user": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "id": "OKmx0OczW6p",
+            "attributeValues": []
+        },
+        {
+            "href": "https://hisptz.com/diabetes/api/29/legendSets/vT0zfxNqfo6",
+            "name": "DM/HTN -Complications",
+            "created": "2023-10-20T09:57:19.313",
+            "lastUpdated": "2023-10-20T09:57:19.313",
+            "translations": [],
+            "externalAccess": false,
+            "publicAccess": "rw------",
+            "userGroupAccesses": [],
+            "userAccesses": [],
+            "access": {
+                "manage": true,
+                "externalize": true,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "legends": [
+                {
+                    "name": "Low",
+                    "created": "2023-10-20T09:57:19.313",
+                    "lastUpdated": "2023-10-20T09:57:19.313",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 0.0,
+                    "endValue": 60.0,
+                    "color": "#FC0411",
+                    "displayName": "Low",
+                    "favorite": false,
+                    "id": "Vk5tZKZlrPN",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Medium",
+                    "created": "2023-10-20T09:57:19.313",
+                    "lastUpdated": "2023-10-20T09:57:19.313",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 60.0,
+                    "endValue": 80.0,
+                    "color": "#feb24c",
+                    "displayName": "Medium",
+                    "favorite": false,
+                    "id": "BZjt2YFHpBE",
+                    "attributeValues": []
+                },
+                {
+                    "name": "High",
+                    "created": "2023-10-20T09:57:19.313",
+                    "lastUpdated": "2023-10-20T09:57:19.313",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 80.0,
+                    "endValue": 100.0,
+                    "color": "#269D09",
+                    "displayName": "High",
+                    "favorite": false,
+                    "id": "yjZ75lTsB5i",
+                    "attributeValues": []
+                }
+            ],
+            "displayName": "DM/HTN -Complications",
+            "favorite": false,
+            "user": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "id": "vT0zfxNqfo6",
+            "attributeValues": []
+        },
+        {
+            "href": "https://hisptz.com/diabetes/api/29/legendSets/fSznffmINTo",
+            "name": "DM/HTN-Loss to follow up",
+            "created": "2023-10-20T09:54:06.582",
+            "lastUpdated": "2023-10-20T09:54:06.582",
+            "translations": [],
+            "externalAccess": false,
+            "publicAccess": "rw------",
+            "userGroupAccesses": [],
+            "userAccesses": [],
+            "access": {
+                "manage": true,
+                "externalize": true,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "legends": [
+                {
+                    "name": "Fair",
+                    "created": "2023-10-20T09:54:06.582",
+                    "lastUpdated": "2023-10-20T09:54:06.582",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 10.0,
+                    "endValue": 30.0,
+                    "color": "#feb24c",
+                    "displayName": "Fair",
+                    "favorite": false,
+                    "id": "D5boML9mK81",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Excellent",
+                    "created": "2023-10-20T09:54:06.583",
+                    "lastUpdated": "2023-10-20T09:54:06.583",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 0.0,
+                    "endValue": 10.0,
+                    "color": "#269D09",
+                    "displayName": "Excellent",
+                    "favorite": false,
+                    "id": "TcLxKRcBRwr",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Poor",
+                    "created": "2023-10-20T09:54:06.582",
+                    "lastUpdated": "2023-10-20T09:54:06.582",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 30.0,
+                    "endValue": 100.0,
+                    "color": "#FC0411",
+                    "displayName": "Poor",
+                    "favorite": false,
+                    "id": "G4NX8vGpXoH",
+                    "attributeValues": []
+                }
+            ],
+            "displayName": "DM/HTN-Loss to follow up",
+            "favorite": false,
+            "user": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "id": "fSznffmINTo",
+            "attributeValues": []
+        },
+        {
+            "href": "https://hisptz.com/diabetes/api/29/legendSets/WDxrZMAmRb7",
+            "name": "DM/HTN-Non pharmacological",
+            "created": "2023-10-20T09:44:30.996",
+            "lastUpdated": "2023-10-20T10:51:39.646",
+            "translations": [],
+            "externalAccess": false,
+            "publicAccess": "rw------",
+            "userGroupAccesses": [],
+            "userAccesses": [],
+            "access": {
+                "manage": true,
+                "externalize": true,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "legends": [
+                {
+                    "name": "Medium",
+                    "created": "2023-10-20T10:51:39.647",
+                    "lastUpdated": "2023-10-20T10:51:39.647",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 80.0,
+                    "endValue": 90.0,
+                    "color": "#feb24c",
+                    "displayName": "Medium",
+                    "favorite": false,
+                    "id": "c5Fe0bcxPMq",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Low",
+                    "created": "2023-10-20T10:51:39.647",
+                    "lastUpdated": "2023-10-20T10:51:39.647",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 0.0,
+                    "endValue": 80.0,
+                    "color": "#FC0411",
+                    "displayName": "Low",
+                    "favorite": false,
+                    "id": "WOjaUu40HEQ",
+                    "attributeValues": []
+                },
+                {
+                    "name": "High",
+                    "created": "2023-10-20T10:51:39.647",
+                    "lastUpdated": "2023-10-20T10:51:39.647",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 90.0,
+                    "endValue": 110.0,
+                    "color": "#269D09",
+                    "displayName": "High",
+                    "favorite": false,
+                    "id": "SGx2b4DwCaL",
+                    "attributeValues": []
+                }
+            ],
+            "displayName": "DM/HTN-Non pharmacological",
+            "favorite": false,
+            "user": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "id": "WDxrZMAmRb7",
+            "attributeValues": []
+        },
+        {
+            "href": "https://hisptz.com/diabetes/api/29/legendSets/N9gGcFvSTNN",
+            "name": "DM/HTN-Pharmacological",
+            "created": "2023-10-20T09:48:18.137",
+            "lastUpdated": "2023-10-20T10:51:54.288",
+            "translations": [],
+            "externalAccess": false,
+            "publicAccess": "rw------",
+            "userGroupAccesses": [],
+            "userAccesses": [],
+            "access": {
+                "manage": true,
+                "externalize": true,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "legends": [
+                {
+                    "name": "High",
+                    "created": "2023-10-20T10:51:54.288",
+                    "lastUpdated": "2023-10-20T10:51:54.288",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 90.0,
+                    "endValue": 110.0,
+                    "color": "#269D09",
+                    "displayName": "High",
+                    "favorite": false,
+                    "id": "DPSTuIdzOkj",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Low",
+                    "created": "2023-10-20T10:51:54.289",
+                    "lastUpdated": "2023-10-20T10:51:54.289",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 0.0,
+                    "endValue": 80.0,
+                    "color": "#FC0411",
+                    "displayName": "Low",
+                    "favorite": false,
+                    "id": "LrhmjlEexet",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Medium",
+                    "created": "2023-10-20T10:51:54.288",
+                    "lastUpdated": "2023-10-20T10:51:54.288",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 80.0,
+                    "endValue": 90.0,
+                    "color": "#feb24c",
+                    "displayName": "Medium",
+                    "favorite": false,
+                    "id": "sdZPVfNTSMb",
+                    "attributeValues": []
+                }
+            ],
+            "displayName": "DM/HTN-Pharmacological",
+            "favorite": false,
+            "user": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "id": "N9gGcFvSTNN",
+            "attributeValues": []
+        },
+        {
+            "href": "https://hisptz.com/diabetes/api/29/legendSets/URvBYa0YqA0",
+            "name": "perfomance score",
+            "created": "2023-10-24T08:15:33.076",
+            "lastUpdated": "2023-10-28T05:50:34.543",
+            "translations": [],
+            "externalAccess": false,
+            "publicAccess": "rw------",
+            "userGroupAccesses": [],
+            "userAccesses": [],
+            "access": {
+                "manage": true,
+                "externalize": true,
+                "write": true,
+                "read": true,
+                "update": true,
+                "delete": true
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "legends": [
+                {
+                    "name": "Below target",
+                    "created": "2023-10-28T05:50:34.548",
+                    "lastUpdated": "2023-10-28T05:50:34.548",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 24.0,
+                    "endValue": 49.0,
+                    "color": "#D59D1D",
+                    "displayName": "Below target",
+                    "favorite": false,
+                    "id": "DhP0eOPTgaA",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Approaching target",
+                    "created": "2023-10-28T05:50:34.550",
+                    "lastUpdated": "2023-10-28T05:50:34.550",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 49.0,
+                    "endValue": 74.0,
+                    "color": "#FCFBB9",
+                    "displayName": "Approaching target",
+                    "favorite": false,
+                    "id": "Y37O1SQOvxg",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Reaching or exceeding target ",
+                    "created": "2023-10-28T05:50:34.551",
+                    "lastUpdated": "2023-10-28T05:50:34.551",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 99.0,
+                    "endValue": 100.0,
+                    "color": "#0AA004",
+                    "displayName": "Reaching or exceeding target ",
+                    "favorite": false,
+                    "id": "o4aamvr1sS2",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Close to target ",
+                    "created": "2023-10-28T05:50:34.551",
+                    "lastUpdated": "2023-10-28T05:50:34.551",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 74.0,
+                    "endValue": 99.0,
+                    "color": "#E7EFD5",
+                    "displayName": "Close to target ",
+                    "favorite": false,
+                    "id": "U3PuLR0Lljf",
+                    "attributeValues": []
+                },
+                {
+                    "name": "Very far from target",
+                    "created": "2023-10-28T05:50:34.552",
+                    "lastUpdated": "2023-10-28T05:50:34.552",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "startValue": 0.0,
+                    "endValue": 24.0,
+                    "color": "#EE0915",
+                    "displayName": "Very far from target",
+                    "favorite": false,
+                    "id": "WBeIp2AIb8f",
+                    "attributeValues": []
+                }
+            ],
+            "displayName": "perfomance score",
+            "favorite": false,
+            "user": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "id": "URvBYa0YqA0",
+            "attributeValues": []
+        }
+    ]
+}

@@ -1,0 +1,1343 @@
+{
+    "system": {
+        "id": "64fa9a73-77a3-4745-ab34-d0c3c0aedf9d",
+        "rev": "19eb664",
+        "version": "2.40.1",
+        "date": "2023-12-18T04:36:23.419+0000"
+    },
+    "dashboards": [
+        {
+            "name": "Facility Quality Score: DM/HTN",
+            "created": "2023-10-23T06:24:02.739",
+            "lastUpdated": "2023-12-06T12:43:33.684",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "lUrzCjP6ZOy",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {
+                    "M5zQapPyTZI": {
+                        "displayName": "Stine Loft",
+                        "access": "rw------",
+                        "id": "M5zQapPyTZI"
+                    }
+                },
+                "userGroups": {},
+                "public": "r-------"
+            },
+            "layout": {
+                "columns": []
+            },
+            "itemConfig": {
+                "insertPosition": "END"
+            },
+            "restrictFilters": false,
+            "allowedFilters": [],
+            "id": "SrfJqzczggw",
+            "dashboardItems": [
+                {
+                    "created": "2023-12-06T12:43:33.582",
+                    "lastUpdated": "2023-12-06T12:43:33.685",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "visualization": {
+                        "id": "pIPgzdoe7WN"
+                    },
+                    "users": [],
+                    "x": 0,
+                    "y": 0,
+                    "height": 15,
+                    "width": 18,
+                    "type": "VISUALIZATION",
+                    "contentCount": 1,
+                    "interpretationCount": 0,
+                    "interpretationLikeCount": 0,
+                    "favorite": false,
+                    "id": "ZKoec4UR6gR",
+                    "attributeValues": [],
+                    "reports": [],
+                    "resources": []
+                },
+                {
+                    "created": "2023-12-06T12:43:33.582",
+                    "lastUpdated": "2023-12-06T12:43:33.685",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "visualization": {
+                        "id": "rV1JsPOPYWX"
+                    },
+                    "users": [],
+                    "x": 33,
+                    "y": 0,
+                    "height": 15,
+                    "width": 26,
+                    "type": "VISUALIZATION",
+                    "contentCount": 1,
+                    "interpretationCount": 0,
+                    "interpretationLikeCount": 0,
+                    "favorite": false,
+                    "id": "w0C48Of3RLX",
+                    "attributeValues": [],
+                    "reports": [],
+                    "resources": []
+                },
+                {
+                    "created": "2023-12-06T12:43:33.582",
+                    "lastUpdated": "2023-12-06T12:43:33.685",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "visualization": {
+                        "id": "rbd12Cc5Hz4"
+                    },
+                    "users": [],
+                    "x": 0,
+                    "y": 15,
+                    "height": 28,
+                    "width": 23,
+                    "type": "VISUALIZATION",
+                    "contentCount": 1,
+                    "interpretationCount": 0,
+                    "interpretationLikeCount": 0,
+                    "favorite": false,
+                    "id": "hQj2hStN7PC",
+                    "attributeValues": [],
+                    "reports": [],
+                    "resources": []
+                },
+                {
+                    "created": "2023-12-06T12:43:33.582",
+                    "lastUpdated": "2023-12-06T12:43:33.685",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "visualization": {
+                        "id": "J5SyNzxvsl6"
+                    },
+                    "users": [],
+                    "x": 18,
+                    "y": 0,
+                    "height": 15,
+                    "width": 15,
+                    "type": "VISUALIZATION",
+                    "contentCount": 1,
+                    "interpretationCount": 0,
+                    "interpretationLikeCount": 0,
+                    "favorite": false,
+                    "id": "MoK2keY5NFT",
+                    "attributeValues": [],
+                    "reports": [],
+                    "resources": []
+                },
+                {
+                    "created": "2023-12-06T12:43:33.582",
+                    "lastUpdated": "2023-12-06T12:43:33.686",
+                    "translations": [],
+                    "externalAccess": false,
+                    "userGroupAccesses": [],
+                    "userAccesses": [],
+                    "access": {
+                        "manage": true,
+                        "externalize": true,
+                        "write": true,
+                        "read": true,
+                        "update": true,
+                        "delete": true
+                    },
+                    "favorites": [],
+                    "sharing": {
+                        "external": false,
+                        "users": {},
+                        "userGroups": {}
+                    },
+                    "visualization": {
+                        "id": "ZHl210CNK4P"
+                    },
+                    "users": [],
+                    "x": 23,
+                    "y": 15,
+                    "height": 28,
+                    "width": 11,
+                    "type": "VISUALIZATION",
+                    "contentCount": 1,
+                    "interpretationCount": 0,
+                    "interpretationLikeCount": 0,
+                    "favorite": false,
+                    "id": "rpNxrWKKDv8",
+                    "attributeValues": [],
+                    "reports": [],
+                    "resources": []
+                }
+            ]
+        }
+    ],
+    "visualizations": [
+        {
+            "name": "Indicator groups indexes",
+            "created": "2023-10-24T09:31:18.875",
+            "lastUpdated": "2023-10-24T09:50:30.403",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "--------"
+            },
+            "dataDimensionItems": [
+                {
+                    "indicator": {
+                        "id": "NnFcrmEIFw8"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "Tsbw9panygP"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "xAl5imA3i8x"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "psx7mDZ7M80"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                }
+            ],
+            "organisationUnits": [],
+            "periods": [],
+            "dataElementGroupSetDimensions": [],
+            "organisationUnitGroupSetDimensions": [],
+            "organisationUnitLevels": [],
+            "categoryDimensions": [],
+            "categoryOptionGroupSetDimensions": [],
+            "userOrganisationUnit": true,
+            "userOrganisationUnitChildren": false,
+            "userOrganisationUnitGrandChildren": false,
+            "itemOrganisationUnitGroups": [],
+            "digitGroupSeparator": "SPACE",
+            "sortOrder": 0,
+            "topLimit": 0,
+            "aggregationType": "DEFAULT",
+            "completedOnly": false,
+            "skipRounding": false,
+            "hideTitle": false,
+            "hideSubtitle": false,
+            "subscribers": [],
+            "type": "COLUMN",
+            "reportingParams": {
+                "grandParentOrganisationUnit": false,
+                "parentOrganisationUnit": false,
+                "organisationUnit": false,
+                "reportingPeriod": false
+            },
+            "columnDimensions": [
+                "pe"
+            ],
+            "rowDimensions": [
+                "dx"
+            ],
+            "filterDimensions": [
+                "ou"
+            ],
+            "rowTotals": false,
+            "colTotals": false,
+            "rowSubTotals": false,
+            "colSubTotals": false,
+            "numberType": "VALUE",
+            "regressionType": "NONE",
+            "hideEmptyRowItems": "NONE",
+            "displayDensity": "NORMAL",
+            "fontSize": "NORMAL",
+            "fontStyle": {
+                "targetLineLabel": {
+                    "bold": true,
+                    "textColor": "#f70814"
+                }
+            },
+            "colorSet": "BASIC",
+            "yearlySeries": [],
+            "showData": true,
+            "regression": false,
+            "cumulativeValues": false,
+            "percentStackedValues": false,
+            "showHierarchy": false,
+            "showDimensionLabels": false,
+            "hideEmptyRows": false,
+            "hideEmptyColumns": false,
+            "fixColumnHeaders": false,
+            "fixRowHeaders": false,
+            "hideLegend": false,
+            "noSpaceBetweenColumns": false,
+            "id": "rV1JsPOPYWX",
+            "attributeValues": [],
+            "relativePeriods": {
+                "thisDay": false,
+                "yesterday": false,
+                "last3Days": false,
+                "last7Days": false,
+                "last14Days": false,
+                "last30Days": false,
+                "last60Days": false,
+                "last90Days": false,
+                "last180Days": false,
+                "thisMonth": false,
+                "lastMonth": false,
+                "thisBimonth": false,
+                "lastBimonth": false,
+                "thisQuarter": false,
+                "lastQuarter": true,
+                "thisSixMonth": false,
+                "lastSixMonth": false,
+                "weeksThisYear": false,
+                "monthsThisYear": false,
+                "biMonthsThisYear": false,
+                "quartersThisYear": false,
+                "thisYear": false,
+                "monthsLastYear": false,
+                "quartersLastYear": false,
+                "lastYear": false,
+                "last5Years": false,
+                "last10Years": false,
+                "last12Months": false,
+                "last6Months": false,
+                "last3Months": false,
+                "last6BiMonths": false,
+                "last4Quarters": false,
+                "last2SixMonths": false,
+                "thisFinancialYear": false,
+                "lastFinancialYear": false,
+                "last5FinancialYears": false,
+                "last10FinancialYears": false,
+                "thisWeek": false,
+                "lastWeek": false,
+                "thisBiWeek": false,
+                "lastBiWeek": false,
+                "last4Weeks": false,
+                "last4BiWeeks": false,
+                "last12Weeks": false,
+                "last52Weeks": false
+            },
+            "series": [
+                {
+                    "dimensionItem": "LAST_QUARTER",
+                    "axis": 0
+                }
+            ],
+            "optionalAxes": [],
+            "legend": {
+                "showKey": false
+            },
+            "icons": [],
+            "seriesKey": {
+                "hidden": false
+            },
+            "axes": [
+                {
+                    "index": 0,
+                    "type": "RANGE",
+                    "maxValue": 5.0,
+                    "minValue": 0.0,
+                    "targetLine": {
+                        "value": 4.0,
+                        "title": {
+                            "text": "Target score",
+                            "fontStyle": {
+                                "bold": true,
+                                "textColor": "#f70814"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Total score --",
+            "created": "2023-10-24T09:39:45.016",
+            "lastUpdated": "2023-10-28T05:53:07.683",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "--------"
+            },
+            "dataDimensionItems": [
+                {
+                    "indicator": {
+                        "id": "cH7zWqO6e93"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                }
+            ],
+            "organisationUnits": [],
+            "periods": [],
+            "dataElementGroupSetDimensions": [],
+            "organisationUnitGroupSetDimensions": [],
+            "organisationUnitLevels": [],
+            "categoryDimensions": [],
+            "categoryOptionGroupSetDimensions": [],
+            "userOrganisationUnit": true,
+            "userOrganisationUnitChildren": false,
+            "userOrganisationUnitGrandChildren": false,
+            "itemOrganisationUnitGroups": [],
+            "digitGroupSeparator": "SPACE",
+            "sortOrder": 0,
+            "topLimit": 0,
+            "aggregationType": "DEFAULT",
+            "completedOnly": false,
+            "skipRounding": false,
+            "title": "Total Score for Last Quater",
+            "hideTitle": false,
+            "hideSubtitle": false,
+            "subscribers": [],
+            "type": "GAUGE",
+            "reportingParams": {
+                "grandParentOrganisationUnit": false,
+                "parentOrganisationUnit": false,
+                "organisationUnit": false,
+                "reportingPeriod": false
+            },
+            "columnDimensions": [
+                "dx"
+            ],
+            "rowDimensions": [],
+            "filterDimensions": [
+                "ou",
+                "pe"
+            ],
+            "rowTotals": false,
+            "colTotals": false,
+            "rowSubTotals": false,
+            "colSubTotals": false,
+            "numberType": "VALUE",
+            "regressionType": "NONE",
+            "hideEmptyRowItems": "NONE",
+            "displayDensity": "NORMAL",
+            "fontSize": "NORMAL",
+            "fontStyle": {
+                "visualizationTitle": {
+                    "bold": true
+                },
+                "seriesAxisLabel": {
+                    "bold": true
+                }
+            },
+            "colorSet": "DEFAULT",
+            "yearlySeries": [],
+            "showData": true,
+            "regression": false,
+            "cumulativeValues": false,
+            "percentStackedValues": false,
+            "showHierarchy": false,
+            "showDimensionLabels": false,
+            "hideEmptyRows": false,
+            "hideEmptyColumns": false,
+            "fixColumnHeaders": false,
+            "fixRowHeaders": false,
+            "hideLegend": false,
+            "noSpaceBetweenColumns": false,
+            "id": "pIPgzdoe7WN",
+            "attributeValues": [],
+            "relativePeriods": {
+                "thisDay": false,
+                "yesterday": false,
+                "last3Days": false,
+                "last7Days": false,
+                "last14Days": false,
+                "last30Days": false,
+                "last60Days": false,
+                "last90Days": false,
+                "last180Days": false,
+                "thisMonth": false,
+                "lastMonth": false,
+                "thisBimonth": false,
+                "lastBimonth": false,
+                "thisQuarter": false,
+                "lastQuarter": true,
+                "thisSixMonth": false,
+                "lastSixMonth": false,
+                "weeksThisYear": false,
+                "monthsThisYear": false,
+                "biMonthsThisYear": false,
+                "quartersThisYear": false,
+                "thisYear": false,
+                "monthsLastYear": false,
+                "quartersLastYear": false,
+                "lastYear": false,
+                "last5Years": false,
+                "last10Years": false,
+                "last12Months": false,
+                "last6Months": false,
+                "last3Months": false,
+                "last6BiMonths": false,
+                "last4Quarters": false,
+                "last2SixMonths": false,
+                "thisFinancialYear": false,
+                "lastFinancialYear": false,
+                "last5FinancialYears": false,
+                "last10FinancialYears": false,
+                "thisWeek": false,
+                "lastWeek": false,
+                "thisBiWeek": false,
+                "lastBiWeek": false,
+                "last4Weeks": false,
+                "last4BiWeeks": false,
+                "last12Weeks": false,
+                "last52Weeks": false
+            },
+            "series": [
+                {
+                    "dimensionItem": "cH7zWqO6e93",
+                    "axis": 0
+                }
+            ],
+            "optionalAxes": [],
+            "legend": {
+                "showKey": true,
+                "style": "FILL",
+                "set": {
+                    "id": "URvBYa0YqA0"
+                },
+                "strategy": "FIXED"
+            },
+            "icons": [],
+            "seriesKey": {
+                "hidden": false
+            },
+            "axes": [
+                {
+                    "index": 0,
+                    "type": "RANGE",
+                    "label": {
+                        "fontStyle": {
+                            "bold": true
+                        }
+                    },
+                    "maxValue": 10.0,
+                    "minValue": 0.0
+                }
+            ]
+        },
+        {
+            "name": "Indicator groups indexes--Last Quater",
+            "created": "2023-10-24T09:31:18.875",
+            "lastUpdated": "2023-10-24T09:47:43.660",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "--------"
+            },
+            "dataDimensionItems": [
+                {
+                    "indicator": {
+                        "id": "NnFcrmEIFw8"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "Tsbw9panygP"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "xAl5imA3i8x"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "psx7mDZ7M80"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                }
+            ],
+            "organisationUnits": [],
+            "periods": [],
+            "dataElementGroupSetDimensions": [],
+            "organisationUnitGroupSetDimensions": [],
+            "organisationUnitLevels": [],
+            "categoryDimensions": [],
+            "categoryOptionGroupSetDimensions": [],
+            "userOrganisationUnit": true,
+            "userOrganisationUnitChildren": false,
+            "userOrganisationUnitGrandChildren": false,
+            "itemOrganisationUnitGroups": [],
+            "digitGroupSeparator": "NONE",
+            "sortOrder": 0,
+            "topLimit": 0,
+            "aggregationType": "DEFAULT",
+            "completedOnly": false,
+            "skipRounding": false,
+            "hideTitle": false,
+            "hideSubtitle": false,
+            "subscribers": [],
+            "type": "PIVOT_TABLE",
+            "reportingParams": {
+                "grandParentOrganisationUnit": false,
+                "parentOrganisationUnit": false,
+                "organisationUnit": false,
+                "reportingPeriod": false
+            },
+            "columnDimensions": [
+                "pe"
+            ],
+            "rowDimensions": [
+                "dx"
+            ],
+            "filterDimensions": [
+                "ou"
+            ],
+            "rowTotals": false,
+            "colTotals": false,
+            "rowSubTotals": false,
+            "colSubTotals": false,
+            "numberType": "VALUE",
+            "regressionType": "NONE",
+            "hideEmptyRowItems": "NONE",
+            "displayDensity": "COMPACT",
+            "fontSize": "NORMAL",
+            "fontStyle": {
+                "targetLineLabel": {
+                    "bold": true,
+                    "textColor": "#f70814"
+                }
+            },
+            "colorSet": "BASIC",
+            "yearlySeries": [],
+            "showData": true,
+            "regression": false,
+            "cumulativeValues": false,
+            "percentStackedValues": false,
+            "showHierarchy": false,
+            "showDimensionLabels": false,
+            "hideEmptyRows": false,
+            "hideEmptyColumns": false,
+            "fixColumnHeaders": false,
+            "fixRowHeaders": false,
+            "hideLegend": false,
+            "noSpaceBetweenColumns": false,
+            "id": "J5SyNzxvsl6",
+            "attributeValues": [],
+            "relativePeriods": {
+                "thisDay": false,
+                "yesterday": false,
+                "last3Days": false,
+                "last7Days": false,
+                "last14Days": false,
+                "last30Days": false,
+                "last60Days": false,
+                "last90Days": false,
+                "last180Days": false,
+                "thisMonth": false,
+                "lastMonth": false,
+                "thisBimonth": false,
+                "lastBimonth": false,
+                "thisQuarter": false,
+                "lastQuarter": true,
+                "thisSixMonth": false,
+                "lastSixMonth": false,
+                "weeksThisYear": false,
+                "monthsThisYear": false,
+                "biMonthsThisYear": false,
+                "quartersThisYear": false,
+                "thisYear": false,
+                "monthsLastYear": false,
+                "quartersLastYear": false,
+                "lastYear": false,
+                "last5Years": false,
+                "last10Years": false,
+                "last12Months": false,
+                "last6Months": false,
+                "last3Months": false,
+                "last6BiMonths": false,
+                "last4Quarters": false,
+                "last2SixMonths": false,
+                "thisFinancialYear": false,
+                "lastFinancialYear": false,
+                "last5FinancialYears": false,
+                "last10FinancialYears": false,
+                "thisWeek": false,
+                "lastWeek": false,
+                "thisBiWeek": false,
+                "lastBiWeek": false,
+                "last4Weeks": false,
+                "last4BiWeeks": false,
+                "last12Weeks": false,
+                "last52Weeks": false
+            },
+            "series": [
+                {
+                    "dimensionItem": "LAST_QUARTER",
+                    "axis": 0
+                }
+            ],
+            "optionalAxes": [],
+            "legend": {
+                "showKey": false
+            },
+            "icons": [],
+            "seriesKey": {
+                "hidden": false
+            },
+            "axes": [
+                {
+                    "index": 0,
+                    "type": "RANGE",
+                    "maxValue": 5.0,
+                    "minValue": 0.0,
+                    "targetLine": {
+                        "value": 3.0,
+                        "title": {
+                            "text": "Target score",
+                            "fontStyle": {
+                                "bold": true,
+                                "textColor": "#f70814"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "Target for Indicators",
+            "created": "2023-10-23T05:53:27.011",
+            "lastUpdated": "2023-10-23T06:03:25.937",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "--------"
+            },
+            "dataDimensionItems": [
+                {
+                    "expressionDimensionItem": {
+                        "id": "dQ0X3JYYkFR"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "Ta154uhPTHO"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "mRpHfgaSRsU"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "msils1uwA9t"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "GnhRiHAkF7P"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "LfU52kxuaeA"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "RrRxHiOJbhU"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "PuUCq1NCI5P"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "V7jbSupn8aW"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "mCbSu1ihdER"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "gjc6nZeSYgA"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "kmVhEXKIAmN"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "Qx4UAc39adn"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "K0Q1jgDcGKn"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "bB6HXr3cMfq"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "m8TkaIlZ9iZ"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "jWtjRmRd7Td"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "mCtbDCFD2t6"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                },
+                {
+                    "expressionDimensionItem": {
+                        "id": "xmAlqlgrmIP"
+                    },
+                    "dataDimensionItemType": "EXPRESSION_DIMENSION_ITEM"
+                }
+            ],
+            "organisationUnits": [],
+            "periods": [],
+            "dataElementGroupSetDimensions": [],
+            "organisationUnitGroupSetDimensions": [],
+            "organisationUnitLevels": [],
+            "categoryDimensions": [],
+            "categoryOptionGroupSetDimensions": [],
+            "userOrganisationUnit": true,
+            "userOrganisationUnitChildren": false,
+            "userOrganisationUnitGrandChildren": false,
+            "itemOrganisationUnitGroups": [],
+            "digitGroupSeparator": "SPACE",
+            "sortOrder": 0,
+            "topLimit": 0,
+            "aggregationType": "DEFAULT",
+            "completedOnly": false,
+            "skipRounding": false,
+            "hideTitle": false,
+            "hideSubtitle": false,
+            "subscribers": [],
+            "type": "PIVOT_TABLE",
+            "reportingParams": {
+                "grandParentOrganisationUnit": false,
+                "parentOrganisationUnit": false,
+                "organisationUnit": false,
+                "reportingPeriod": false
+            },
+            "columnDimensions": [
+                "pe"
+            ],
+            "rowDimensions": [
+                "dx"
+            ],
+            "filterDimensions": [
+                "ou"
+            ],
+            "rowTotals": false,
+            "colTotals": false,
+            "rowSubTotals": false,
+            "colSubTotals": false,
+            "numberType": "VALUE",
+            "regressionType": "NONE",
+            "hideEmptyRowItems": "NONE",
+            "displayDensity": "NORMAL",
+            "fontSize": "NORMAL",
+            "fontStyle": {},
+            "colorSet": "DEFAULT",
+            "yearlySeries": [],
+            "showData": true,
+            "regression": false,
+            "cumulativeValues": false,
+            "percentStackedValues": false,
+            "showHierarchy": false,
+            "showDimensionLabels": false,
+            "hideEmptyRows": false,
+            "hideEmptyColumns": false,
+            "fixColumnHeaders": false,
+            "fixRowHeaders": false,
+            "hideLegend": false,
+            "noSpaceBetweenColumns": false,
+            "id": "ZHl210CNK4P",
+            "attributeValues": [],
+            "relativePeriods": {
+                "thisDay": false,
+                "yesterday": false,
+                "last3Days": false,
+                "last7Days": false,
+                "last14Days": false,
+                "last30Days": false,
+                "last60Days": false,
+                "last90Days": false,
+                "last180Days": false,
+                "thisMonth": false,
+                "lastMonth": true,
+                "thisBimonth": false,
+                "lastBimonth": false,
+                "thisQuarter": false,
+                "lastQuarter": false,
+                "thisSixMonth": false,
+                "lastSixMonth": false,
+                "weeksThisYear": false,
+                "monthsThisYear": false,
+                "biMonthsThisYear": false,
+                "quartersThisYear": false,
+                "thisYear": false,
+                "monthsLastYear": false,
+                "quartersLastYear": false,
+                "lastYear": false,
+                "last5Years": false,
+                "last10Years": false,
+                "last12Months": false,
+                "last6Months": false,
+                "last3Months": false,
+                "last6BiMonths": false,
+                "last4Quarters": false,
+                "last2SixMonths": false,
+                "thisFinancialYear": false,
+                "lastFinancialYear": false,
+                "last5FinancialYears": false,
+                "last10FinancialYears": false,
+                "thisWeek": false,
+                "lastWeek": false,
+                "thisBiWeek": false,
+                "lastBiWeek": false,
+                "last4Weeks": false,
+                "last4BiWeeks": false,
+                "last12Weeks": false,
+                "last52Weeks": false
+            },
+            "series": [],
+            "optionalAxes": [],
+            "legend": {
+                "showKey": false
+            },
+            "icons": [],
+            "seriesKey": {
+                "hidden": false
+            },
+            "axes": []
+        },
+        {
+            "name": "Facility quality management: Diabetes & Hypertension",
+            "created": "2023-10-24T08:26:55.248",
+            "lastUpdated": "2023-10-24T08:26:55.248",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "favorites": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "--------"
+            },
+            "dataDimensionItems": [
+                {
+                    "indicator": {
+                        "id": "v1X57kyUrPK"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "g5LT7dAUq5A"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "pm873S205DW"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "KtCcb0ZLPdS"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "q8yhINHkRIH"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "BtD55z05xIh"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "qTGA3ZmV0Am"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "S73j0dW34cQ"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "BjqeVnENVa3"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "PlV18ezQ9yg"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "xcXpAMef2Fn"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "Yx1E3cewOVN"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "XA6v7FDfcfx"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "Fvjcqs0vpqH"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                },
+                {
+                    "indicator": {
+                        "id": "Cb2oB65P3mJ"
+                    },
+                    "dataDimensionItemType": "INDICATOR"
+                }
+            ],
+            "organisationUnits": [],
+            "periods": [],
+            "dataElementGroupSetDimensions": [],
+            "organisationUnitGroupSetDimensions": [],
+            "organisationUnitLevels": [],
+            "categoryDimensions": [],
+            "categoryOptionGroupSetDimensions": [],
+            "userOrganisationUnit": true,
+            "userOrganisationUnitChildren": false,
+            "userOrganisationUnitGrandChildren": false,
+            "itemOrganisationUnitGroups": [],
+            "digitGroupSeparator": "SPACE",
+            "sortOrder": 0,
+            "topLimit": 0,
+            "aggregationType": "DEFAULT",
+            "completedOnly": false,
+            "skipRounding": false,
+            "hideTitle": false,
+            "hideSubtitle": false,
+            "subscribers": [],
+            "type": "PIVOT_TABLE",
+            "reportingParams": {
+                "grandParentOrganisationUnit": false,
+                "parentOrganisationUnit": false,
+                "organisationUnit": false,
+                "reportingPeriod": false
+            },
+            "columnDimensions": [
+                "pe"
+            ],
+            "rowDimensions": [
+                "dx"
+            ],
+            "filterDimensions": [
+                "ou"
+            ],
+            "rowTotals": false,
+            "colTotals": false,
+            "rowSubTotals": false,
+            "colSubTotals": false,
+            "numberType": "VALUE",
+            "regressionType": "NONE",
+            "hideEmptyRowItems": "NONE",
+            "displayDensity": "NORMAL",
+            "fontSize": "NORMAL",
+            "fontStyle": {},
+            "colorSet": "DEFAULT",
+            "yearlySeries": [],
+            "showData": true,
+            "regression": false,
+            "cumulativeValues": false,
+            "percentStackedValues": false,
+            "showHierarchy": false,
+            "showDimensionLabels": false,
+            "hideEmptyRows": false,
+            "hideEmptyColumns": false,
+            "fixColumnHeaders": false,
+            "fixRowHeaders": false,
+            "hideLegend": false,
+            "noSpaceBetweenColumns": false,
+            "id": "rbd12Cc5Hz4",
+            "attributeValues": [],
+            "relativePeriods": {
+                "thisDay": false,
+                "yesterday": false,
+                "last3Days": false,
+                "last7Days": false,
+                "last14Days": false,
+                "last30Days": false,
+                "last60Days": false,
+                "last90Days": false,
+                "last180Days": false,
+                "thisMonth": false,
+                "lastMonth": false,
+                "thisBimonth": false,
+                "lastBimonth": false,
+                "thisQuarter": false,
+                "lastQuarter": false,
+                "thisSixMonth": false,
+                "lastSixMonth": false,
+                "weeksThisYear": false,
+                "monthsThisYear": false,
+                "biMonthsThisYear": false,
+                "quartersThisYear": false,
+                "thisYear": false,
+                "monthsLastYear": false,
+                "quartersLastYear": false,
+                "lastYear": false,
+                "last5Years": false,
+                "last10Years": false,
+                "last12Months": false,
+                "last6Months": false,
+                "last3Months": false,
+                "last6BiMonths": false,
+                "last4Quarters": true,
+                "last2SixMonths": false,
+                "thisFinancialYear": false,
+                "lastFinancialYear": false,
+                "last5FinancialYears": false,
+                "last10FinancialYears": false,
+                "thisWeek": false,
+                "lastWeek": false,
+                "thisBiWeek": false,
+                "lastBiWeek": false,
+                "last4Weeks": false,
+                "last4BiWeeks": false,
+                "last12Weeks": false,
+                "last52Weeks": false
+            },
+            "series": [],
+            "optionalAxes": [],
+            "legend": {
+                "showKey": true,
+                "style": "FILL",
+                "set": {
+                    "id": "URvBYa0YqA0"
+                },
+                "strategy": "FIXED"
+            },
+            "icons": [],
+            "seriesKey": {
+                "hidden": false
+            },
+            "axes": []
+        }
+    ]
+}

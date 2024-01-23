@@ -1,0 +1,2719 @@
+{
+    "system": {
+        "id": "64fa9a73-77a3-4745-ab34-d0c3c0aedf9d",
+        "rev": "19eb664",
+        "version": "2.40.1",
+        "date": "2023-12-18T04:34:50.984+0000"
+    },
+    "indicatorGroups": [
+        {
+            "name": "Compliactions management",
+            "created": "2023-10-18T10:57:03.606",
+            "lastUpdated": "2023-10-18T10:57:03.606",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "wTsz35SaSEo",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "NQRbITf9HGD"
+                },
+                {
+                    "id": "W564EZngHcl"
+                },
+                {
+                    "id": "pUzM8TDEaJ1"
+                },
+                {
+                    "id": "Loy4cPMmT7M"
+                }
+            ]
+        },
+        {
+            "name": "Cross cutting",
+            "created": "2023-10-18T11:13:17.476",
+            "lastUpdated": "2023-10-18T11:13:17.476",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "WKIdz6YEZ2A",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "e9eHpG2SXTu"
+                },
+                {
+                    "id": "Cb5AIm1h4GM"
+                },
+                {
+                    "id": "A7ZFv6h8UtH"
+                },
+                {
+                    "id": "pNqArUbcuZG"
+                },
+                {
+                    "id": "a5jLzo3aorq"
+                }
+            ]
+        },
+        {
+            "name": "Diabetes",
+            "created": "2023-10-18T11:13:55.969",
+            "lastUpdated": "2023-10-18T11:20:15.321",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "peEWPYZKILD",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "MtmMiZiEI7z"
+                },
+                {
+                    "id": "A5LQMQpq9tH"
+                },
+                {
+                    "id": "Rwn5d1kxt5v"
+                },
+                {
+                    "id": "cEJiWrLhBuu"
+                },
+                {
+                    "id": "Loy4cPMmT7M"
+                },
+                {
+                    "id": "G4Hk9U1S1ev"
+                },
+                {
+                    "id": "fYR6Ky0GFv4"
+                },
+                {
+                    "id": "MWqmK9xBNst"
+                },
+                {
+                    "id": "iGT2FnDl6yW"
+                },
+                {
+                    "id": "bVr1Jd6fsne"
+                },
+                {
+                    "id": "ZFEraSXoagO"
+                },
+                {
+                    "id": "MQKf5Xb4wgV"
+                },
+                {
+                    "id": "F45BukGQyRH"
+                },
+                {
+                    "id": "pUzM8TDEaJ1"
+                },
+                {
+                    "id": "W564EZngHcl"
+                },
+                {
+                    "id": "kijxKAhmx9g"
+                },
+                {
+                    "id": "tCuCBVujfn0"
+                }
+            ]
+        },
+        {
+            "name": "Early detection",
+            "created": "2023-10-18T10:56:05.157",
+            "lastUpdated": "2023-10-18T10:56:05.157",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "JMpA6pijyXT",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "e9eHpG2SXTu"
+                },
+                {
+                    "id": "Cb5AIm1h4GM"
+                },
+                {
+                    "id": "A7ZFv6h8UtH"
+                },
+                {
+                    "id": "pNqArUbcuZG"
+                },
+                {
+                    "id": "a5jLzo3aorq"
+                }
+            ]
+        },
+        {
+            "name": "Hypertension",
+            "created": "2023-10-18T11:17:21.612",
+            "lastUpdated": "2023-10-18T11:17:21.612",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "U425bxV78pM",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "YGSZiNhB3qO"
+                },
+                {
+                    "id": "yn4vZaA8L4S"
+                },
+                {
+                    "id": "LbJzu9uTQus"
+                },
+                {
+                    "id": "NQRbITf9HGD"
+                },
+                {
+                    "id": "HuffdVK8VZG"
+                },
+                {
+                    "id": "u2JT620Mbd3"
+                },
+                {
+                    "id": "LX7mzWM20sJ"
+                },
+                {
+                    "id": "ZD2spB53oLp"
+                },
+                {
+                    "id": "ookLIuOT0Dy"
+                },
+                {
+                    "id": "c3s451KaodF"
+                },
+                {
+                    "id": "DCLkKYSkqwM"
+                }
+            ]
+        },
+        {
+            "name": "Prevalence / Incidence",
+            "created": "2023-10-18T11:02:57.730",
+            "lastUpdated": "2023-10-18T11:02:57.730",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "bgqikftImlz",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "MtmMiZiEI7z"
+                },
+                {
+                    "id": "LX7mzWM20sJ"
+                },
+                {
+                    "id": "YGSZiNhB3qO"
+                },
+                {
+                    "id": "G4Hk9U1S1ev"
+                },
+                {
+                    "id": "LbJzu9uTQus"
+                },
+                {
+                    "id": "fYR6Ky0GFv4"
+                },
+                {
+                    "id": "tCuCBVujfn0"
+                },
+                {
+                    "id": "c3s451KaodF"
+                }
+            ]
+        },
+        {
+            "name": "Treatment",
+            "created": "2023-10-18T10:58:35.923",
+            "lastUpdated": "2023-10-18T10:58:35.923",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "Rqv3Mzpb6H4",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "HuffdVK8VZG"
+                },
+                {
+                    "id": "F45BukGQyRH"
+                },
+                {
+                    "id": "Rwn5d1kxt5v"
+                },
+                {
+                    "id": "yn4vZaA8L4S"
+                },
+                {
+                    "id": "ZD2spB53oLp"
+                },
+                {
+                    "id": "ookLIuOT0Dy"
+                },
+                {
+                    "id": "MWqmK9xBNst"
+                },
+                {
+                    "id": "bVr1Jd6fsne"
+                },
+                {
+                    "id": "kijxKAhmx9g"
+                }
+            ]
+        },
+        {
+            "name": "Treatment outcomes",
+            "created": "2023-10-18T11:00:13.305",
+            "lastUpdated": "2023-10-18T11:00:13.305",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "id": "xctmyDNsDSN",
+            "attributeValues": [],
+            "indicators": [
+                {
+                    "id": "A5LQMQpq9tH"
+                },
+                {
+                    "id": "MQKf5Xb4wgV"
+                },
+                {
+                    "id": "u2JT620Mbd3"
+                },
+                {
+                    "id": "cEJiWrLhBuu"
+                },
+                {
+                    "id": "iGT2FnDl6yW"
+                },
+                {
+                    "id": "DCLkKYSkqwM"
+                },
+                {
+                    "id": "ZFEraSXoagO"
+                }
+            ]
+        }
+    ],
+    "indicatorTypes": [
+        {
+            "name": "Factor",
+            "created": "2023-09-13T07:48:02.469",
+            "lastUpdated": "2023-09-13T07:48:02.469",
+            "translations": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "factor": 1,
+            "number": false,
+            "id": "zVJcEdjPHDh"
+        },
+        {
+            "name": "Percentage",
+            "created": "2023-09-13T07:48:14.833",
+            "lastUpdated": "2023-09-13T07:48:14.833",
+            "translations": [],
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "factor": 100,
+            "number": false,
+            "id": "EU5Xekxg7No"
+        }
+    ],
+    "indicators": [
+        {
+            "name": "Acute complications among people with diabetes",
+            "created": "2023-10-17T09:24:02.432",
+            "lastUpdated": "2023-10-23T20:54:53.449",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Acute complications: diabetes",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{Yan4q0qyztI}",
+            "numeratorDescription": "Number of people with diabetes with acute complications the last 12 months",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "cEJiWrLhBuu",
+            "attributeValues": []
+        },
+        {
+            "name": "Assessment of CKD among people with diabetes ",
+            "created": "2023-10-17T08:38:03.763",
+            "lastUpdated": "2023-10-23T20:55:14.012",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Assessment of CKD: diabetes",
+            "legendSets": [
+                {
+                    "id": "vT0zfxNqfo6"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{IoNdXefOdnq}",
+            "numeratorDescription": "Number of people with diabetes assessed for CKD",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "Loy4cPMmT7M",
+            "attributeValues": []
+        },
+        {
+            "name": "Assessment of CKD among people with hypertension ",
+            "created": "2023-10-17T08:41:08.174",
+            "lastUpdated": "2023-10-23T20:55:37.424",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Assessment of CKD: hypertension",
+            "legendSets": [
+                {
+                    "id": "vT0zfxNqfo6"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{SVak0uAeJUt}",
+            "numeratorDescription": "Number of people with hypertension assessed for CKD in the last 6 months.",
+            "denominator": "I{Z7dTmDzHLQK}",
+            "denominatorDescription": "Number of people with hypertension active in care",
+            "id": "NQRbITf9HGD",
+            "attributeValues": []
+        },
+        {
+            "name": "Blindness among people with diabetes ",
+            "created": "2023-10-17T09:21:00.742",
+            "lastUpdated": "2023-10-23T20:56:01.085",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Blindness  ",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{G4kLfivhFsV}",
+            "numeratorDescription": "Number of people with blindness",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "A5LQMQpq9tH",
+            "attributeValues": []
+        },
+        {
+            "name": "CKD among people with diabetes",
+            "created": "2023-10-17T09:22:49.581",
+            "lastUpdated": "2023-10-23T20:56:26.480",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "CKD",
+            "legendSets": [
+                {
+                    "id": "vT0zfxNqfo6"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{DnX9na1zkiE}",
+            "numeratorDescription": "Number of people with diabetes newly diagnosed with CKD in the last 12 months",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "ZFEraSXoagO",
+            "attributeValues": []
+        },
+        {
+            "name": "CVD incidence",
+            "created": "2023-10-17T09:39:43.281",
+            "lastUpdated": "2023-10-23T20:57:24.011",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "CVD incidence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{SCcR4OMaIFu}",
+            "numeratorDescription": "Number of people diagnosed with CVD",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "c3s451KaodF",
+            "attributeValues": []
+        },
+        {
+            "name": "CVD prevalence",
+            "created": "2023-10-17T09:38:45.277",
+            "lastUpdated": "2023-10-23T20:57:58.125",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "CVD prevalence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{DnX9na1zkiE}",
+            "numeratorDescription": "Number of people with diabetes newly diagnosed with CKD in the last 12 months",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "LX7mzWM20sJ",
+            "attributeValues": []
+        },
+        {
+            "name": "Complications management",
+            "created": "2023-10-24T09:05:02.029",
+            "lastUpdated": "2023-10-24T09:05:02.029",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Complications management",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "zVJcEdjPHDh"
+            },
+            "numerator": "((I{W2OnRy0Qk13}/70)+(I{Yan4q0qyztI}/100)+(I{W2OnRy0Qk13}/70)+(I{SVak0uAeJUt}/70)+(I{kxxJ28BeRfj}/70))/5",
+            "numeratorDescription": "Average Complications management",
+            "denominator": "1",
+            "denominatorDescription": "1",
+            "id": "Tsbw9panygP",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes detection rate from community screening",
+            "created": "2023-10-17T06:47:19.227",
+            "lastUpdated": "2023-10-23T20:58:40.637",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes detection rate",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{aOVlSoZiTul}",
+            "numeratorDescription": "Number of people diagnosed with diabetes after being screened for DM and HTN at community level",
+            "denominator": "#{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 40 na zaidi",
+            "id": "a5jLzo3aorq",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes treatment: non-pharmacological",
+            "created": "2023-10-17T08:44:21.417",
+            "lastUpdated": "2023-10-23T20:59:03.923",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes treatment: non-pharmacological",
+            "legendSets": [
+                {
+                    "id": "WDxrZMAmRb7"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{g9j8nRV5Szg}",
+            "numeratorDescription": "Number of people with diabetes on non-pharmacological treatment",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "Rwn5d1kxt5v",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes treatment: pharmacological injectable",
+            "created": "2023-10-17T08:47:14.662",
+            "lastUpdated": "2023-10-23T20:59:31.206",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes treatment: pharmacological injectable",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{MSdos2R3Var}",
+            "numeratorDescription": "Number of people with diabetes on injectable pharmacological treatment",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "F45BukGQyRH",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes treatment: pharmacological oral",
+            "created": "2023-10-17T08:46:00.626",
+            "lastUpdated": "2023-10-23T20:59:56.159",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes treatment: pharmacological oral",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{niB9yDwH3RX}",
+            "numeratorDescription": "Number of people with diabetes on oral pharmacological treatment",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "bVr1Jd6fsne",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes type 1 incidence",
+            "created": "2023-10-17T09:36:53.901",
+            "lastUpdated": "2023-10-23T21:00:47.010",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes T1 incidence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{tGnAfidoXsl}",
+            "numeratorDescription": "Number of people diagnosed with type 1 diabetes",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "MtmMiZiEI7z",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes type 1 prevalence",
+            "created": "2023-10-17T09:35:48.377",
+            "lastUpdated": "2023-10-23T21:01:37.109",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes T1 prevalence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{OBvWzY1CQrU}",
+            "numeratorDescription": "Number of people diagnosed with type 1 diabetes in the last 12 months.",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "fYR6Ky0GFv4",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes type 2 incidence",
+            "created": "2023-10-17T09:34:47.359",
+            "lastUpdated": "2023-10-23T21:02:16.251",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes T2 incidence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{bMWxnXECShL}",
+            "numeratorDescription": "Number of people diagnosed with type 2 diabetes",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "G4Hk9U1S1ev",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetes type 2 prevalence",
+            "created": "2023-10-17T09:33:40.739",
+            "lastUpdated": "2023-10-23T21:02:54.702",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes T2 prevalence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{sW77koxDIau}",
+            "numeratorDescription": "Number of people diagnosed with type 2 diabetes in the last 12 months.",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "tCuCBVujfn0",
+            "attributeValues": []
+        },
+        {
+            "name": "Diabetic foot exam among people with diabetes ",
+            "created": "2023-10-17T08:24:32.931",
+            "lastUpdated": "2023-10-23T21:03:19.392",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetic foot exam  ",
+            "legendSets": [
+                {
+                    "id": "vT0zfxNqfo6"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{W2OnRy0Qk13}",
+            "numeratorDescription": "Number of people with diabetes assessed for diabetic foot",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "pUzM8TDEaJ1",
+            "attributeValues": []
+        },
+        {
+            "name": "Early Detection",
+            "created": "2023-10-24T08:54:54.064",
+            "lastUpdated": "2023-10-24T08:54:54.064",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Early Detection",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "zVJcEdjPHDh"
+            },
+            "numerator": "((I{vFbXtfeBJ19})/60)+(I{PtXHmAmFLFK}/90)+(I{jnTAe1byQnW}/90)/3",
+            "numeratorDescription": "Average of Early Detection",
+            "denominator": "1",
+            "denominatorDescription": "1",
+            "id": "NnFcrmEIFw8",
+            "attributeValues": []
+        },
+        {
+            "name": "Glycaemic control among people with diabetes ",
+            "created": "2023-10-17T09:20:02.896",
+            "lastUpdated": "2023-10-23T20:36:40.652",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Glycaemic control  ",
+            "legendSets": [
+                {
+                    "id": "OKmx0OczW6p"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{sosE12ng3ne}",
+            "numeratorDescription": "Numerator",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Denominator",
+            "id": "iGT2FnDl6yW",
+            "attributeValues": []
+        },
+        {
+            "name": "Hypertension control among people with hypertension  ",
+            "created": "2023-10-17T09:28:54.067",
+            "lastUpdated": "2023-10-23T21:04:12.576",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "HTN control ",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{PLY6OZN9Ero}",
+            "numeratorDescription": "Number of people with BP control",
+            "denominator": "I{Z7dTmDzHLQK}",
+            "denominatorDescription": "Number of people with hypertension active in care",
+            "id": "u2JT620Mbd3",
+            "attributeValues": []
+        },
+        {
+            "name": "Hypertension detection rate from community screening",
+            "created": "2023-10-17T06:47:50.385",
+            "lastUpdated": "2023-10-23T21:04:47.465",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "HTN detection rate ",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{kvZKpuw77JP}",
+            "numeratorDescription": "Number of people diagnosed with hypertension after being screened for DM and HTN at community level",
+            "denominator": "#{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 40 na zaidi",
+            "id": "pNqArUbcuZG",
+            "attributeValues": []
+        },
+        {
+            "name": "Hypertension incidence",
+            "created": "2023-10-17T09:37:46.188",
+            "lastUpdated": "2023-10-23T21:05:40.614",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "HTN incidence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{WSz8uFu3s6M}",
+            "numeratorDescription": "Number of people diagnosed with hypertension in the last 12 months",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "YGSZiNhB3qO",
+            "attributeValues": []
+        },
+        {
+            "name": "Hypertension prevalence",
+            "created": "2023-10-17T09:41:08.913",
+            "lastUpdated": "2023-10-23T21:06:18.236",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "HTN prevalence",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{eMSIv2TPjgH}",
+            "numeratorDescription": "Number of people diagnosed with hypertension",
+            "denominator": "#{ykShMtNgDB1.GU5Za7lqR8B} + #{ykShMtNgDB1.uV2VZgwcBwl} + #{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 18 na zaidi",
+            "id": "LbJzu9uTQus",
+            "attributeValues": []
+        },
+        {
+            "name": "Hypertension treatment: pharmacological",
+            "created": "2023-10-17T09:14:56.986",
+            "lastUpdated": "2023-10-23T21:06:41.016",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "HTN treatment: pharmacological",
+            "legendSets": [
+                {
+                    "id": "N9gGcFvSTNN"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{UXqitCslJa4}",
+            "numeratorDescription": "Number of people with hypertension receiving an antihypertensive agent",
+            "denominator": "I{Z7dTmDzHLQK}",
+            "denominatorDescription": "Number of people with hypertension active in care",
+            "id": "ookLIuOT0Dy",
+            "attributeValues": []
+        },
+        {
+            "name": "Loss to follow-up among people with diabetes ",
+            "created": "2023-10-17T09:11:30.854",
+            "lastUpdated": "2023-10-23T21:03:43.649",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Loss to follow-up: diabetes",
+            "legendSets": [
+                {
+                    "id": "fSznffmINTo"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{twEzlg9DanB}",
+            "numeratorDescription": "Number of people with diabetes lost to follow-up",
+            "denominator": "I{Tt2z5XTOM8p}",
+            "denominatorDescription": "Number of people with diabetes registered at a facility",
+            "id": "MWqmK9xBNst",
+            "attributeValues": []
+        },
+        {
+            "name": "Loss to follow-up among people with hypertension ",
+            "created": "2023-10-17T09:16:59.738",
+            "lastUpdated": "2023-10-23T21:07:27.356",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Loss to follow-up: hypertension",
+            "legendSets": [
+                {
+                    "id": "fSznffmINTo"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{yWvBbCp4v4O}",
+            "numeratorDescription": "Number of people with hypertension lost to follow-up",
+            "denominator": "I{RI0gWHD5tGT}",
+            "denominatorDescription": "Number of people with hypertension registered at a facility",
+            "id": "yn4vZaA8L4S",
+            "attributeValues": []
+        },
+        {
+            "name": "Lower-limb amputation among people with diabetes ",
+            "created": "2023-10-17T09:21:53.127",
+            "lastUpdated": "2023-10-23T21:07:53.676",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Lower-limb amputation  ",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{tKCzCHIuMFi}",
+            "numeratorDescription": "Number of people with lower-limp amputations",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "MQKf5Xb4wgV",
+            "attributeValues": []
+        },
+        {
+            "name": "New_Number of people screened for risk of DM and HTN at community level among the target",
+            "created": "2023-10-24T05:36:32.746",
+            "lastUpdated": "2023-10-24T05:36:32.746",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "% screened for risk at community level",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{vFbXtfeBJ19}",
+            "numeratorDescription": "New_Number of people screened for risk of DM and HTN at community level\t",
+            "denominator": "60",
+            "denominatorDescription": "Target",
+            "id": "v1X57kyUrPK",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people screened to be at high risk of diabetes among the target",
+            "created": "2023-10-24T05:39:23.323",
+            "lastUpdated": "2023-10-24T05:39:23.323",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number of people to be at high risk of diabetes",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{PtXHmAmFLFK}",
+            "numeratorDescription": "New_Number of people screened to be at high risk of diabetes\t",
+            "denominator": "90",
+            "denominatorDescription": "Target",
+            "id": "g5LT7dAUq5A",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people screened to be at high risk of hypertension among the target",
+            "created": "2023-10-24T05:42:06.938",
+            "lastUpdated": "2023-10-24T05:42:06.938",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number of  to be at high risk of hypertension",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{jnTAe1byQnW}",
+            "numeratorDescription": "Number of people screened to be at high risk of hypertension",
+            "denominator": "90",
+            "denominatorDescription": "Target",
+            "id": "pm873S205DW",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes active in care among target",
+            "created": "2023-10-24T07:51:34.764",
+            "lastUpdated": "2023-10-24T07:51:34.764",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number diabetes active in care among target",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{ijz7TWvEBlW}",
+            "numeratorDescription": "Number of people with diabetes active in care among target",
+            "denominator": "80",
+            "denominatorDescription": "Target",
+            "id": "Yx1E3cewOVN",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes assessed for CKD among target",
+            "created": "2023-10-24T07:37:37.054",
+            "lastUpdated": "2023-10-24T07:37:37.054",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number with diabetes assessed for CKD",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{IoNdXefOdnq}",
+            "numeratorDescription": "Number of people with diabetes assessed for CKD",
+            "denominator": "70",
+            "denominatorDescription": "Target",
+            "id": "BtD55z05xIh",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes assessed for diabetic foot among target",
+            "created": "2023-10-24T07:29:19.408",
+            "lastUpdated": "2023-10-24T07:29:19.408",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number  assessed for diabetic foot",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{W2OnRy0Qk13}",
+            "numeratorDescription": "Number of people with diabetes assessed for diabetic foot",
+            "denominator": "70",
+            "denominatorDescription": "Target",
+            "id": "KtCcb0ZLPdS",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes assessed for retinopathy among target",
+            "created": "2023-10-24T07:40:55.978",
+            "lastUpdated": "2023-10-24T07:40:55.978",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number diabetes assessed for retinopathy",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{kxxJ28BeRfj}",
+            "numeratorDescription": "Number of people with diabetes assessed for retinopathy",
+            "denominator": "70",
+            "denominatorDescription": "Target",
+            "id": "S73j0dW34cQ",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes on injectable pharmacological among the target",
+            "created": "2023-10-24T07:49:08.540",
+            "lastUpdated": "2023-10-24T07:49:08.540",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number diabetes on injectable pharmacological",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{MSdos2R3Var}",
+            "numeratorDescription": "Number of people with diabetes on injectable pharmacological treatment among the target",
+            "denominator": "40",
+            "denominatorDescription": "Target",
+            "id": "xcXpAMef2Fn",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes on non-pharmacological treatment among target",
+            "created": "2023-10-24T07:42:47.283",
+            "lastUpdated": "2023-10-24T07:42:47.283",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number diabetes on non-pharmacological",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{g9j8nRV5Szg}",
+            "numeratorDescription": "Number of people with diabetes on non-pharmacological treatment",
+            "denominator": "90",
+            "denominatorDescription": "Target",
+            "id": "BjqeVnENVa3",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes on oral pharmacological among target",
+            "created": "2023-10-24T07:44:50.542",
+            "lastUpdated": "2023-10-24T07:44:50.542",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number diabetes on oral pharmacological",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{niB9yDwH3RX}",
+            "numeratorDescription": "Number of people with diabetes on oral pharmacological treatment",
+            "denominator": "50",
+            "denominatorDescription": "Target",
+            "id": "PlV18ezQ9yg",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with diabetes with acute complications the last 12 months among target",
+            "created": "2023-10-24T07:34:45.378",
+            "lastUpdated": "2023-10-24T07:34:45.378",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number diabetes with acute complications",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{Yan4q0qyztI}",
+            "numeratorDescription": "Number of people with diabetes with acute complications the last 12 months",
+            "denominator": "100",
+            "denominatorDescription": "Target",
+            "id": "q8yhINHkRIH",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with glyceamic control among the target",
+            "created": "2023-10-24T07:56:53.481",
+            "lastUpdated": "2023-10-24T07:56:53.481",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number of people with glyceamic control",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{sosE12ng3ne}",
+            "numeratorDescription": "Number of people with glyceamic control",
+            "denominator": "70",
+            "denominatorDescription": "Target",
+            "id": "Cb2oB65P3mJ",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with hypertension active in care among the target",
+            "created": "2023-10-24T07:53:32.256",
+            "lastUpdated": "2023-10-24T07:53:32.256",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number of people with hypertension active in care",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{Z7dTmDzHLQK}",
+            "numeratorDescription": "Number of people with hypertension active in care",
+            "denominator": "80",
+            "denominatorDescription": "Target",
+            "id": "XA6v7FDfcfx",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with hypertension assessed for CKD in the last 6 months among target",
+            "created": "2023-10-24T07:39:18.306",
+            "lastUpdated": "2023-10-24T07:39:18.306",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number with hypertension assessed for CKD",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{SVak0uAeJUt}",
+            "numeratorDescription": "Number of people with hypertension assessed for CKD in the last 6 months.",
+            "denominator": "90",
+            "denominatorDescription": "Target",
+            "id": "qTGA3ZmV0Am",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with hypertension receiving an antihypertensive among the target",
+            "created": "2023-10-24T07:55:45.956",
+            "lastUpdated": "2023-10-24T07:55:45.956",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number hypertension receiving an antihypertensive",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{UXqitCslJa4}",
+            "numeratorDescription": "Number of people with hypertension receiving an antihypertensive agent",
+            "denominator": "80",
+            "denominatorDescription": "Target",
+            "id": "Fvjcqs0vpqH",
+            "attributeValues": []
+        },
+        {
+            "name": "Number of people with raised cholestorol among target",
+            "created": "2023-10-24T08:09:41.315",
+            "lastUpdated": "2023-10-24T08:09:41.315",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Number of people with raised cholestorol",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{zRfGhds18dn}",
+            "numeratorDescription": "Number of people with raised cholestorol",
+            "denominator": "20",
+            "denominatorDescription": "Target",
+            "id": "e4rShfYYQcM",
+            "attributeValues": []
+        },
+        {
+            "name": "People screened for hypertension at facility level",
+            "created": "2023-10-17T08:41:57.124",
+            "lastUpdated": "2023-10-23T20:34:42.712",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "People screened for HTN: facility",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "1",
+            "numeratorDescription": "Numerator",
+            "denominator": "-1",
+            "denominatorDescription": "Denominator",
+            "id": "ZD2spB53oLp",
+            "attributeValues": []
+        },
+        {
+            "name": "People screened for risk of diabetes and hypertension at community level",
+            "created": "2023-10-17T06:05:34.349",
+            "lastUpdated": "2023-10-23T21:09:16.375",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "People screened for risk of diabetes and HTN",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{vFbXtfeBJ19}",
+            "numeratorDescription": "Number of people screened for risk of DM and HTN at community level",
+            "denominator": "#{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 40 na zaidi",
+            "id": "A7ZFv6h8UtH",
+            "attributeValues": []
+        },
+        {
+            "name": "People screened to be at high risk of diabetes attending a facility",
+            "created": "2023-10-17T06:25:32.811",
+            "lastUpdated": "2023-10-23T21:09:53.539",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Diabetes referral attendence rate",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{PtXHmAmFLFK}",
+            "numeratorDescription": "Number of people screened to be at high risk of diabetes",
+            "denominator": "#{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 40 na zaidi",
+            "id": "e9eHpG2SXTu",
+            "attributeValues": []
+        },
+        {
+            "name": "People screened to be at high risk of hypertension attending a facility",
+            "created": "2023-10-17T06:27:38.139",
+            "lastUpdated": "2023-10-23T21:10:36.038",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "HTN referral attendence rate ",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{jnTAe1byQnW}",
+            "numeratorDescription": "Number of people screened to be at high risk of hypertension",
+            "denominator": "#{ykShMtNgDB1.cDJ9PFr9uzM} + #{ykShMtNgDB1.PvCDQOjeMDy} + #{ykShMtNgDB1.ZxQ1BYjm6eO} + #{ykShMtNgDB1.WuqXemlutom}",
+            "denominatorDescription": "Idadi ya watu miaka 40 na zaidi",
+            "id": "Cb5AIm1h4GM",
+            "attributeValues": []
+        },
+        {
+            "name": "People with diabetes active in care",
+            "created": "2023-10-17T09:13:10.154",
+            "lastUpdated": "2023-10-23T21:11:13.604",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "People active in care: Diabetes",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{ijz7TWvEBlW}",
+            "numeratorDescription": "Number of people with diabetes active in care",
+            "denominator": "I{Tt2z5XTOM8p}",
+            "denominatorDescription": "Number of people with diabetes registered at a facility",
+            "id": "kijxKAhmx9g",
+            "attributeValues": []
+        },
+        {
+            "name": "People with hypertension active in care",
+            "created": "2023-10-17T09:18:36.133",
+            "lastUpdated": "2023-10-23T21:11:51.296",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "People active in care: Hypertension",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{Z7dTmDzHLQK}",
+            "numeratorDescription": "Number of people with hypertension active in care",
+            "denominator": "I{RI0gWHD5tGT}",
+            "denominatorDescription": "Number of people with hypertension registered at a facility",
+            "id": "HuffdVK8VZG",
+            "attributeValues": []
+        },
+        {
+            "name": "Raised total cholesterol among people with hypertension ",
+            "created": "2023-10-17T09:30:07.872",
+            "lastUpdated": "2023-10-23T21:12:15.607",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Raised total cholesterol  ",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{zRfGhds18dn}",
+            "numeratorDescription": "Number of people with raised cholestorol",
+            "denominator": "I{Z7dTmDzHLQK}",
+            "denominatorDescription": "Number of people with hypertension active in care",
+            "id": "DCLkKYSkqwM",
+            "attributeValues": []
+        },
+        {
+            "name": "Retinopathy screening among people with diabetes ",
+            "created": "2023-10-17T08:39:11.756",
+            "lastUpdated": "2023-10-23T21:12:39.078",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Retinopathy screening  ",
+            "legendSets": [
+                {
+                    "id": "vT0zfxNqfo6"
+                }
+            ],
+            "annualized": false,
+            "indicatorType": {
+                "id": "EU5Xekxg7No"
+            },
+            "numerator": "I{kxxJ28BeRfj}",
+            "numeratorDescription": "Number of people with diabetes assessed for retinopathy",
+            "denominator": "I{ijz7TWvEBlW}",
+            "denominatorDescription": "Number of people with diabetes active in care",
+            "id": "W564EZngHcl",
+            "attributeValues": []
+        },
+        {
+            "name": "Total score",
+            "created": "2023-10-24T09:35:04.591",
+            "lastUpdated": "2023-10-24T09:35:04.591",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Total score",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "zVJcEdjPHDh"
+            },
+            "numerator": "(((I{vFbXtfeBJ19})/60)+(I{PtXHmAmFLFK}/90)+(I{jnTAe1byQnW}/90)/3)+(((I{W2OnRy0Qk13}/70)+(I{Yan4q0qyztI}/100)+(I{W2OnRy0Qk13}/70)+(I{SVak0uAeJUt}/70)+(I{kxxJ28BeRfj}/70))/5)+(((I{g9j8nRV5Szg}/90)+(I{niB9yDwH3RX}/50)+(I{MSdos2R3Var}/40)+(I{ijz7TWvEBlW}/80)+(I{Z7dTmDzHLQK}/80)+(I{UXqitCslJa4}/80))/6)+((I{sosE12ng3ne}/70))/4",
+            "numeratorDescription": "Total score",
+            "denominator": "1",
+            "denominatorDescription": "1",
+            "id": "cH7zWqO6e93",
+            "attributeValues": []
+        },
+        {
+            "name": "Treatment",
+            "created": "2023-10-24T09:12:45.507",
+            "lastUpdated": "2023-10-24T09:12:45.507",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Treatment",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "zVJcEdjPHDh"
+            },
+            "numerator": "((I{g9j8nRV5Szg}/90)+(I{niB9yDwH3RX}/50)+(I{MSdos2R3Var}/40)+(I{ijz7TWvEBlW}/80)+(I{Z7dTmDzHLQK}/80)+(I{UXqitCslJa4}/80))/6",
+            "numeratorDescription": "Average Treatment",
+            "denominator": "1",
+            "denominatorDescription": "1",
+            "id": "xAl5imA3i8x",
+            "attributeValues": []
+        },
+        {
+            "name": "Treatment outcomes - disease management",
+            "created": "2023-10-24T09:20:03.020",
+            "lastUpdated": "2023-10-24T09:20:03.020",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Tuzo Engelbert",
+                "displayName": "Tuzo Engelbert",
+                "username": "tuzoengelbert"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Treatment outcomes - disease management",
+            "legendSets": [],
+            "annualized": false,
+            "indicatorType": {
+                "id": "zVJcEdjPHDh"
+            },
+            "numerator": "(I{sosE12ng3ne}/70)",
+            "numeratorDescription": "Treatment outcomes - disease management",
+            "denominator": "1",
+            "denominatorDescription": "1",
+            "id": "psx7mDZ7M80",
+            "attributeValues": []
+        }
+    ],
+    "indicatorGroupSets": [
+        {
+            "name": "Output",
+            "created": "2023-10-18T11:10:50.470",
+            "lastUpdated": "2023-10-18T11:10:50.470",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Output",
+            "compulsory": false,
+            "id": "FwPPlIjgwGq",
+            "indicatorGroups": [
+                {
+                    "id": "JMpA6pijyXT"
+                },
+                {
+                    "id": "wTsz35SaSEo"
+                },
+                {
+                    "id": "Rqv3Mzpb6H4"
+                }
+            ]
+        },
+        {
+            "name": "Results",
+            "created": "2023-10-18T11:11:23.641",
+            "lastUpdated": "2023-10-18T11:11:23.641",
+            "translations": [],
+            "createdBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "lastUpdatedBy": {
+                "id": "M5zQapPyTZI",
+                "code": null,
+                "name": "Isabela Ngowi",
+                "displayName": "Isabela Ngowi",
+                "username": "bella"
+            },
+            "sharing": {
+                "owner": "M5zQapPyTZI",
+                "external": false,
+                "users": {},
+                "userGroups": {},
+                "public": "rw------"
+            },
+            "shortName": "Results",
+            "compulsory": false,
+            "id": "JKMamUdOSCn",
+            "indicatorGroups": [
+                {
+                    "id": "bgqikftImlz"
+                },
+                {
+                    "id": "xctmyDNsDSN"
+                }
+            ]
+        }
+    ]
+}
