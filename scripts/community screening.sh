@@ -11,6 +11,9 @@ GRANT_TYPE="client_credentials"
 START_DATE=`date +"%Y-%m-%dT00:00:00Z"`
 END_DATE=`date +"%Y-%m-%dT23:59:59Z"`
 
+#PROGRAM
+#PROGRAM STAGES
+
 # Get Keycloak token
 TOKEN_RESPONSE=$(curl -X POST \
   -d "client_id=$CLIENT_ID" \
@@ -27,11 +30,11 @@ CLIENTS_REGISTERED=$(curl -s -X GET \
   $FHIR_SERVER_URL/fhir/Patient?_lastUpdated=ge2023-07-20T00:00:00Z&_lastUpdated=le2023-10-11T00:00:00)
 
 # Save FHIR response to a temporary file
-TMP_FILE=$(mktemp)
-echo "$CLIENTS_REGISTERED" > "$TMP_FILE"
+PATIENT_TMP_FILE=$(mktemp)
+echo "$CLIENTS_REGISTERED" > "$PATIENT_TMP_FILE"
 
 # Loop through each patient ID and fetch patient resource
-jq -r '.entry[].resource.id' "$TMP_FILE" | while IFS= read -r patient_id; do
+jq -r '.entry[].resource.id' "$PATIENT_TMP_FILE" | while IFS= read -r patient_id; do
   # Remove leading/trailing whitespaces if any
   patient_id=$(echo "$patient_id" | xargs)
 
@@ -54,6 +57,6 @@ jq -r '.entry[].resource.id' "$TMP_FILE" | while IFS= read -r patient_id; do
 done
 
 # Remove temporary file
-rm "$TMP_FILE"
+rm "$PATIENT_TMP_FILE"
 
 echo $CLIENTS_IDS
