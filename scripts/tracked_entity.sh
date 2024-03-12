@@ -94,9 +94,15 @@ jq -r '.entry[].resource.id' "$PATIENT_TMP_FILE" | while IFS= read -r patient_id
         location_id=$(jq -r '.[] | select(.displayName == "'"$location_name"'") | .id' orgunits.json)
         PATIENT_RESOURCE=$(echo "$PATIENT_RESOURCE" | jq --arg loc_id "$location_id" '.meta.tag |= map(if .system == "https://smartregister.org/location-tag-id" then .code = $loc_id else . end)')
         
-        # Print the updated patient resource
-        echo "Updated Patient Resource:"
-        echo "$PATIENT_RESOURCE"
+        # Send the updated patient resource to the OpenHIM Mapping Mediator
+        MAPPING_RESULT=$(curl -s -X POST \
+          -H "Content-Type: application/json" \
+          -d "$PATIENT_RESOURCE" \
+          "http://localhost:5001/patient-risk-single2")
+
+        # Save the mapping result to another variable
+        echo "Mapping Result:"
+        echo "$MAPPING_RESULT"
       
       else
         echo "Location name does not exist in orgunits.json: $location_name"
