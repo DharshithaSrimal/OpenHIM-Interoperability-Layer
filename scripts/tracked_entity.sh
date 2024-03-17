@@ -39,7 +39,7 @@ while IFS= read -r location_info; do
   locationArray[$location_id]="$location_name"
 done < <(curl -s -X GET \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
-  "$FHIR_SERVER_URL/fhir/Location" | jq -r '.entry[] | .resource | "\(.id) \(.name)"')
+  "$FHIR_SERVER_URL/fhir/Location?_count=100" | jq -r '.entry[] | .resource | "\(.id) \(.name)"')
 
 ##### End FHIR Location setup #####
 
@@ -56,7 +56,8 @@ orgunits=$(cat orgunits.json)
 # Send FHIR request to get clients registered per the day
 CLIENTS_REGISTERED=$(curl -s -X GET \
   -H "Authorization: Bearer $ACCESS_TOKEN" \
-  $FHIR_SERVER_URL/fhir/Patient?_lastUpdated=ge2023-07-20T00:00:00Z&_lastUpdated=le2023-10-11T00:00:00)
+  $FHIR_SERVER_URL/fhir/Patient?_lastUpdated=ge2024-03-15T00:00:00Z&_lastUpdated=le2024-03-15T23:59:59)
+
 
 # Save FHIR response to a temporary file
 PATIENT_TMP_FILE=$(mktemp)
@@ -66,16 +67,27 @@ echo "$CLIENTS_REGISTERED" > "$PATIENT_TMP_FILE"
 jq -r '.entry[].resource.id' "$PATIENT_TMP_FILE" | while IFS= read -r patient_id; do
   # Remove leading/trailing whitespaces if any
   patient_id=$(echo "$patient_id" | xargs)
-
+  
   # Send request to get patient resource
   PATIENT_RESOURCE=$(curl -s -X GET \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     "$FHIR_SERVER_URL/fhir/Patient/$patient_id")
-
+  
   # Check if the patient resource is empty or contains an error message
   if [ -z "$PATIENT_RESOURCE" ] || [ "$(echo "$PATIENT_RESOURCE" | jq -r '.issue')" != "null" ]; then
     echo "Error fetching patient resource for ID $patient_id"
   else
+
+    # Extract the practitioner location tag
+    practitioner_location_tag=$(echo "$PATIENT_RESOURCE" | jq -r '.meta.tag[] | select(.system == "https://smartregister.org/location-tag-id")')
+
+    # Replace the meta.tag array with only the practitioner location tag
+    PATIENT_RESOURCE=$(echo "$PATIENT_RESOURCE" | jq --argjson practitioner_location_tag "$practitioner_location_tag" '.meta.tag = [$practitioner_location_tag]')
+
+    # Remove the other tags from the meta.tag array
+    PATIENT_RESOURCE=$(echo "$PATIENT_RESOURCE" | jq 'del(.meta.tag[] | select(.system != "https://smartregister.org/location-tag-id"))')
+
+
     # Extract the Practitioner Location code
     practitioner_location_code=$(echo "$PATIENT_RESOURCE" | jq -r '.meta.tag[] | select(.system == "https://smartregister.org/location-tag-id") | .code')
     
@@ -84,7 +96,7 @@ jq -r '.entry[].resource.id' "$PATIENT_TMP_FILE" | while IFS= read -r patient_id
     
     # Use locationArray inside the loop
     location_name=${locationArray[$practitioner_location_code]}
-    
+
     if [ -z "$location_name" ]; then
       echo "Location name not found for code: $practitioner_location_code"
     else
@@ -94,16 +106,74 @@ jq -r '.entry[].resource.id' "$PATIENT_TMP_FILE" | while IFS= read -r patient_id
         location_id=$(jq -r '.[] | select(.displayName == "'"$location_name"'") | .id' orgunits.json)
         PATIENT_RESOURCE=$(echo "$PATIENT_RESOURCE" | jq --arg loc_id "$location_id" '.meta.tag |= map(if .system == "https://smartregister.org/location-tag-id" then .code = $loc_id else . end)')
         
+        # Calculate age from birthday
+        birth_date=$(echo "$PATIENT_RESOURCE" | jq -r '.birthDate')
+        current_year=$(date +"%Y")
+        birth_year=$(date -d "$birth_date" +"%Y")
+        age=$((current_year - birth_year))
+        
         # Send the updated patient resource to the OpenHIM Mapping Mediator
         MAPPING_RESULT=$(curl -s -X POST \
           -H "Content-Type: application/json" \
           -d "$PATIENT_RESOURCE" \
-          "http://localhost:5001/patient-risk-single2")
+          "http://localhost:5001/fhir-to-tei")
+
+        # Update the age attribute in the mapping result
+        MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq '.attributes |= map(if .attribute == "QUS2rM78s6F" then .value = "'"$age"'" else . end)')
+
+        # Update the age attribute in the mapping result
+        case $age in
+          [1-44])
+            age_group="Ageless45"
+            ;;
+          45|4[6-9])
+            age_group="45to54"
+            ;;
+          5[0-9]|6[0-4])
+            age_group="55to64"
+            ;;
+          *)
+            age_group="65orAbove"
+            ;;
+        esac
+
+        # Update the age attribute in the mapping result
+        MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq '.attributes |= map(if .attribute == "cTFwAAW0and" then .value = "'"$age_group"'" else . end)')
+        
+        # Update the gender attribute in the mapping result
+        gender=$(echo "$PATIENT_RESOURCE" | jq -r '.gender' | awk '{print toupper(substr($0, 1, 1)) tolower(substr($0, 2))}')
+        MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq '.attributes |= map(if .attribute == "Nymn5TH8GRu" then .value = "'"$gender"'" else . end)')
+        
+        # Extract the enrollment ID from the mapping result
+       enrollment_date=$(echo "$PATIENT_RESOURCE" | jq -r '.meta.lastUpdated' | awk -F 'T' '{print $1}')
+
+        # Extract the orgUnit from the mapping result
+        org_unit=$(echo "$MAPPING_RESULT" | jq -r '.orgUnit')
+
+        # Extract the date portion from the meta.lastUpdated
+        enrollment_id=$(echo "$PATIENT_RESOURCE" | jq -r '.id')
+
+        # Construct the enrollment object
+        enrollment='{"enrollment": "'"$enrollment_id"'", "orgUnit": "'"$org_unit"'", "trackedEntity": "sHGa6nkjrlG", "program": "jwn5nGdUepW", "enrollmentDate": "'"$enrollment_date"'"}'
+
+        # Add the enrollment object to the mapping result
+        MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq ". + {\"enrollments\": [$enrollment]}")
+        # Remove attributes with null or empty values from the attributes array
+        # MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq '.attributes |= map(select(.value != null and .value != ""))')
+
+        echo "$MAPPING_RESULT"
+
 
         # Save the mapping result to another variable
-        echo "Mapping Result:"
-        echo "$MAPPING_RESULT"
-      
+        # echo "Mapping Result:"
+         # Send the mapped result to DHIS2 trackedEntityInstances
+        RESULT=$(curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Basic $(echo -n "$USERNAME:$PASSWORD" | base64)" \
+          -d "$MAPPING_RESULT" \
+          "$DHIS2_SERVER_URL/trackedEntityInstances")
+
+        echo $RESULT
       else
         echo "Location name does not exist in orgunits.json: $location_name"
       fi

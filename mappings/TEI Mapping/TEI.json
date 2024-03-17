@@ -1,0 +1,93 @@
+{
+    "name": "Map FHIR Patient to DHIS2 Tracked Entity Instances",
+    "description": "Map FHIR patient resource to DHIS2 Tracked Entity Instances",
+    "endpoint": {
+        "pattern": "/fhir-to-tei"
+    },
+    "transformation": {
+        "input": "JSON",
+        "output": "JSON"
+    },
+    "inputMapping": {
+        "constants.trackedEntityType": "trackedEntityType",
+        "requestBody.meta.tag[0].code": "orgUnit",
+        "constants.inactive": "inactive",
+        "constants.deleted": "inactive",
+        "constants.featureType": "featureType",
+        "constants.attributes[0].attribute": "attributes[0].attribute",
+        "requestBody.id": "attributes[0].value",
+        "constants.attributes[1].attribute": "attributes[1].attribute",
+        "requestBody.identifier[0].value": "attributes[1].value",
+        "constants.attributes[2].attribute": "attributes[2].attribute",
+        "requestBody.identifier[1].value": "attributes[2].value",
+        "constants.attributes[3].attribute": "attributes[3].attribute",
+        "requestBody.name[0].text": "attributes[3].value",
+        "constants.attributes[4].attribute": "attributes[4].attribute",
+        "requestBody.birthDate": "attributes[4].value",
+        "constants.attributes[5].attribute": "attributes[5].attribute",
+        "constants.attributes[6].attribute": "attributes[6].attribute",
+        "constants.attributes[7].attribute": "attributes[7].attribute",
+        "requestBody.gender": "attributes[7].value",
+        "constants.attributes[8].attribute": "attributes[8].attribute",
+        "requestBody.telecom[0].value": "attributes[8].value"
+    },
+    "constants": {
+        "trackedEntityType": "sHGa6nkjrlG",
+        "inactive": false,
+        "deleted": false,
+        "featureType": "NONE",
+        "enrollments": [
+            {
+                "trackedEntity": "sHGa6nkjrlG",
+                "program": "jwn5nGdUepW",
+                "orgUnit": "",
+                "enrollmentDate": "",
+                "coordinate": {
+                    "latitude": "",
+                    "longitude": ""
+                },
+                "events": [],
+                "notes": []
+            }
+        ],
+        "relationships": [],
+        "attributes": [
+            {
+                "attribute": "dvArr6f1C8h",
+                "value": "DIABETES-2024/0000113"
+            },
+            {
+                "attribute": "j92f54nkFoH",
+                "value": "1003001"
+            },
+            {
+                "attribute": "rwo5EyR2gO2",
+                "value": "873529058"
+            },
+            {
+                "attribute": "A960fhyHbT4",
+                "value": "Madeera Fernando"
+            },
+            {
+                "attribute": "lzZVaU3Ubji",
+                "value": "2006-12-27"
+            },
+            {
+                "attribute": "QUS2rM78s6F",
+                "value": "17"
+            },
+            {
+                "attribute": "cTFwAAW0and",
+                "value": "Ageless45"
+            },
+            {
+                "attribute": "Nymn5TH8GRu",
+                "value": "Female"
+            },
+            {
+                "attribute": "sw7Qd3ZtbLm",
+                "value": "770000001"
+            }
+        ]
+    }
+}
