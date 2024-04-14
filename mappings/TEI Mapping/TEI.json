@@ -21,15 +21,16 @@
         "constants.attributes[2].attribute": "attributes[2].attribute",
         "requestBody.identifier[1].value": "attributes[2].value",
         "constants.attributes[3].attribute": "attributes[3].attribute",
-        "requestBody.name[0].text": "attributes[3].value",
+        "requestBody.name[0].given[0]": "attributes[3].value",        
         "constants.attributes[4].attribute": "attributes[4].attribute",
-        "requestBody.birthDate": "attributes[4].value",
+        "requestBody.name[0].text": "attributes[4].value",
         "constants.attributes[5].attribute": "attributes[5].attribute",
-        "constants.attributes[6].attribute": "attributes[6].attribute",
-        "constants.attributes[7].attribute": "attributes[7].attribute",
-        "requestBody.gender": "attributes[7].value",
-        "constants.attributes[8].attribute": "attributes[8].attribute",
-        "requestBody.telecom[0].value": "attributes[8].value"
+        "requestBody.birthDate": "attributes[5].value",
+        "constants.attributes[8].attribute": "attributes[6].attribute",
+        "requestBody.telecom[0].value": "attributes[6].value",
+        "requestBody.meta.lastUpdated": "enrollments[0].enrollmentDate",
+        "constants.enrollments[0].trackedEntity": "enrollments[0].trackedEntity",
+        "constants.enrollments[0].program": "enrollments[0].program"
     },
     "constants": {
         "trackedEntityType": "sHGa6nkjrlG",
@@ -66,23 +67,15 @@
             },
             {
                 "attribute": "A960fhyHbT4",
-                "value": "Madeera Fernando"
+                "value": "Madeera"
+            },
+            {
+                "attribute": "zvQt40lKh48",
+                "value": "Fernando"
             },
             {
                 "attribute": "lzZVaU3Ubji",
                 "value": "2006-12-27"
-            },
-            {
-                "attribute": "QUS2rM78s6F",
-                "value": "17"
-            },
-            {
-                "attribute": "cTFwAAW0and",
-                "value": "Ageless45"
-            },
-            {
-                "attribute": "Nymn5TH8GRu",
-                "value": "Female"
             },
             {
                 "attribute": "sw7Qd3ZtbLm",
