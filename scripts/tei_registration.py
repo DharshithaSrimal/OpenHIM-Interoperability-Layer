@@ -5,17 +5,17 @@ from datetime import datetime
 import base64 
 
 # Replace these values with your Keycloak and FHIR server details
-KEYCLOAK_URL = "http://188.166.213.172:8081/realms/wdf_stage/protocol/openid-connect/token"
-FHIR_SERVER_URL = "http://188.166.213.172:8082"
+KEYCLOAK_URL = "http://188.166.213.172:9001/realms/wdf_stage/protocol/openid-connect/token"
+FHIR_SERVER_URL = "http://188.166.213.172:9002"
 
 CLIENT_ID = "cHIMS Client"
-CLIENT_SECRET = "lvUTECeWLcHfyj0UZ5AI0q0t4X67vOaS"
+CLIENT_SECRET = "y5ShTB8DWRr6nfftohJaKIaqnUDS7qnJ"
 GRANT_TYPE = "client_credentials"
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-START_DATE = "2024-04-14T00:00:00Z"
-END_DATE = "2024-04-15T23:59:59Z"
+START_DATE = "2024-05-09T00:00:00Z"
+END_DATE = "2024-05-10T23:59:59Z"
 
 # DHIS2
 DHIS2_SERVER_URL = "http://localhost:8084/dhis/api"
@@ -33,7 +33,6 @@ token_response = requests.post(KEYCLOAK_URL, data={
     "grant_type": GRANT_TYPE
 })
 ACCESS_TOKEN = token_response.json()["access_token"]
-
 ##### FHIR Location setup #####
 
 # Send FHIR request to get all locations and process it in a loop
@@ -120,16 +119,16 @@ for patient_info in patients_bundle:
     # Add incidentDate to enrollments
     mapping_result["enrollments"][0]["incidentDate"] = mapping_result["enrollments"][0]["enrollmentDate"]
 
-    # Send the payload to DHIS2 trackedEntityInstances
-    response = requests.post(
-        f"{DHIS2_SERVER_URL}/trackedEntityInstances",
-        headers={
-            "Content-Type": "application/json",
-            "Authorization": "Basic " + base64.b64encode(f"{USERNAME}:{PASSWORD}".encode()).decode()
-        },
-        json=mapping_result
-    )
-    print(response)
+    # # Send the payload to DHIS2 trackedEntityInstances
+    # response = requests.post(
+    #     f"{DHIS2_SERVER_URL}/trackedEntityInstances",
+    #     headers={
+    #         "Content-Type": "application/json",
+    #         "Authorization": "Basic " + base64.b64encode(f"{USERNAME}:{PASSWORD}".encode()).decode()
+    #     },
+    #     json=mapping_result
+    # )
+    # print(response)
     # Save the mapping result
 
     mapping_ = requests.post(
