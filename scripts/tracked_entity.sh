@@ -16,7 +16,9 @@ DHIS2_SERVER_URL="http://localhost:8084/dhis/api"
 USERNAME="admin"
 PASSWORD="district"
 
-declare -A locationArray  # Define locationArray here
+declare -A locationArray
+declare -A MAPPING_RESULTS
+count=0
 
 # Get Keycloak token
 TOKEN_RESPONSE=$(curl -s -X POST \
@@ -72,22 +74,11 @@ jq -r '.entry[].resource.id' "$PATIENT_TMP_FILE" | while IFS= read -r patient_id
   PATIENT_RESOURCE=$(curl -s -X GET \
     -H "Authorization: Bearer $ACCESS_TOKEN" \
     "$FHIR_SERVER_URL/fhir/Patient/$patient_id")
-  
+  echo "$PATIENT_RESOURCE"
   # Check if the patient resource is empty or contains an error message
   if [ -z "$PATIENT_RESOURCE" ] || [ "$(echo "$PATIENT_RESOURCE" | jq -r '.issue')" != "null" ]; then
     echo "Error fetching patient resource for ID $patient_id"
   else
-
-    # Extract the practitioner location tag
-    practitioner_location_tag=$(echo "$PATIENT_RESOURCE" | jq -r '.meta.tag[] | select(.system == "https://smartregister.org/location-tag-id")')
-
-    # Replace the meta.tag array with only the practitioner location tag
-    PATIENT_RESOURCE=$(echo "$PATIENT_RESOURCE" | jq --argjson practitioner_location_tag "$practitioner_location_tag" '.meta.tag = [$practitioner_location_tag]')
-
-    # Remove the other tags from the meta.tag array
-    PATIENT_RESOURCE=$(echo "$PATIENT_RESOURCE" | jq 'del(.meta.tag[] | select(.system != "https://smartregister.org/location-tag-id"))')
-
-
     # Extract the Practitioner Location code
     practitioner_location_code=$(echo "$PATIENT_RESOURCE" | jq -r '.meta.tag[] | select(.system == "https://smartregister.org/location-tag-id") | .code')
     
@@ -143,44 +134,31 @@ jq -r '.entry[].resource.id' "$PATIENT_TMP_FILE" | while IFS= read -r patient_id
         # Update the gender attribute in the mapping result
         gender=$(echo "$PATIENT_RESOURCE" | jq -r '.gender' | awk '{print toupper(substr($0, 1, 1)) tolower(substr($0, 2))}')
         MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq '.attributes |= map(if .attribute == "Nymn5TH8GRu" then .value = "'"$gender"'" else . end)')
-        
-        # Extract the enrollment ID from the mapping result
-       enrollment_date=$(echo "$PATIENT_RESOURCE" | jq -r '.meta.lastUpdated' | awk -F 'T' '{print $1}')
-
-        # Extract the orgUnit from the mapping result
-        org_unit=$(echo "$MAPPING_RESULT" | jq -r '.orgUnit')
-
-        # Extract the date portion from the meta.lastUpdated
-        enrollment_id=$(echo "$PATIENT_RESOURCE" | jq -r '.id')
-
-        # Construct the enrollment object
-        enrollment='{"enrollment": "'"$enrollment_id"'", "orgUnit": "'"$org_unit"'", "trackedEntity": "sHGa6nkjrlG", "program": "jwn5nGdUepW", "enrollmentDate": "'"$enrollment_date"'"}'
-
-        # Add the enrollment object to the mapping result
-        MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq ". + {\"enrollments\": [$enrollment]}")
-        # Remove attributes with null or empty values from the attributes array
-        # MAPPING_RESULT=$(echo "$MAPPING_RESULT" | jq '.attributes |= map(select(.value != null and .value != ""))')
-
-        echo "$MAPPING_RESULT"
-
 
         # Save the mapping result to another variable
         # echo "Mapping Result:"
+        echo "$MAPPING_RESULT"
+        # MAPPING_RESULTS[$count]="$MAPPING_RESULT"
+        # echo "$MAPPING_RESULTS[0]"
+        # echo "$MAPPING_RESULTS"
          # Send the mapped result to DHIS2 trackedEntityInstances
-        RESULT=$(curl -X POST \
-          -H "Content-Type: application/json" \
-          -H "Authorization: Basic $(echo -n "$USERNAME:$PASSWORD" | base64)" \
-          -d "$MAPPING_RESULT" \
-          "$DHIS2_SERVER_URL/trackedEntityInstances")
+        # RESULT=$(curl -X POST \
+        #   -H "Content-Type: application/json" \
+        #   -H "Authorization: Basic $(echo -n "$USERNAME:$PASSWORD" | base64)" \
+        #   -d "$MAPPING_RESULT" \
+        #   "$DHIS2_SERVER_URL/trackedEntityInstances")
 
-        echo $RESULT
+        # echo $RESULT
       else
         echo "Location name does not exist in orgunits.json: $location_name"
       fi
     fi
   fi
+  ((count++))
 done
 
+
+echo $SCREENED_CLIENTS
 # Remove temporary files
 rm "$PATIENT_TMP_FILE"
 
