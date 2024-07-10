@@ -5,17 +5,17 @@ from datetime import datetime
 import base64 
 
 # Replace these values with your Keycloak and FHIR server details
-KEYCLOAK_URL = "http://188.166.213.172:9001/realms/wdf_stage/protocol/openid-connect/token"
-FHIR_SERVER_URL = "http://188.166.213.172:9002"
+KEYCLOAK_URL = "https://keycloak.diabetescompass.health.gov.lk:4443/realms/dc_community/protocol/openid-connect/token"
+FHIR_SERVER_URL = "https://fhir.diabetescompass.health.gov.lk:4443"
 
-CLIENT_ID = "cHIMS Client"
-CLIENT_SECRET = "y5ShTB8DWRr6nfftohJaKIaqnUDS7qnJ"
+CLIENT_ID = "dc-interoperability"
+CLIENT_SECRET = "pZ6EKIhWCtqAaCiB5Atmmj6ULlcc0FG1"
 GRANT_TYPE = "client_credentials"
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-START_DATE = "2024-05-09T00:00:00Z"
-END_DATE = "2024-05-10T23:59:59Z"
+START_DATE = "2024-05-15T00:00:00Z"
+END_DATE = "2024-07-04T00:00:00Z"
 
 # DHIS2
 DHIS2_SERVER_URL = "http://localhost:8084/dhis/api"
@@ -130,12 +130,12 @@ for patient_info in patients_bundle:
     # )
     # print(response)
     # Save the mapping result
-
-    mapping_ = requests.post(
-        "http://localhost:5001/patient-risk-test",
-        headers={"Content-Type": "application/json"},
-        json=mapping_result
-    )
+# Send to openhim ##############
+    # mapping_ = requests.post(
+    #     "http://localhost:5001/patient-risk-test",
+    #     headers={"Content-Type": "application/json"},
+    #     json=mapping_result
+    # )
 
 # List to hold the tracked entity instances
 tracked_entity_instances = []
@@ -169,3 +169,89 @@ tracked_entity_instances = []
 
 # Print the response
 # print(response.text)
+
+### Community Screening ###
+questionnaireResponse = requests.get(
+    f"{FHIR_SERVER_URL}/fhir/QuestionnaireResponse?_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&questionnaire=dc-diabetes-screening",
+    headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
+)
+# Check for successful response
+if questionnaireResponse.status_code == 200:
+    qr_data = questionnaireResponse.json()
+    qr_bundle = qr_data.get("entry", [])
+
+    # Process each QuestionnaireResponse
+    for entry in qr_bundle:
+        resource = entry.get('resource', {})
+        questionnaire_response_id = resource.get('id')
+        patient_reference = resource.get('subject', {}).get('reference')
+        
+        if patient_reference:
+            patient_id = patient_reference.split('/')[-1]
+           
+        # Extract RiskAssessment references from the contained List
+        risk_assessment_ids = []
+        contained_resources = resource.get('contained', [])
+        for contained in contained_resources:
+            if contained.get('resourceType') == 'List':
+                for item in contained.get('entry', []):
+                    reference = item.get('item', {}).get('reference', '')
+                    if reference.startswith('RiskAssessment/'):
+                        risk_assessment_id = reference.split('/')[-1]
+                        risk_assessment_ids.append(risk_assessment_id)
+                        
+
+        # Prepare the payload based on available resources
+        payload = {
+            "resourceType": "Bundle",
+            "type": "batch",
+            "entry": [
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": f"Patient/{patient_id}"
+                    }
+                },
+                {
+                    "request": {
+                        "method": "GET",
+                        "url": f"QuestionnaireResponse/{questionnaire_response_id}"
+                    }
+                }
+            ]
+        }
+        
+        for risk_assessment_id in risk_assessment_ids:
+            payload["entry"].append({
+                "request": {
+                    "method": "GET",
+                    "url": f"RiskAssessment/{risk_assessment_id}"
+                }
+            })
+            # Clear risk_assessment_ids for the next iteration
+            risk_assessment_ids.clear()
+
+        # Send the POST request to localhost:5001
+        post_response = requests.post(
+            f"{FHIR_SERVER_URL}/fhir", 
+            json=payload,
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {ACCESS_TOKEN}"
+            }
+        )
+
+        bundle = post_response.json()
+        bundle = patients_data.get("entry", [])
+
+        post_response = requests.post(
+            'http://localhost:5001/fhir-to-tei',
+            json=bundle,
+            headers={"Content-Type": "text"}
+        )
+
+        if post_response.status_code == 200:
+            print("Post request successful:", post_response.json())
+        else:
+            print("Post request failed:", post_response.status_code, post_response.text)
+
