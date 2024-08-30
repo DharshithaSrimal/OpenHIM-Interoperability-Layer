@@ -14,8 +14,8 @@ GRANT_TYPE = "client_credentials"
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-START_DATE = "2024-05-15T00:00:00Z"
-END_DATE = "2024-07-04T00:00:00Z"
+START_DATE = "2024-06-15T00:00:00Z"
+END_DATE = "2024-08-10T00:00:00Z"
 
 # DHIS2
 DHIS2_SERVER_URL = "http://localhost:8084/dhis/api"
@@ -25,6 +25,29 @@ PASSWORD = "Admin@Asd1"
 locationArray = {}
 MAPPING_RESULTS = {}
 count = 0
+
+# Safely extract the value with nested dictionaries and lists
+def get_nested_value(data, keys, default=None):
+    for key in keys:
+        if isinstance(data, list):
+            # Ensure we're within bounds
+            data = data[key] if len(data) > key else None
+        elif isinstance(data, dict):
+            data = data.get(key)
+        if data is None:
+            return default
+    return data
+
+# Intermediate
+dm_risk = ""
+htn_risk = ""
+high = "High"
+low = "Low"
+risk = ""
+consent = ""
+screening_required = ""
+referral_place = ""
+
 
 # Get Keycloak token
 token_response = requests.post(KEYCLOAK_URL, data={
@@ -73,7 +96,7 @@ for patient_info in patients_bundle:
     location_name = locationArray.get(practitioner_location_code)
 
     if not location_name:
-        print(f"Location name not found for code: {practitioner_location_code}")
+        # print(f"Location name not found for code: {practitioner_location_code}")
         continue
 
     if not any(org["displayName"] == location_name for org in orgunits):
@@ -82,6 +105,7 @@ for patient_info in patients_bundle:
 
     # Get the location ID for the matching location name
     location_id = next((org["id"] for org in orgunits if org["displayName"] == location_name), None)
+    print(location_id)
     if not location_id:
         continue
 
@@ -107,12 +131,13 @@ for patient_info in patients_bundle:
         json=patient_resource
     )
     mapping_result = mapping_response.json()
-
+    data_origin = "Community Screening App"
     # Update the age attribute in the mapping result
     age_group = "Ageless45" if age < 45 else "45to54" if age < 55 else "55to64" if age < 65 else "65orAbove"
     mapping_result["attributes"].append({"attribute": "QUS2rM78s6F", "value": str(age)})
     mapping_result["attributes"].append({"attribute": "cTFwAAW0and", "value": age_group})
     mapping_result["attributes"].append({"attribute": "Nymn5TH8GRu", "value": patient_resource["gender"].capitalize()})
+    mapping_result["attributes"].append({"attribute": "QmkJzDbUkSC", "value": data_origin})
 
     # Add orgUnit to enrollments
     mapping_result["enrollments"][0]["orgUnit"] = mapping_result.get("orgUnit")
@@ -131,11 +156,11 @@ for patient_info in patients_bundle:
     # print(response)
     # Save the mapping result
 # Send to openhim ##############
-    # mapping_ = requests.post(
-    #     "http://localhost:5001/patient-risk-test",
-    #     headers={"Content-Type": "application/json"},
-    #     json=mapping_result
-    # )
+    mapping_ = requests.post(
+        "http://localhost:5001/patient-risk-test",
+        headers={"Content-Type": "application/json"},
+        json=mapping_result
+    )
 
 # List to hold the tracked entity instances
 tracked_entity_instances = []
@@ -228,8 +253,8 @@ if questionnaireResponse.status_code == 200:
                     "url": f"RiskAssessment/{risk_assessment_id}"
                 }
             })
-            # Clear risk_assessment_ids for the next iteration
-            risk_assessment_ids.clear()
+        # Clear risk_assessment_ids for the next iteration
+        risk_assessment_ids.clear()
 
         # Send the POST request to localhost:5001
         post_response = requests.post(
@@ -242,16 +267,90 @@ if questionnaireResponse.status_code == 200:
         )
 
         bundle = post_response.json()
-        bundle = patients_data.get("entry", [])
+        # bundle = patients_data.get("entry", [])
+
+        # Check if the response contains RiskAssessment resources and extract values
+        if "entry" in bundle:
+            for entry in bundle["entry"]:
+                # Extract RiskAssessment resource
+                if entry["resource"]["resourceType"] == "RiskAssessment":
+                    risk_assessment = entry["resource"]
+                    code = risk_assessment.get("code").get("coding", [{}])[0].get("code")
+                    risk = risk_assessment.get("prediction", [{}])[0].get("qualitativeRisk").get("text")
+                    if(code == "772788006"):
+                        dm_risk = risk
+                    if(code == "268607006"):
+                        htn_risk = risk
+                 # Extract QuestionnaireResponse resource
+                elif entry["resource"]["resourceType"] == "QuestionnaireResponse":
+                    questionnaire_response = entry["resource"]
+                    # consent = questionnaire_response.get("item", [{}])[0].get("item", [{}])[1].get("answer", [{}])[0].get("valueCoding").get("display")
+                    
+                    # Define the keys for the nested extraction
+                    concent_keys = ["item", 0, "item", 1, "answer", 0, "valueCoding", "display"]
+
+                    # Extract the consent safely
+                    consent = get_nested_value(questionnaire_response, concent_keys, default="N/A")
+                    
+                    if(consent == "I consent to participating in this screening"):
+                        consent = "true"
+                    else:
+                        consent = "false"
+                    
+                    # Define the keys for the nested extraction
+                    screening_required_keys = ["item", 3, "item", 0, "text"]
+
+                    # Extract the screening required
+                    screening_required = get_nested_value(questionnaire_response, screening_required_keys, default="N/A")
+                    
+                    # screening_required = questionnaire_response.get("item", [{}])[3].get("item", [{}])[0].get("text")
+                    if (screening_required == "Results"):
+                        screening_required = "true"
+                    else:
+                        screening_required = "false"
+
+                    # Define the keys for the nested extraction
+                    keys = ["item", 3, "item", 5, "answer", 0, "valueReference", "display"]
+
+                    # Extract the referral place safely
+                    referral_place = get_nested_value(questionnaire_response, keys, default="N/A")
+
+                    print("Place:", referral_place)
+                    # referral_place = questionnaire_response.get("item", [{}])[3].get("item", [{}])[5].get("answer", [{}])[0].get("valueReference").get("display")
+                    # print("Place: ", referral_place)
+        if (dm_risk == high and htn_risk == high):
+            risk = "High risk of diabetes and hypertension"
+        if (dm_risk == high and htn_risk == low): 
+            risk = "High risk of diabetes" 
+        if (dm_risk == low and htn_risk == high):  
+            risk = "High risk of hypertension"
+        if (dm_risk == low and htn_risk == low):
+            risk = "Low Risk"
 
         post_response = requests.post(
-            'http://localhost:5001/fhir-to-tei',
+            'http://localhost:5001/community-screening',
             json=bundle,
-            headers={"Content-Type": "text"}
+            headers={"Content-Type": "application/json"},
         )
 
         if post_response.status_code == 200:
-            print("Post request successful:", post_response.json())
+            # print("Post request successful:", post_response.json())
+            screening_event = post_response.json()
+            # Update the age attribute in the mapping result
+            screening_event["dataValues"].append({"dataElement": "vjABPom3WZD", "value": str(screening_required)})
+            screening_event["dataValues"].append({"dataElement": "igk7wHUjNoY", "value": str(consent)})
+            screening_event["dataValues"].append({"dataElement": "rRh555ufFsW", "value": str(referral_place)})
+            screening_event["dataValues"].append({"dataElement": "caq1Rf8wDx7", "value": str(risk)})
+            screening_event["dataValues"].append({"dataElement": "v96qvNbmSIz", "value": str(practitioner_code)})
+            print(screening_event)
         else:
             print("Post request failed:", post_response.status_code, post_response.text)
 
+        mapping_a = requests.post(
+        "http://localhost:5001/patient-risk-test",
+        headers={"Content-Type": "application/json"},
+        json=screening_event
+        )
+
+
+ 

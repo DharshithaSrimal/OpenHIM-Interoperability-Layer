@@ -16,15 +16,7 @@
         "requestBody.entry[1].resource.contained[0].date":"eventDate",
         "requestBody.entry[1].resource.meta.lastUpdated":"completedDate",
         "constants.dataValues[0].dataElement": "dataValues[0].dataElement",
-        "constants.dataValues[1].dataElement": "dataValues[1].dataElement",
-        "constants.dataValues[1].value": "dataValues[1].value",
-        "constants.dataValues[2].dataElement": "dataValues[2].dataElement",
-        "requestBody.entry[1].resource.item[3].item[6].answer[0].valueDate":"dataValues[2].value",
-        "constants.dataValues[3].dataElement": "dataValues[3].dataElement",
-        "requestBody.entry[1].resource.item[3].item[5].answer[0].display":"dataValues[3].value",
-        "constants.dataValues[4].dataElement": "dataValues[4].dataElement",
-        "constants.dataValues[5].dataElement": "dataValues[5].dataElement",
-        "requestBody.entry[0].generalPractitioner[0].reference":"dataValues[5].value"
+        "requestBody.entry[2].resource.meta.lastUpdated": "dataValues[0].value"
     },
     "constants": {
         "eventDate": "2023-05-31",
@@ -40,34 +32,9 @@
         "relationships": [],
         "dataValues": [
                 {
-                    // Screening required
-                    "dataElement": "vjABPom3WZD",
-                    "value": "true"
-                },
-                {
-                    // Consent for screening
-                    "dataElement": "igk7wHUjNoY",
-                    "value": "true"
-                },
-                {
                     // Referral date
                     "dataElement": "H96DVMnlKbi",
                     "value": "2023-05-31"
-                },
-                {
-                    // Referral place
-                    "dataElement": "rRh555ufFsW",
-                    "value": "referral place orgunit"
-                },
-                {
-                    // DM and HTN risk screening
-                    "dataElement": "caq1Rf8wDx7",
-                    "value": "Diabetes and hypertension risk screening"
-                },
-                {
-                    // Practitioner
-                    "dataElement": "v96qvNbmSIz",
-                    "value": "practitioner"
                 }
             ]
     }

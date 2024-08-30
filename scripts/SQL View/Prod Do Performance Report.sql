@@ -20,7 +20,7 @@ SELECT
 FROM programstageinstance AS psi
 INNER JOIN programinstance AS pi ON pi.programinstanceid = psi.programinstanceid
 INNER JOIN trackedentityinstance AS tei ON tei.trackedentityinstanceid = pi.trackedentityinstanceid
-INNER JOIN userinfo AS ui ON ui.userinfoid = tei.lastupdatedby
+INNER JOIN userinfo AS ui ON ui.username = psi.eventdatavalues->'v96qvNbmSIz'->>'value' 
 INNER JOIN programstage AS ps ON ps.programstageid = psi.programstageid
 INNER JOIN userrolemembers AS urm ON urm.userid = ui.userinfoid
 INNER JOIN userrole AS ur ON urm.userroleid = ur.userroleid
