@@ -1,0 +1,56 @@
+{
+  "events": [
+    {
+      "dataValues": [
+        //Diastolic blood pressure
+        {
+          "dataElement": "oipjzjylb5j",
+          "value": "67"
+        },
+        //Prescription of medication HTN
+        {
+          "dataElement": "wuWLanPwym8",
+          "value": "Losartan"
+        },
+        //FBS
+        {
+          "dataElement": "lX3Mr4fDzt7",
+          "value": "81"
+        },
+        //RBS
+        {
+          "dataElement": "akdaaNwuAWT"
+        },
+        //Systolic blood pressure
+        {
+          "dataElement": "ooWz0VBNypG",
+          "value": "124"
+        },
+        //Patient Status
+        {
+          "dataElement": "nrTS05LkiaS",
+          "value": "Active"
+        },
+        //Hypertension
+        {
+          "dataElement": "rW9y580Zer8",
+          "value": "true"
+        },
+        //Unspecified diabetes
+        {
+          "dataElement": "p1Jx0zlriQr",
+          "value": "false"
+        }
+      ],
+      "eventDate": "2024-08-21",
+      "programStage": "Qpuicl4a94s",
+      "program": "jwn5nGdUepW",
+      "event": "OEBDIGC7cZD",
+      "status": "COMPLETED",
+      "completedDate": "2024-08-21",
+      "attributeOptionCombo": "uGIJ6IdkP7Q",
+      "orgUnit": "WoFlqQmqtSR",
+      "trackedEntityInstance": "KL0snru4kJe"
+    }
+  ]
+}

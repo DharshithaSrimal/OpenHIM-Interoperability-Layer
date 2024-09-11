@@ -1,20 +1,21 @@
 SELECT
 	ORG_UNIT,
 	FULL_NAME,
-    SUM(clients_registered) AS total_clients_registered,
-    SUM(screening_not_required) AS total_screening_not_required,
-    SUM(screenings_due) AS total_screenings_due,
-    SUM(clients_screened) AS total_clients_screened,
-    SUM(clients_not_consent_to_screening) AS total_clients_not_consent_to_screening,
-    SUM(clients_referred) AS total_clients_referred,
-    SUM(phone_calls_due) AS total_phone_calls_due,
-    SUM(phone_calls_overdue) AS total_phone_calls_overdue,
-    SUM(phone_calls_completed) AS total_phone_calls_completed,
-    SUM(home_visits_due) AS total_home_visits_due,
-    SUM(home_visits_overdue) AS total_home_visits_overdue,
-    SUM(home_completed) AS total_home_completed,
-	CREATED_DATE,
+    SUM(clients_registered) AS clients_registered,
+    SUM(SCREENINGS_DUE) AS SCREENINGS_DUE,
+    SUM(SCREENINGS_OVERDUE) AS SCREENINGS_OVERDUE,
+    SUM(CLIENTS_NOT_CONSENT_TO_SCREENING) AS CLIENTS_NOT_CONSENT_TO_SCREENING,
+    SUM(SCREENING_NOT_REQUIRED) AS SCREENING_NOT_REQUIRED,
+    SUM(CLIENTS_SCREENED) AS CLIENTS_SCREENED,
+    SUM(CLIENTS_REFERRED) AS CLIENTS_REFERRED,
+    SUM(CLIENTS_NOT_REFERRED) AS CLIENTS_NOT_REFERRED,
+    SUM(CLIENT_VISITS) AS CLIENT_VISITS,
+    SUM(PHONE_CALLS_DUE) AS PHONE_CALLS_DUE,
+    SUM(PHONE_CALLS_OVERDUE) AS PHONE_CALLS_OVERDUE,
+    SUM(HOME_VISITS_DUE) AS HOME_VISITS_DUE,
+    SUM(HOME_VISITS_OVERDUE) AS HOME_VISITS_OVERDUE,
+	MIN(CREATED_DATE) AS CREATED_DATE,
 	USER_ROLE,
 	DSD
-FROM view_do_performance2
-GROUP BY ORG_UNIT, FULL_NAME, CREATED_DATE, USER_ROLE, DSD;
+FROM view_do_performance
+GROUP BY ORG_UNIT, FULL_NAME, USER_ROLE, DSD;
