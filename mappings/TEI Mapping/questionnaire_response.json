@@ -1,0 +1,59 @@
+{
+    "name": "Map Patient/ QuestionnaireResponse to DHIS2 Tracked Entity Instances",
+    "description": "Map FHIR patient resource to DHIS2 Tracked Entity Instances",
+    "endpoint": {
+        "pattern": "/community-screening"
+    },
+    "transformation": {
+        "input": "JSON",
+        "output": "JSON"
+    },
+    "inputMapping": {
+        "constants.trackedEntityType": "trackedEntityType",
+        "requestBody.meta.tag[0].code": "orgUnit",
+        "constants.inactive": "inactive",
+        "constants.deleted": "inactive",
+        "constants.featureType": "featureType",
+        "constants.attributes[0].attribute": "attributes[0].attribute",
+        "requestBody.id": "attributes[0].value",
+        "constants.attributes[1].attribute": "attributes[1].attribute",
+        "requestBody.identifier[0].value": "attributes[1].value",
+        "constants.attributes[2].attribute": "attributes[2].attribute",
+        "requestBody.identifier[1].value": "attributes[2].value",
+        "constants.attributes[3].attribute": "attributes[3].attribute",
+        "requestBody.name[0].given[0]": "attributes[3].value",        
+        "constants.attributes[4].attribute": "attributes[4].attribute",
+        "requestBody.name[0].text": "attributes[4].value",
+        "constants.attributes[5].attribute": "attributes[5].attribute",
+        "requestBody.birthDate": "attributes[5].value",
+        "constants.attributes[8].attribute": "attributes[6].attribute",
+        "requestBody.telecom[0].value": "attributes[6].value",
+        "requestBody.meta.lastUpdated": "enrollments[0].enrollmentDate",
+        "constants.enrollments[0].trackedEntity": "enrollments[0].trackedEntity",
+        "constants.enrollments[0].program": "enrollments[0].program"
+    },
+    "constants": {
+        "resourceType": "Bundle",
+        "type": "batch",
+        "entry": [
+            {
+                "request": {
+                    "method": "GET",
+                    "url": "Patient/c98b1648-aeca-4afb-9739-07e6eeeb5eb7"
+                }
+            },
+            {
+                "request": {
+                    "method": "GET",
+                    "url": "QuestionnaireResponse/2"
+                }
+            },
+            {
+                "request": {
+                    "method": "GET",
+                    "url": "RiskAssessment?subject=Patient/c98b1648-aeca-4afb-9739-07e6eeeb5eb7"
+                }
+            }
+        ]
+    }
+}

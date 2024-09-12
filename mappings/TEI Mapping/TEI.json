@@ -27,9 +27,7 @@
         "constants.attributes[5].attribute": "attributes[5].attribute",
         "requestBody.birthDate": "attributes[5].value",
         "constants.attributes[6].attribute": "attributes[6].attribute",
-        // "requestBody.telecom[0].value": "attributes[6].value",
         "constants.attributes[7].attribute": "attributes[7].attribute",
-        // "requestBody.generalPractitioner[0].reference": "attributes[7].value",
         "requestBody.meta.lastUpdated": "enrollments[0].enrollmentDate",
         "constants.enrollments[0].trackedEntity": "enrollments[0].trackedEntity",
         "constants.enrollments[0].program": "enrollments[0].program"
