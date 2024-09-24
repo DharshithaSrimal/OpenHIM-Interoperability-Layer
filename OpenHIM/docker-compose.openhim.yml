@@ -24,7 +24,7 @@ services:
       - "8080:8080"
       - "5000:5000"
       - "5001:5001"
-    restart: unless-stopped
+    restart: always
 
   openhim-console:
     container_name: openhim-console
@@ -35,4 +35,4 @@ services:
       - "9000:80"
     depends_on:
       - openhim-core
-    restart: unless-stopped
+    restart: always
