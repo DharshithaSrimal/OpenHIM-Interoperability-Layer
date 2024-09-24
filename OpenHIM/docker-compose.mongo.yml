@@ -15,6 +15,7 @@ services:
     command:
       - --replSet
       - mapper-mongo-set
+    restart: unless-stopped
 
   mapper-mongo-2:
     image: mongo:4.2
@@ -26,6 +27,7 @@ services:
     command:
       - --replSet
       - mapper-mongo-set
+    restart: unless-stopped
 
   mapper-mongo-3:
     image: mongo:4.2
@@ -37,3 +39,4 @@ services:
     command:
       - --replSet
       - mapper-mongo-set
+    restart: unless-stopped
