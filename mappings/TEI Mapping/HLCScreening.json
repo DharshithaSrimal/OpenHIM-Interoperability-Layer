@@ -1,0 +1,31 @@
+{
+  "name": "Update HLC Screening event",
+  "description": "Update HLC Screening event",
+  "endpoint": {
+    "pattern": "/hlc-screening"
+  },
+  "transformation": {
+    "input": "JSON",
+    "output": "JSON"
+  },
+  "inputMapping": {
+    "requestBody.programStage": "programStage",
+    "requestBody.orgUnit": "orgUnit",
+    "requestBody.program": "program",
+    "requestBody.event": "event",
+    "requestBody.trackedEntityInstance": "trackedEntityInstance",
+    "constants.status": "status",
+    "requestBody.eventDate": "eventDate",
+    "requestBody.dataValues": "dataValues"
+  },
+  "constants": {
+    "programStage": "z9cBkab75I7",
+    "orgUnit": "rWiCZKdxhCO",
+    "program": "jwn5nGdUepW",
+    "event": "mKOH7yohPHU",
+    "trackedEntityInstance": "vL3Lh4KuKQl",
+    "status": "COMPLETED",
+    "eventDate": "2024-10-23T05:30:00.000",
+    "dataValues": []
+  }
+}
