@@ -1,6 +1,6 @@
 {
-  "name": "Update HLC Screening event",
-  "description": "Update HLC Screening event",
+  "name": "Update Community Screening Followup Event",
+  "description": "Update Community Screening Followup Event",
   "endpoint": {
     "pattern": "/followup"
   },
@@ -15,17 +15,21 @@
     "requestBody.event": "event",
     "requestBody.trackedEntityInstance": "trackedEntityInstance",
     "constants.status": "status",
-    "requestBody.eventDate": "eventDate",
     "requestBody.dataValues": "dataValues"
   },
   "constants": {
-    "programStage": "z9cBkab75I7",
-    "orgUnit": "rWiCZKdxhCO",
+    "programStage": "DUIcjLs9FiX",
+    "orgUnit": "bR6C70natYe",
     "program": "jwn5nGdUepW",
-    "event": "mKOH7yohPHU",
-    "trackedEntityInstance": "vL3Lh4KuKQl",
-    "status": "COMPLETED",
+    "event": "VRmpPYR6HGA",
+    "trackedEntityInstance": "mOACTDZwuva",
+    "status": "ACTIVE",
     "eventDate": "2024-10-23T05:30:00.000",
-    "dataValues": []
+    "dataValues": [
+      {
+        "dataElement": "VCQ4bYBggPB",
+        "value": "Screening_Completed"
+      }
+    ]
   }
 }

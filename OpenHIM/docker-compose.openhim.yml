@@ -20,6 +20,7 @@ services:
       - authentication_jwt_secretOrPublicKey=secret
       - authentication_jwt_algorithms=HS256
       - authentication_jwt_issuer=openhim
+      # - OPENHIM_URL=http://openhim-core:8080
     ports:
       - "8080:8080"
       - "5000:5000"
@@ -36,3 +37,5 @@ services:
     depends_on:
       - openhim-core
     restart: always
+    # environment:
+    #    - OPENHIM_URL=http://openhim-core:8080

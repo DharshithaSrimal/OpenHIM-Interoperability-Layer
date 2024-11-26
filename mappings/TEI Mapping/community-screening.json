@@ -1,41 +1,41 @@
 {
-    "name": "Map FHIR Resources to Community Screening Events",
-    "description": "Map FHIR Resources to Community Screening Events",
-    "endpoint": {
-        "pattern": "/community-screening"
-    },
-    "transformation": {
-        "input": "JSON",
-        "output": "JSON"
-    },
-    "inputMapping": {
-        "constants.program": "program",
-        "constants.programStage": "programStage",
-        "constants.status": "status",
-        "constants.attributeOptionCombo": "attributeOptionCombo",
-        "requestBody.entry[1].resource.contained[0].date":"eventDate",
-        "requestBody.entry[1].resource.meta.lastUpdated":"completedDate",
-        "constants.dataValues[0].dataElement": "dataValues[0].dataElement",
-        "requestBody.entry[2].resource.meta.lastUpdated": "dataValues[0].value"
-    },
-    "constants": {
-        "eventDate": "2023-05-31",
-        "occurredAt": "2023-05-31",
-        "programStage": "xi9Gv2SJalA",
-        "program": "jwn5nGdUepW",
-        "status": "COMPLETED",
-        "completedDate": "2023-05-31",
-        "attributeOptionCombo": "uGIJ6IdkP7Q",
-        "orgUnit": "EF5pbiM7RSX",
-        "trackedEntityInstance": "hBscn5EifIY",
-        "enrollment": "yl77FkoPPr7",
-        "relationships": [],
-        "dataValues": [
-                {
-                    // Referral date
-                    "dataElement": "H96DVMnlKbi",
-                    "value": "2023-05-31"
-                }
-            ]
-    }
+  "name": "Map FHIR Resources to Community Screening Events",
+  "description": "Map FHIR Resources to Community Screening Events",
+  "endpoint": {
+    "pattern": "/community-screening"
+  },
+  "transformation": {
+    "input": "JSON",
+    "output": "JSON"
+  },
+  "inputMapping": {
+    "constants.program": "program",
+    "constants.programStage": "programStage",
+    "constants.status": "status",
+    "constants.attributeOptionCombo": "attributeOptionCombo",
+    "requestBody.entry[1].resource.contained[0].date": "eventDate",
+    "requestBody.entry[1].resource.meta.lastUpdated": "completedDate",
+    "constants.dataValues[0].dataElement": "dataValues[0].dataElement",
+    "requestBody.entry[2].resource.meta.lastUpdated": "dataValues[0].value"
+  },
+  "constants": {
+    "eventDate": "2023-05-31",
+    "occurredAt": "2023-05-31",
+    "programStage": "xi9Gv2SJalA",
+    "program": "jwn5nGdUepW",
+    "status": "COMPLETED",
+    "completedDate": "2023-05-31",
+    "attributeOptionCombo": "uGIJ6IdkP7Q",
+    "orgUnit": "EF5pbiM7RSX",
+    "trackedEntityInstance": "hBscn5EifIY",
+    "enrollment": "yl77FkoPPr7",
+    "relationships": [],
+    "dataValues": [
+      {
+        // Referral date
+        "dataElement": "H96DVMnlKbi",
+        "value": "2023-05-31"
+      }
+    ]
+  }
 }
