@@ -21,8 +21,12 @@ CLIENT_SECRET = os.getenv("CLIENT_SECRET")
 GRANT_TYPE = os.getenv("GRANT_TYPE")
 # FHIR
 FHIR_SERVER_URL = os.getenv("FHIR_SERVER_URL")
-# DHIS2 
-api = Api('http://localhost:8084/dhis', 'admin', 'district')
+
+# DHIS2
+DHIS2_USER = os.getenv("DHIS2_USER")
+DHIS2_PASS = os.getenv("DHIS2_PASS")
+DHIS2_SERVER_URL = os.getenv("DHIS2_SERVER_URL")
+api = Api(DHIS2_SERVER_URL, DHIS2_USER, DHIS2_PASS)
 
 # Metadata
 UNIQUE_ID = config["UNIQUE_ID"]
@@ -65,9 +69,15 @@ while current_date <= end_date_range:
     })
     ACCESS_TOKEN = token_response.json().get("access_token")
 
-    # FHIR Service Request setup
+    # Encounters count
+    encounters = requests.get(
+    f"{FHIR_SERVER_URL}/fhir/Encounter?type=facility_visit&_count=0&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}",
+    headers={"Authorization": f"Bearer {ACCESS_TOKEN}"})
+    encounter_count = encounters.json().get("total")
+
+    # FHIR encounters
     encounter_response = requests.get(
-        f"{FHIR_SERVER_URL}/fhir/Encounter?type=facility_visit&_sort=_lastUpdated&_count=1000",
+        f"{FHIR_SERVER_URL}/fhir/Encounter?type=facility_visit&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&_sort=_lastUpdated&_count={encounter_count}",
         headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
     )
 
@@ -91,6 +101,7 @@ while current_date <= end_date_range:
             'trackedEntityType': TRACKED_ENTITY_TYPE,
             'filter': UNIQUE_ID + ':eq:' + patient_id
         }
+
         tei_id, org_unit = None, None
         try:
             tei_response = api.get('trackedEntityInstances', params=params)
@@ -135,17 +146,24 @@ while current_date <= end_date_range:
                     encounter_resource = entry["resource"]
                     event_date = encounter_resource.get("period").get("start")
 
-                elif entry["resource"]["resourceType"] == "Patient":   
+                if entry["resource"]["resourceType"] == "Patient":   
                     patient_response = entry["resource"] 
                     screening_phn = None
                     # Define the keys for the nested extraction
                     screening_phn_keys = ["identifier", 0, "value"]
                     # Extract the screening phn
                     screening_phn = get_nested_value(patient_response, screening_phn_keys, default="N/A")
+                    params = {
+                        'fields': 'trackedEntityInstance,attributes[attribute,value]',
+                        'ouMode': 'ACCESSIBLE',
+                        'trackedEntityType': TRACKED_ENTITY_TYPE,
+                        'filter': TEI_ATTR_PHN + ':eq:' + screening_phn
+                    }
+                    tei_response = api.get('trackedEntityInstances', params=params)
                     # Extract the Practitioner Location code
                     location_keys = ["meta", "tag", 4, "code"]
                     location_code = get_nested_value(patient_response, location_keys, default="N/A")
-                elif entry["resource"]["resourceType"] == "Condition":   
+                if entry["resource"]["resourceType"] == "Condition":   
                     patient_response = entry["resource"] 
                     # Define the keys for the nested extraction
                     screening_phn_keys = ["identifier", 0, "value"]
@@ -154,7 +172,7 @@ while current_date <= end_date_range:
                     # Extract the Practitioner Location code
                     location_keys = ["meta", "tag", 4, "code"]
                     location_code = get_nested_value(patient_response, location_keys, default="N/A")
-                elif entry["resource"]["resourceType"] == "Observation":   
+                if entry["resource"]["resourceType"] == "Observation":   
                     patient_response = entry["resource"] 
                     # Define the keys for the nested extraction
                     screening_phn_keys = ["identifier", 0, "value"]
