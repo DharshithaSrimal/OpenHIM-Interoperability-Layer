@@ -41,8 +41,10 @@ GRANT_TYPE = os.getenv("GRANT_TYPE")
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
 # START_DATE = "2020-01-01T00:00:01Z"
-START_DATE = "2021-01-31T00:00:00"
-END_DATE = "2021-03-10T00:00:00"
+# START_DATE = "2021-12-31T00:00:00"
+# END_DATE = "2022-02-10T00:00:00"
+START_DATE = "2022-04-10T00:00:00"
+END_DATE = "2022-08-10T00:00:00"
 
 # DHIS2
 DHIS2_USER = os.getenv("DHIS2_USER")
@@ -132,7 +134,7 @@ with open("orgunits.json") as f:
 ##### Patient setup #####
 
 encounters = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Encounter?_count=400000&date=ge{START_DATE}&date=le{END_DATE}",
+    f"{FHIR_SERVER_URL}/fhir/Encounter?_count=400000&date=ge{START_DATE}&date=le{END_DATE}&type=facility_visit",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 encounters_data = encounters.json()
@@ -220,7 +222,7 @@ for encounter_info in encounters_bundle:
                             print("Success")
                     except Exception as e:
                         print(f"TEI Registration Failed: {str(e)}")
-                        error_message = f"TEI Registration Failed: {str(e)}"
+                        error_message = f"TEI Registration Failed: {str(e)}, Encounter: {encounter_id}"
                         log_error(error_message)
     
     except Exception as e:

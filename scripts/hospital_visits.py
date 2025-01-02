@@ -160,27 +160,38 @@ while current_date <= end_date_range:
                         'filter': TEI_ATTR_PHN + ':eq:' + screening_phn
                     }
                     tei_response = api.get('trackedEntityInstances', params=params)
-                    # Extract the Practitioner Location code
-                    location_keys = ["meta", "tag", 4, "code"]
-                    location_code = get_nested_value(patient_response, location_keys, default="N/A")
-                if entry["resource"]["resourceType"] == "Condition":   
-                    patient_response = entry["resource"] 
-                    # Define the keys for the nested extraction
-                    screening_phn_keys = ["identifier", 0, "value"]
-                    # Extract the screening phn
-                    screening_phn = get_nested_value(patient_response, screening_phn_keys, default="N/A")
-                    # Extract the Practitioner Location code
-                    location_keys = ["meta", "tag", 4, "code"]
-                    location_code = get_nested_value(patient_response, location_keys, default="N/A")
-                if entry["resource"]["resourceType"] == "Observation":   
-                    patient_response = entry["resource"] 
-                    # Define the keys for the nested extraction
-                    screening_phn_keys = ["identifier", 0, "value"]
-                    # Extract the screening phn
-                    screening_phn = get_nested_value(patient_response, screening_phn_keys, default="N/A")
-                    # Extract the Practitioner Location code
-                    location_keys = ["meta", "tag", 4, "code"]
-                    location_code = get_nested_value(patient_response, location_keys, default="N/A")
+                    tei_response_json = tei_response.json()
+
+                    # Get TEI and org unit id
+                    if tei_response_json['trackedEntityInstances']:
+                        tei_id = tei_response_json['trackedEntityInstances'][0]['trackedEntityInstance']
+                        org_unit = tei_response_json['trackedEntityInstances'][0]['orgUnit']
+                    else:
+                        tei_id = ""
+                        org_unit = ""
+
+                    if entry["resource"]["resourceType"] == "Condition": 
+                        diabetes_present = "false"
+                        hypertension_present = "false"  
+                        condition_keys = ["code", "coding", 0, "code"]
+                        # Extract the screening phn
+                        condition = get_nested_value(patient_response, screening_phn_keys, default="N/A")
+                        resource = entry.get("resource", {})
+                        condition_code = resource.get("code", {}).get("coding", [{}])[0].get("code", "")
+                        if condition_code == "diabetes":
+                            diabetes_present = "true"
+                        if condition_code == "38341003" or condition_code == "hypertension":  # SNOMED code for hypertension
+                            hypertension_present = "true"
+
+                    if entry["resource"]["resourceType"] == "Observation":   
+                        patient_response = entry["resource"] 
+                        # Define the keys for the nested extraction
+                        screening_phn_keys = ["identifier", 0, "value"]
+                        # Extract the screening phn
+                        screening_phn = get_nested_value(patient_response, screening_phn_keys, default="N/A")
+                        # Extract the Practitioner Location code
+                        location_keys = ["meta", "tag", 4, "code"]
+                        location_code = get_nested_value(patient_response, location_keys, default="N/A")
            
         # Fetch TEI
         params = {
@@ -201,3 +212,44 @@ while current_date <= end_date_range:
             org_unit = ""
     # Move to the next day
     current_date += timedelta(days=1)
+
+    payload = {
+      "dataValues": [
+        {
+          "dataElement": "oipjzjylb5j",
+          "value": "76"
+        },
+        {
+          "dataElement": "wuWLanPwym8",
+          "value": "Losartan"
+        },
+        {
+          "dataElement": "lX3Mr4fDzt7",
+          "value": "94"
+        },
+        {
+          "dataElement": "akdaaNwuAWT"
+        },
+        {
+          "dataElement": "ooWz0VBNypG",
+          "value": "144"
+        },
+        {
+          "dataElement": "rW9y580Zer8",
+          "value": "true"
+        },
+        {
+          "dataElement": "p1Jx0zlriQr",
+          "value": "false"
+        }
+      ],
+      "eventDate": "2023-10-10",
+      "programStage": "Qpuicl4a94s",
+      "program": "jwn5nGdUepW",
+      "event": "NxhU6lno2tP",
+      "status": "COMPLETED",
+      "completedDate": "2023-10-10",
+      "attributeOptionCombo": "uGIJ6IdkP7Q",
+      "orgUnit": "WoFlqQmqtSR",
+      "trackedEntityInstance": "yFtIAkcrZrp"
+    }
