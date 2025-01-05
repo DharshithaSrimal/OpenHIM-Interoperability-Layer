@@ -43,8 +43,8 @@ GRANT_TYPE = os.getenv("GRANT_TYPE")
 # START_DATE = "2020-01-01T00:00:01Z"
 # START_DATE = "2021-12-31T00:00:00"
 # END_DATE = "2022-02-10T00:00:00"
-START_DATE = "2022-04-10T00:00:00"
-END_DATE = "2022-08-10T00:00:00"
+START_DATE = "2024-07-15T00:00:00"
+END_DATE = "2024-09-15T00:00:00"
 
 # DHIS2
 DHIS2_USER = os.getenv("DHIS2_USER")
@@ -134,7 +134,7 @@ with open("orgunits.json") as f:
 ##### Patient setup #####
 
 encounters = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Encounter?_count=400000&date=ge{START_DATE}&date=le{END_DATE}&type=facility_visit",
+    f"{FHIR_SERVER_URL}/fhir/Encounter?_count=400000&date=ge{START_DATE}&date=le{END_DATE}&type=facility_visit&_tag=PKT0010397",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 encounters_data = encounters.json()
@@ -149,84 +149,86 @@ for encounter_info in encounters_bundle:
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"})
     patient_resource = patient_.json()
     
+    patient_location = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/location-tag-id"), None)
+    if(patient_location) == "PKT0010397":
     # Calculate age from birthday
-    birth_date = patient_resource["birthDate"]
-    current_year = datetime.now().year
-    birth_year = datetime.strptime(birth_date, "%Y-%m-%d").year
-    age = current_year - birth_year
+        birth_date = patient_resource["birthDate"]
+        current_year = datetime.now().year
+        birth_year = datetime.strptime(birth_date, "%Y-%m-%d").year
+        age = current_year - birth_year
 
-    # Extract the Patient origin
-    patient_origin = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/app-version"), None)
-    
-    # Construct the updated patient resource - set ouid
-    patient_resource["meta"]["tag"] = [{"system": "https://smartregister.org/location-tag-id", "code": ou_id}]
-    app_version = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/app-version"), None)
-    phn = None
-    try:
-    # Send the updated patient resource to the OpenHIM Mapping Mediator
-        mapping_response = requests.post(
-            "http://localhost:5001/fhir-to-tei",
-            headers={"Content-Type": "application/json"},
-            auth=HTTPBasicAuth(OPENHIM_CLIENT, OPENHIM_CLIENT_PASS),
-            json=patient_resource
-        )
-        if patient_origin == "2.0.0-diabetesCompass":
-            data_origin = "Community_Screening_App"
-        elif patient_origin == "Not defined":
-            data_origin = "Clinic_App"
+        # Extract the Patient origin
+        patient_origin = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/app-version"), None)
         
-            mapping_result = mapping_response.json()
-            if mapping_response.status_code == 200:
-                # Update the age attribute in the mapping result
-                age_group = "Ageless45" if age < 45 else "45to54" if age < 55 else "55to64" if age < 65 else "65orAbove"
-                mapping_result["attributes"].append({"attribute": "QUS2rM78s6F", "value": str(age)})
-                mapping_result["attributes"].append({"attribute": "cTFwAAW0and", "value": age_group})
-                mapping_result["attributes"].append({"attribute": "Nymn5TH8GRu", "value": patient_resource["gender"].capitalize()})
-                mapping_result["attributes"].append({"attribute": "QmkJzDbUkSC", "value": data_origin})
-                current_date = encounter_info["resource"]["period"]["start"]
-                # Add orgUnit to enrollments
-                # ou = mapping_result.get("orgUnit")
-                ou = "EF5pbiM7RSX"
-                mapping_result["orgUnit"] = ou
-                mapping_result["enrollments"][0]["orgUnit"] = ou
-                # Add incidentDate to enrollments
-                mapping_result["enrollments"][0]["enrollmentDate"] = current_date
-                mapping_result["enrollments"][0]["incidentDate"] = current_date
-                try:
-                    phn = mapping_result["attributes"][1]["value"]
-                    if not phn:
-                        print("PHN value is missing in the attributes list.")
-                except (IndexError, KeyError) as e:
-                    print(f"Error: Could not extract PHN - {str(e)}")
-                    log_error(f"Error: Resource id {mapping_result["attributes"][0]["value"]}")
-                    phn = None
-            else:
-                print(f"Error: {mapping_response.status_code}, {mapping_response.text}")
+        # Construct the updated patient resource - set ouid
+        patient_resource["meta"]["tag"] = [{"system": "https://smartregister.org/location-tag-id", "code": ou_id}]
+        app_version = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/app-version"), None)
+        phn = None
+        try:
+        # Send the updated patient resource to the OpenHIM Mapping Mediator
+            mapping_response = requests.post(
+                "http://localhost:5001/fhir-to-tei",
+                headers={"Content-Type": "application/json"},
+                auth=HTTPBasicAuth(OPENHIM_CLIENT, OPENHIM_CLIENT_PASS),
+                json=patient_resource
+            )
+            if patient_origin == "2.0.0-diabetesCompass":
+                data_origin = "Community_Screening_App"
+            elif patient_origin == "Not defined":
+                data_origin = "Clinic_App"
             
-            if phn != None:
-                params = {
-                    'fields': 'trackedEntityInstance,attributes[attribute,value]',
-                    'ouMode': 'ACCESSIBLE',
-                    'trackedEntityType': TRACKED_ENTITY_TYPE,
-                    'filter': TEI_ATTR_PHN + ':eq:' + phn
-                }
-                tei_response = api.get('trackedEntityInstances', params=params)
-                tei_response_json = tei_response.json()
-            
-                if not tei_response_json['trackedEntityInstances']:
+                mapping_result = mapping_response.json()
+                if mapping_response.status_code == 200:
+                    # Update the age attribute in the mapping result
+                    age_group = "Ageless45" if age < 45 else "45to54" if age < 55 else "55to64" if age < 65 else "65orAbove"
+                    mapping_result["attributes"].append({"attribute": "QUS2rM78s6F", "value": str(age)})
+                    mapping_result["attributes"].append({"attribute": "cTFwAAW0and", "value": age_group})
+                    mapping_result["attributes"].append({"attribute": "Nymn5TH8GRu", "value": patient_resource["gender"].capitalize()})
+                    mapping_result["attributes"].append({"attribute": "QmkJzDbUkSC", "value": data_origin})
+                    current_date = encounter_info["resource"]["period"]["start"]
+                    # Add orgUnit to enrollments
+                    # ou = mapping_result.get("orgUnit")
+                    ou = "EF5pbiM7RSX"
+                    mapping_result["orgUnit"] = ou
+                    mapping_result["enrollments"][0]["orgUnit"] = ou
+                    # Add incidentDate to enrollments
+                    mapping_result["enrollments"][0]["enrollmentDate"] = current_date
+                    mapping_result["enrollments"][0]["incidentDate"] = current_date
                     try:
-                        tei_post_response = api.post('trackedEntityInstances', json=mapping_result)
-                        if tei_post_response.status_code != 200:
-                            print(f"TEI Registration failed: ", tei_post_response.json(), " Encounter: ", encounter_id)
-                        else:
-                            print("Success")
-                    except Exception as e:
-                        print(f"TEI Registration Failed: {str(e)}")
-                        error_message = f"TEI Registration Failed: {str(e)}, Encounter: {encounter_id}"
-                        log_error(error_message)
-    
-    except Exception as e:
-                        print(f"OpenHIM Failed: {encounter_id}")
-                        error_message = f"OpenHIM Failed: Encounter: {encounter_id}"
-                        log_error(error_message)
+                        phn = mapping_result["attributes"][1]["value"]
+                        if not phn:
+                            print("PHN value is missing in the attributes list.")
+                    except (IndexError, KeyError) as e:
+                        print(f"Error: Could not extract PHN - {str(e)}")
+                        log_error(f"Error: Resource id {mapping_result["attributes"][0]["value"]}")
+                        phn = None
+                else:
+                    print(f"Error: {mapping_response.status_code}, {mapping_response.text}")
+                
+                if phn != None:
+                    params = {
+                        'fields': 'trackedEntityInstance,attributes[attribute,value]',
+                        'ouMode': 'ACCESSIBLE',
+                        'trackedEntityType': TRACKED_ENTITY_TYPE,
+                        'filter': TEI_ATTR_PHN + ':eq:' + phn
+                    }
+                    tei_response = api.get('trackedEntityInstances', params=params)
+                    tei_response_json = tei_response.json()
+                
+                    if not tei_response_json['trackedEntityInstances']:
+                        try:
+                            tei_post_response = api.post('trackedEntityInstances', json=mapping_result)
+                            if tei_post_response.status_code != 200:
+                                print(f"TEI Registration failed: ", tei_post_response.json(), " Encounter: ", encounter_id)
+                            else:
+                                print("Success")
+                        except Exception as e:
+                            print(f"TEI Registration Failed: {str(e)}")
+                            error_message = f"TEI Registration Failed: {str(e)}, Encounter: {encounter_id}"
+                            log_error(error_message)
+        
+        except Exception as e:
+                            print(f"OpenHIM Failed: {encounter_id}")
+                            error_message = f"OpenHIM Failed: Encounter: {encounter_id}"
+                            log_error(error_message)
 print(" Done!")

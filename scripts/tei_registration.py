@@ -1,13 +1,14 @@
+from dotenv import load_dotenv, dotenv_values
 import os
 import json
 import requests
 from datetime import datetime
-from requests.auth import HTTPBasicAuth
-import base64 
+from requests.auth import HTTPBasicAuth 
 # Install External Libraries
 import subprocess
 import sys
 
+### Defs  
 def install_package(package):
     """Installs the specified package using pip."""
     subprocess.check_call([sys.executable, "-m", "pip", "install", package])
@@ -28,31 +29,55 @@ def check_and_install_requirements():
                 __import__(package.split("==")[0])
             except ImportError:
                 print(f"Package {package} is not installed. Installing...")
-                install_package(package)
+                # install_package(package)
             else:
                 print(f"Package {package} is already installed.")
+
+def get_tracked_entity_instance(patient_id):
+    print("tei data", patient_id)
+    params = {
+        'fields': 'trackedEntityInstance,attributes[attribute,value],orgUnit',
+        'ouMode': 'ACCESSIBLE',
+        'trackedEntityType': TRACKED_ENTITY_TYPE,
+        'filter': f"{UNIQUE_ID}:eq:{patient_id}"
+    }
+    try:
+        response = api.get('trackedEntityInstances', params=params)
+        tei_data = response.json().get('trackedEntityInstances', [])
+        if tei_data:
+            return tei_data[0]["trackedEntityInstance"], tei_data[0]["orgUnit"]
+    except Exception as e:
+        print(f"TEI Fetch Failed: {str(e)}")
+    return None, None
 
 if __name__ == "__main__":
     check_and_install_requirements()
 # End of installing External Libraries
 from dhis2 import Api
-# Replace these values with your Keycloak and FHIR server details
-KEYCLOAK_URL = "https://keycloak.diabetescompass.health.gov.lk:4443/realms/dc_community/protocol/openid-connect/token"
-FHIR_SERVER_URL = "https://fhir.diabetescompass.health.gov.lk:4443"
+load_dotenv()  # Load environment variables from .env file
 
-CLIENT_ID = "dc-interoperability"
-CLIENT_SECRET = "pZ6EKIhWCtqAaCiB5Atmmj6ULlcc0FG1"
-GRANT_TYPE = "client_credentials"
+# FHIR
+FHIR_SERVER_URL = os.getenv("FHIR_SERVER_URL")
+
+# Keycloak
+KEYCLOAK_URL = os.getenv("KEYCLOAK_URL")
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+GRANT_TYPE = os.getenv("GRANT_TYPE")
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-START_DATE = "2024-08-15T00:00:00Z"
-END_DATE = "2024-08-25T00:00:00Z"
+START_DATE = "2024-12-24T00:00:00Z"
+END_DATE = "2024-12-25T00:00:00Z"
 
 # DHIS2
-DHIS2_SERVER_URL = "http://localhost:8084/dhis/api"
-USERNAME = "admin"
-PASSWORD = "Admin@Asd1"
+DHIS2_USER = os.getenv("DHIS2_USER")
+DHIS2_PASS = os.getenv("DHIS2_PASS")
+DHIS2_SERVER_URL = os.getenv("DHIS2_SERVER_URL")
+
+# OpenHIM
+OPENHIM_CLIENT = os.getenv("OPENHIM_CLIENT_ID")
+OPENHIM_CLIENT_PASS = os.getenv("OPENHIM_CLIENT_PASS")
 
 locationArray = {}
 MAPPING_RESULTS = {}
@@ -71,21 +96,29 @@ def get_nested_value(data, keys, default=None):
     return data
 
 # Intermediate
-dm_risk = ""
-htn_risk = ""
+config = {
+    **dotenv_values(".env.shared")
+}
+dm_risk, htn_risk = None, None
 high = "High"
 low = "Low"
 risk = ""
-consent = ""
-screening_required = ""
+consent = None
+screening_required = None
 referral_place = ""
-trackedEntityType = "sHGa6nkjrlG"
+TRACKED_ENTITY_TYPE = config["TRACKED_ENTITY_TYPE"]
+TEI_ATTR_PHN = config["TEI_ATTR_PHN"]
 tei_id = ""
-tei_phn_attr = "j92f54nkFoH"
 tei_ou = ""
-tei_event_followup = "Phone_Calls_Completed" 
-api = Api('https://dhis.dc.hispsrilanka.org/dhis', 'admin', 'district')
-# api = Api('http://localhost:8084/dhis', 'admin', 'district')
+tei_event_followup = ("Registration_Completed","Screening_Completed") 
+HLC_SCREENING = config["HLC_SCREENING"]
+FOLLOWUP = config["FOLLOWUP"]
+program_stage = (HLC_SCREENING, FOLLOWUP)
+ou_id = ""
+status = ("ACTIVE", "COMPLETED")
+UNIQUE_ID = config["UNIQUE_ID"]
+
+api = Api(DHIS2_SERVER_URL, DHIS2_USER, DHIS2_PASS)
 screening_phn = ""
 org_unit = ""
 
@@ -121,7 +154,7 @@ with open("orgunits.json") as f:
 ##### Patient setup #####
 
 patients_response = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Patient?_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}",
+    f"{FHIR_SERVER_URL}/fhir/Patient?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 patients_data = patients_response.json()
@@ -131,25 +164,18 @@ for patient_info in patients_bundle:
 
     patient_id = patient_info["resource"]["id"]
     patient_resource = patient_info["resource"]
-    
+
     # Extract the Practitioner Location code
     practitioner_location_code = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/location-tag-id"), None)
-    location_name = locationArray.get(practitioner_location_code)
-
-    if not location_name:
-        # print(f"Location name not found for code: {practitioner_location_code}")
-        continue
-
-    if not any(org["displayName"] == location_name for org in orgunits):
-        print(f"Location name does not exist in orgunits.json: {location_name}")
-        continue
-
-    # Get the location ID for the matching location name
-    location_id = next((org["id"] for org in orgunits if org["displayName"] == location_name), None)
-
-    if not location_id:
-        continue
-
+    
+    # Fetch the location
+    ou_params = {
+        'filter': 'code' + ':eq:' + practitioner_location_code
+    }
+    ou_response = api.get('organisationUnits', params=ou_params)
+    ou_response_json = ou_response.json()
+    ou_id = ou_response_json['organisationUnits'][0]['id']
+    
     # Calculate age from birthday
     birth_date = patient_resource["birthDate"]
     current_year = datetime.now().year
@@ -162,28 +188,34 @@ for patient_info in patients_bundle:
         print("Practitioner code not found.")
         continue
 
-    # Construct the updated patient resource
-    patient_resource["meta"]["tag"] = [{"system": "https://smartregister.org/location-tag-id", "code": location_id}]
-    # app_version = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/app-version"), None)
-    # print("Source: ", app_version)
+    # Extract the Patient origin
+    patient_origin = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/app-version"), None)
+    
+    # Construct the updated patient resource - set ouid
+    patient_resource["meta"]["tag"] = [{"system": "https://smartregister.org/location-tag-id", "code": ou_id}]
+    app_version = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/app-version"), None)
+
     # Send the updated patient resource to the OpenHIM Mapping Mediator
     mapping_response = requests.post(
         "http://localhost:5001/fhir-to-tei",
         headers={"Content-Type": "application/json"},
-        auth=HTTPBasicAuth("DC Interoperability Client", "Asdf1234"),
+        auth=HTTPBasicAuth(OPENHIM_CLIENT, OPENHIM_CLIENT_PASS),
         json=patient_resource
     )
-    mapping_result = mapping_response.json()
-
-    if mapping_response.status_code == 200:
-        # Todo: Check whether it is the community screening app or clinic app
+    if patient_origin == "2.0.0-diabetesCompass":
         data_origin = "Community_Screening_App"
+    else:
+        data_origin = "Clinic_App"
+
+    mapping_result = mapping_response.json()
+    if mapping_response.status_code == 200:
         # Update the age attribute in the mapping result
         age_group = "Ageless45" if age < 45 else "45to54" if age < 55 else "55to64" if age < 65 else "65orAbove"
         mapping_result["attributes"].append({"attribute": "QUS2rM78s6F", "value": str(age)})
         mapping_result["attributes"].append({"attribute": "cTFwAAW0and", "value": age_group})
         mapping_result["attributes"].append({"attribute": "Nymn5TH8GRu", "value": patient_resource["gender"].capitalize()})
         mapping_result["attributes"].append({"attribute": "QmkJzDbUkSC", "value": data_origin})
+        mapping_result["attributes"].append({"attribute": "Y3wfrP5h7Uw", "value": practitioner_code})
 
         # Add orgUnit to enrollments
         ou = mapping_result.get("orgUnit")
@@ -197,70 +229,76 @@ for patient_info in patients_bundle:
     params = {
         'fields': 'trackedEntityInstance,attributes[attribute,value]',
         'ou': ou,
-        'trackedEntityType': trackedEntityType,
-        'filter': tei_phn_attr + ':eq:' + phn
+        'trackedEntityType': TRACKED_ENTITY_TYPE,
+        'filter': TEI_ATTR_PHN + ':eq:' + phn
     }
     tei_response = api.get('trackedEntityInstances', params=params)
     tei_response_json = tei_response.json()
-
+    
     if not tei_response_json['trackedEntityInstances']:
-        tei_post_response = api.post('trackedEntityInstances', json=mapping_result)
-        if tei_post_response.status_code == 200:
+        tei_post_response = ''
+        try:
+            tei_post_response = api.post('trackedEntityInstances', json=mapping_result)
+            if tei_post_response.status_code != 200:
+                print(f"TEI Registration failed: ", tei_post_response.json())
+        except Exception as e:
+            print(f"TEI Registration Failed: {str(e)}")
+                        
+        current_date = patient_info["resource"]["meta"]["lastUpdated"]
+        if tei_post_response and tei_post_response.status_code == 200:
             # Parse the JSON string into a dictionary
-            response_dict = json.loads(response_json)
-
+            response_dict = tei_post_response.json()
             # Navigate through the dictionary to get the 'href' value
-            href_value = response_dict['response']['importSummaries'][0]['href']
-
-            # Extract the ID (last part of the URL)
-            id_value = href_value.split('/')[-1]
-            # HLC screening, Followup
-            events_data = [
-                {
+            tei_id = response_dict['response']['importSummaries'][0]['reference']
+            # HLC screening, Followup events
+            hlc_event_data = {
+                "events": [{
                     "trackedEntityInstance": tei_id,
                     "status": "ACTIVE",
-                    "scheduledAt": "2024-09-02",
-                    "attributeCategoryOptions": "",
-                    "programStage": "z9cBkab75I7",
+                    "eventDate": current_date,
+                    "programStage": program_stage[0],
                     "program": "jwn5nGdUepW",
                     "orgUnit": ou
-                },
-                {
+            },
+            {
                     "trackedEntityInstance": tei_id,
                     "status": "ACTIVE",
-                    "scheduledAt": "2024-09-02",
-                    "attributeCategoryOptions": "",
-                    "programStage": "DUIcjLs9FiX",
+                    "eventDate": current_date,
+                    "programStage": program_stage[1],
                     "program": "jwn5nGdUepW",
                     "orgUnit": ou,
-                    "dataValues":[{"dataElement":"VCQ4bYBggPB","value": tei_event_followup}]
-                }
-            ]
-            api.post('events', json=events_data)
+                    "dataValues":[{"dataElement":"VCQ4bYBggPB","value": tei_event_followup[0]}]
+            }]}
+            
+            # hlc_event_data_json = hlc_event_data.json()
+            res = api.post('events', json=hlc_event_data)
+            if res.status_code != 200:
+                print("HLC screening, Followup events creation failed ", res)
 
+            # mapping__ = requests.post(
+            #     "http://localhost:5001/dhis2",
+            #     headers={"Content-Type": "application/json"},
+            #     auth=HTTPBasicAuth("admin", "district"),
+            #     json=hlc_event_data
+            # )
+            
     else:
         # Send PATCH request to update the existing TEI
         tei_id = tei_response_json['trackedEntityInstances'][0]['trackedEntityInstance']
-        # print("TEI: ", tei_id)
         patch_endpoint = "trackedEntityInstances/" + tei_id
         # patch_response = api.put(patch_endpoint, json=mapping_result)
-    # Send the final request ##############
-    
-    # mapping_ = requests.post(
-    #     "http://localhost:5001/dhis2",
-    #     headers={"Content-Type": "application/json"},
-    #     auth=HTTPBasicAuth("admin", "district"),
-    #     json=mapping_result
-    # )
 
 # List to hold the tracked entity instances
 tracked_entity_instances = []
-
+facility_id = ''
+referral_ou_id = ''
+refer = None
 ### Community Screening ###
 questionnaireResponse = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/QuestionnaireResponse?_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&questionnaire=dc-diabetes-screening",
+    f"{FHIR_SERVER_URL}/fhir/QuestionnaireResponse?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&questionnaire=dc-diabetes-screening",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
+
 # Check for successful response
 if questionnaireResponse.status_code == 200:
     qr_data = questionnaireResponse.json()
@@ -271,10 +309,10 @@ if questionnaireResponse.status_code == 200:
         resource = entry.get('resource', {})
         questionnaire_response_id = resource.get('id')
         patient_reference = resource.get('subject', {}).get('reference')
-        
+
         if patient_reference:
             patient_id = patient_reference.split('/')[-1]
-           
+
         # Extract RiskAssessment references from the contained List
         risk_assessment_ids = []
         contained_resources = resource.get('contained', [])
@@ -306,7 +344,7 @@ if questionnaireResponse.status_code == 200:
                 }
             ]
         }
-        
+
         for risk_assessment_id in risk_assessment_ids:
             payload["entry"].append({
                 "request": {
@@ -327,7 +365,7 @@ if questionnaireResponse.status_code == 200:
         )
 
         bundle = post_response.json()
-
+        
         # Check if the response contains RiskAssessment resources and extract values
         if "entry" in bundle:
             for entry in bundle["entry"]:
@@ -341,98 +379,184 @@ if questionnaireResponse.status_code == 200:
                     if(code == "268607006"):
                         htn_risk = risk
                 # Extract QuestionnaireResponse resource
-                elif entry["resource"]["resourceType"] == "QuestionnaireResponse":
+                if entry["resource"]["resourceType"] == "QuestionnaireResponse":
                     questionnaire_response = entry["resource"]
-                    # consent = questionnaire_response.get("item", [{}])[0].get("item", [{}])[1].get("answer", [{}])[0].get("valueCoding").get("display")
-                    
                     # Define the keys for the nested extraction
                     concent_keys = ["item", 0, "item", 1, "answer", 0, "valueCoding", "display"]
 
                     # Extract the consent safely
                     consent = get_nested_value(questionnaire_response, concent_keys, default="N/A")
-                    
+                    # Extract the Patient origin
                     if(consent == "I consent to participating in this screening"):
                         consent = "true"
                     else:
                         consent = "false"
-                    
+                                         
                     # Define the keys for the nested extraction
-                    screening_required_keys = ["item", 3, "item", 0, "text"]
+                    refer, page_3_data, page_5_data = None, None, None
+                    for item in questionnaire_response['item']:
+                        if item['linkId'] == "page-5":
+                            page_5_data = item
+                        if item['linkId'] == "page-3":
+                            page_3_data = item
 
-                    # Extract the screening required
-                    screening_required = get_nested_value(questionnaire_response, screening_required_keys, default="N/A")
-                    
-                    # screening_required = questionnaire_response.get("item", [{}])[3].get("item", [{}])[0].get("text")
-                    if (screening_required == "Results"):
-                        screening_required = "true"
-                    else:
-                        screening_required = "false"
+                    if page_5_data:
+                        for sub_item in page_5_data['item']:
+                            if sub_item['linkId'] == "refer-client-choice":
+                                refer_answer = sub_item['answer'][0]['valueCoding']['code']
+                                if refer_answer == 'yes':
+                                    refer = "true"
+                                elif refer_answer == 'no':
+                                    refer = "false"
+                                break
 
+                    # Get the value of "continue-screening-choice"
+                    screening_required = None
+                    if page_3_data:
+                        for sub_item in page_3_data['item']:
+                            if sub_item['linkId'] == "continue-screening-choice":
+                                screening_required = str(sub_item['answer'][0]['valueBoolean']).lower()
+                           
                     # Define the keys for the nested extraction
-                    keys = ["item", 3, "item", 5, "answer", 0, "valueReference", "display"]
+                    page5 = next((tag["item"] for tag in questionnaire_response["item"] if tag["linkId"] == "page-5"), None)
 
-                    # Extract the referral place safely
-                    referral_place = get_nested_value(questionnaire_response, keys, default="")
+                    facility_id = ''
+                    referral_ou_id = ''
+                    if page5 is not None:
+                        for item in page5:
+                            if item.get("linkId") == "health-facility-choice":
+                                reference = item["answer"][0]["valueReference"]["reference"] 
+                                facility_id = reference.split('/')[-1]
+                                referral_ou_params = {
+                                    'filter': 'code' + ':eq:' + facility_id
+                                }
+                                try:
+                                    referral_ou_response = api.get('organisationUnits', params=referral_ou_params)
+                                    referral_ou_response_json = ou_response.json()
+                                    referral_ou_id = ou_response_json['organisationUnits'][0]['id']
+                                except Exception as e:
+                                    print(f"An error occurred: {str(e)}")
 
-                    print("Place:", referral_place)
-                    # referral_place = questionnaire_response.get("item", [{}])[3].get("item", [{}])[5].get("answer", [{}])[0].get("valueReference").get("display")
-
-                elif entry["resource"]["resourceType"] == "Patient":   
+                if entry["resource"]["resourceType"] == "Patient":   
                     patient_response = entry["resource"] 
                     # Define the keys for the nested extraction
                     screening_phn_keys = ["identifier", 0, "value"]
-                    # Extract the screening required
+                    # Extract the screening phn
                     screening_phn = get_nested_value(patient_response, screening_phn_keys, default="N/A")
+                    # Extract the Practitioner Location code
+                    location_keys = ["meta", "tag", 4, "code"]
+                    location_code = get_nested_value(patient_response, location_keys, default="N/A")
+                    
+        risk = None
+        if (dm_risk != None and dm_risk != None):
+            if (dm_risk == high and htn_risk == high):
+                risk = "High riskofdbthtn"
+            if (dm_risk == high and htn_risk == low): 
+                risk = "highrisk" 
+            if (dm_risk == low and htn_risk == high):  
+                risk = "Highriskhtn"
+            if (dm_risk == low and htn_risk == low):
+                risk = "lowrisk"
 
-        if (dm_risk == high and htn_risk == high):
-            risk = "High riskofdbthtn"
-        if (dm_risk == high and htn_risk == low): 
-            risk = "highrisk" 
-        if (dm_risk == low and htn_risk == high):  
-            risk = "Highriskhtn"
-        if (dm_risk == low and htn_risk == low):
-            risk = "lowrisk"
+        if(screening_required == None and risk != None ):
+            screening_required = "true"
+        elif(screening_required == "false"):
+            screening_required = "false"
+        else:
+            screening_required = "true"
+        # Fetch TEI
         params = {
             'fields': 'trackedEntityInstance,attributes[attribute,value],orgUnit',
-            'ou': ou,
-            'trackedEntityType': trackedEntityType,
-            'filter': tei_phn_attr + ':eq:' + screening_phn
+            'ouMode': 'ACCESSIBLE',
+            'trackedEntityType': TRACKED_ENTITY_TYPE,
+            'filter': TEI_ATTR_PHN + ':eq:' + screening_phn
         }
         tei_response = api.get('trackedEntityInstances', params=params)
         tei_response_json = tei_response.json()
-        print(tei_response_json)
+
+        # Get TEI and org unit id
         if tei_response_json['trackedEntityInstances']:
             tei_id = tei_response_json['trackedEntityInstances'][0]['trackedEntityInstance']
             org_unit = tei_response_json['trackedEntityInstances'][0]['orgUnit']
         else:
             tei_id = ""
             org_unit = ""
+
         post_response = requests.post(
             'http://localhost:5001/community-screening',
             json=bundle,
+            auth=HTTPBasicAuth(OPENHIM_CLIENT, OPENHIM_CLIENT_PASS),
             headers={"Content-Type": "application/json"},
         )
 
-        if tei_id and post_response.status_code == 200 :
-            # print("Post request successful:", post_response.json())
+        # Post screening event if the TEI is available
+        if tei_id and post_response.status_code == 200:
+
             screening_event = post_response.json()
             # Update the age attribute in the mapping result
             screening_event["trackedEntityInstance"] = tei_id
-            screening_event["orgUnit"] = org_unit
-            screening_event["dataValues"].append({"dataElement": "vjABPom3WZD", "value": str(screening_required)})
-            screening_event["dataValues"].append({"dataElement": "igk7wHUjNoY", "value": str(consent)})
-            screening_event["dataValues"].append({"dataElement": "rRh555ufFsW", "value": str(referral_place)})
-            screening_event["dataValues"].append({"dataElement": "caq1Rf8wDx7", "value": str(risk)})
-            screening_event["dataValues"].append({"dataElement": "v96qvNbmSIz", "value": str(practitioner_code)})
-            tei_id = ""
-            org_unit = ""
-            mapping_a = requests.post(
-            "http://localhost:5001/dhis2",
-            headers={"Content-Type": "application/json"},
-            json=screening_event
-            )
-
-            api.post('events', json=screening_event)
+            screening_event["orgUnit"] = org_unit    
+            if (consent):
+                screening_event["dataValues"].append({"dataElement": "igk7wHUjNoY", "value": str(consent)})
+            if (risk != None):
+                screening_event["dataValues"].append({"dataElement": "caq1Rf8wDx7", "value": str(risk)})
+            if(screening_required != None ): 
+                screening_event["dataValues"].append({"dataElement": "vjABPom3WZD", "value": str(screening_required)})
+            if (referral_ou_id):
+                screening_event["dataValues"].append({"dataElement": "rRh555ufFsW", "value": str(referral_ou_id)})
+            if (refer != None):
+                screening_event["dataValues"].append({"dataElement": "mPxpSPjgwkI", "value": str(refer)})
+            if(consent == "false" or screening_required == "false" or risk == "lowrisk"):
+                # # Feth the followup event and make it completes
+                # print(screening_event["status"])
+                # Fetch Event
+                event_params = {
+                    'fields': 'event, orgUnit, trackedEntityInstance, status, eventDate, programStage, program, dataValues[dataElement,value]',
+                    'orgUnit': org_unit,
+                    'trackedEntityInstance': tei_id,
+                    'programStage': program_stage[1]
+                }
+                try:
+                    tei_event_response = api.get('events', params=event_params)
+                    followup_events = tei_event_response.json()
+                    followup_event = tei_event_response_json['events'][0]
+                    followup_event["status"] = status[1]
+                    event_id = followup_event['event']
+                    tei_event_response = api.put('events/' + event_id, json=followup_event)
+                except Exception as e:
+                    print(f"Followup event fetch failed: {str(e)}")
+            # Create community screening event
+            try:
+                res = api.post('events', json=screening_event)
+                print(f"Community screening event creation successful")
+            except Exception as e:
+                print(f"Community screening event create failed: {str(e)}")
+            print("Code: ", res.status_code)
+            if res.status_code == 200:
+                # Fetch Event
+                event_params = {
+                    'fields': 'event, orgUnit, trackedEntityInstance, status, eventDate, programStage, program, dataValues[dataElement,value]',
+                    'ouMode': 'ACCESSIBLE',
+                    'trackedEntityInstance': tei_id,
+                    'programStage': program_stage[1]
+                }
+                try:
+                    tei_event_response = api.get('events', params=event_params)
+                except Exception as e:
+                    print(f"Followup event fetch failed: {str(e)}")
+                # 
+                if(tei_event_response.status_code == 200):
+                    tei_event_response_json = tei_event_response.json()
+                    try:
+                        followup_event = tei_event_response_json['events'][0]
+                        followup_event['dataValues'][0]['value'] = tei_event_followup[1]
+                        event_id = followup_event['event']
+                        tei_event_response = api.put('events/' + event_id, json=followup_event)
+                        if tei_event_response.status_code == 200:
+                            print("Followup events update successful")
+                    except Exception as e:
+                        print(f"Followup event update failed: {str(e)}")
+            
         else:
             print("Post request failed:", post_response.status_code, post_response.text)
 
