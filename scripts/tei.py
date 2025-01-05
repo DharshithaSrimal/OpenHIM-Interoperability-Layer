@@ -40,11 +40,11 @@ GRANT_TYPE = os.getenv("GRANT_TYPE")
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-# START_DATE = "2020-01-01T00:00:01Z"
-# START_DATE = "2021-12-31T00:00:00"
+START_DATE = "2020-01-31T00:00:01"
+END_DATE = "2020-05-30T00:00:00"
 # END_DATE = "2022-02-10T00:00:00"
-START_DATE = "2024-07-15T00:00:00"
-END_DATE = "2024-09-15T00:00:00"
+# START_DATE = "2024-07-15T00:00:00"
+# END_DATE = "2024-09-15T00:00:00"
 
 # DHIS2
 DHIS2_USER = os.getenv("DHIS2_USER")
@@ -134,7 +134,7 @@ with open("orgunits.json") as f:
 ##### Patient setup #####
 
 encounters = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Encounter?_count=400000&date=ge{START_DATE}&date=le{END_DATE}&type=facility_visit&_tag=PKT0010397",
+    f"{FHIR_SERVER_URL}/fhir/Encounter?_count=400000&date=ge{START_DATE}&date=le{END_DATE}&type=facility_visit",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 encounters_data = encounters.json()
@@ -144,14 +144,42 @@ for encounter_info in encounters_bundle:
 
     encounter_id = encounter_info["resource"]["id"]
     patient_id = encounter_info["resource"]["subject"]["reference"].split('/')[-1]
+
+    if patient_id:
+        patient = requests.get(
+                f"{FHIR_SERVER_URL}/fhir/Patient/{patient_id}",
+                headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
+        )
+
+        # Get TEI
+        params = {
+            'fields': 'trackedEntityInstance,attributes[attribute,value],orgUnit',
+            'ouMode': 'ACCESSIBLE',
+            'trackedEntityType': TRACKED_ENTITY_TYPE,
+            'filter': UNIQUE_ID + ':eq:' + patient_id
+        }
+
+        tei_id, org_unit = "", ""
+        try:
+            tei_response = api.get('trackedEntityInstances', params=params)
+            tei_response_json = tei_response.json()
+            # Get TEI and org unit id
+            if tei_response_json['trackedEntityInstances']:
+                tei_id = tei_response_json['trackedEntityInstances'][0]['trackedEntityInstance']
+                org_unit = tei_response_json['trackedEntityInstances'][0]['orgUnit']
+            else:
+                tei_id, org_unit = "", ""
+        except Exception as e:
+            print(f"TEI Fetch Failed: {str(e)}")
+
     patient_ = requests.get(
     f"{FHIR_SERVER_URL}/fhir/Patient/{patient_id}",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"})
     patient_resource = patient_.json()
     
-    patient_location = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/location-tag-id"), None)
-    if(patient_location) == "PKT0010397":
-    # Calculate age from birthday
+    # patient_location = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/location-tag-id"), None)
+    if tei_id == "":
+        # Calculate age from birthday
         birth_date = patient_resource["birthDate"]
         current_year = datetime.now().year
         birth_year = datetime.strptime(birth_date, "%Y-%m-%d").year
