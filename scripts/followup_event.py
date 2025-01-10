@@ -41,8 +41,8 @@ FOLLOWUP_STATUS = config["FOLLOWUP_STATUS"]
 followup_events = ("Screening_Completed", "Phone_Calls_Completed", "Home_Visits_Completed")
 # START_DATE = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
-START_DATE = "2024-12-03T00:00:00Z"
-END_DATE = "2024-12-10T00:00:00Z"
+START_DATE = "2024-12-24T00:00:00Z"
+END_DATE = "2025-01-06T00:00:00Z"
 
 # Get Keycloak token
 token_response = requests.post(KEYCLOAK_URL, data={

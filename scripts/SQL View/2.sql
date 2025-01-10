@@ -1,45 +1,45 @@
-CREATE VIEW view_do_performance AS
+--CREATE VIEW view_do_performance AS
 SELECT ou.name AS org_unit,
     concat(ui.firstname, ' ', ui.surname) AS full_name,
     count(DISTINCT pi.uid) AS clients_registered,
     count(DISTINCT
         CASE
-            WHEN psi.status::text = 'ACTIVE'::text AND ps.name::text = 'Screening at the community'::text AND date_trunc('day'::text, CURRENT_DATE::timestamp with time zone) >= pi.enrollmentdate AND (pi.enrollmentdate + '7 days'::interval) > date_trunc('day'::text, CURRENT_DATE::timestamp with time zone) THEN psi.uid
+            WHEN psi.status::text = 'ACTIVE'::text AND ps.name::text = 'Follow - up Status'::text AND ((psi.eventdatavalues -> 'VCQ4bYBggPB'::text) ->> 'value'::text) = 'Registration_Completed'::text  AND (pi.enrollmentdate + '7 days'::interval) > date_trunc('day'::text, CURRENT_DATE::timestamp with time zone) THEN psi.uid
             ELSE NULL::character varying
         END) AS screenings_due,
     count(DISTINCT
         CASE
-            WHEN psi.status::text = 'ACTIVE'::text AND ps.name::text = 'Screening at the community'::text AND date_trunc('day'::text, CURRENT_DATE::timestamp with time zone) >= pi.enrollmentdate AND (pi.enrollmentdate + '7 days'::interval) <= date_trunc('day'::text, CURRENT_DATE::timestamp with time zone) THEN psi.uid
+            WHEN psi.status::text = 'ACTIVE'::text AND ps.name::text = 'Follow - up Status'::text AND ((psi.eventdatavalues -> 'VCQ4bYBggPB'::text) ->> 'value'::text) = 'Registration_Completed'::text  AND (pi.enrollmentdate + '7 days'::interval) <= date_trunc('day'::text, CURRENT_DATE::timestamp with time zone) THEN psi.uid
             ELSE NULL::character varying
         END) AS screenings_overdue,
     count(DISTINCT
         CASE
-            WHEN ps.name::text = 'Screening at the community'::text AND ((psi.eventdatavalues -> 'igk7wHUjNoY'::text) ->> 'value'::text) = 'False'::text THEN psi.uid
+            WHEN ps.name::text = 'Screening at the community'::text AND ((psi.eventdatavalues -> 'igk7wHUjNoY'::text) ->> 'value'::text) = 'false'::text THEN psi.uid
             ELSE NULL::character varying
         END) AS clients_not_consent_to_screening,
     count(DISTINCT
         CASE
-            WHEN ps.name::text = 'Screening at the community'::text AND ((psi.eventdatavalues -> 'vjABPom3WZD'::text) ->> 'value'::text) = 'False'::text THEN psi.uid
+            WHEN ps.name::text = 'Screening at the community'::text AND ((psi.eventdatavalues -> 'vjABPom3WZD'::text) ->> 'value'::text) = 'false'::text THEN psi.uid
             ELSE NULL::character varying
         END) AS screening_not_required,
     count(DISTINCT
         CASE
-            WHEN ps.name::text = 'Screening at the community'::text AND ((psi.eventdatavalues -> 'vjABPom3WZD'::text) ->> 'value'::text) = 'True'::text THEN psi.uid
+            WHEN ps.name::text = 'Screening at the community'::text AND ((psi.eventdatavalues -> 'igk7wHUjNoY'::text) ->> 'value'::text) = 'true'::text AND ((psi.eventdatavalues -> 'vjABPom3WZD'::text) ->> 'value'::text) = 'true'::text THEN psi.uid
             ELSE NULL::character varying
         END) AS clients_screened,
     count(DISTINCT
         CASE
-            WHEN ((psi.eventdatavalues -> 'mPxpSPjgwkI'::text) ->> 'value'::text) = 'True'::text  AND psi.status::text = 'COMPLETED'::text AND ps.name::text = 'Screening at the community'::text THEN psi.uid
+            WHEN ((psi.eventdatavalues -> 'mPxpSPjgwkI'::text) ->> 'value'::text) = 'true'::text  AND psi.status::text = 'COMPLETED'::text AND ps.name::text = 'Screening at the community'::text THEN psi.uid
             ELSE NULL::character varying
         END) AS clients_referred,
     count(DISTINCT
        CASE
-            WHEN ((psi.eventdatavalues -> 'mPxpSPjgwkI'::text) ->> 'value'::text) = 'False'::text  AND psi.status::text = 'COMPLETED'::text AND ps.name::text = 'Screening at the community'::text THEN psi.uid
+            WHEN ((psi.eventdatavalues -> 'mPxpSPjgwkI'::text) ->> 'value'::text) = 'false'::text  AND psi.status::text = 'COMPLETED'::text AND ps.name::text = 'Screening at the community'::text THEN psi.uid
             ELSE NULL::character varying
         END) AS clients_not_referred,
     count(DISTINCT
         CASE
-            WHEN ps.name::text = 'Screening at the HLC'::text AND psi.status::text = 'COMPLETED'::text THEN psi.uid
+            WHEN ps.name::text = 'Screening at the HLC'::text AND psi.status::text = 'COMPLLETED'::text THEN psi.uid
             ELSE NULL::character varying
         END) AS client_visits,
     count(DISTINCT

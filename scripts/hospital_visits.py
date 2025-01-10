@@ -5,7 +5,7 @@ import requests
 from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 from dhis2 import Api
-
+# 9.18
 tei_id, org_unit = None, None
 
 config = {
@@ -54,12 +54,12 @@ def get_nested_value(data, keys, default=None):
             return default
     return data
 
-# Loop over each day in the date range
-# current_date = start_date_range
+# Loop over each day in the date range 16.50
+# current_date = start_date_range  03:05
 # START_DATE = current_date.strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = (current_date + timedelta(days=1)).strftime("%Y-%m-%dT00:00:00Z")
-START_DATE = "2000-01-01T00:00:00"
-END_DATE = "2022-05-10T00:00:00"
+START_DATE = "2024-10-13T00:00:00"
+END_DATE = "2024-11-13T00:00:00"
 print(f"Processing date range: {START_DATE} to {END_DATE}")
     
 # Get Keycloak token
