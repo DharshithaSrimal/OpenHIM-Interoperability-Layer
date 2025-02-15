@@ -7,7 +7,7 @@ from requests.auth import HTTPBasicAuth
 # Install External Libraries
 import subprocess
 import sys
-# 6.32
+
 def get_tracked_entity_instance(patient_id):
     print("tei data", patient_id)
     params = {
