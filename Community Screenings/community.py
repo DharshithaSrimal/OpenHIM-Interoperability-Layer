@@ -68,12 +68,8 @@ GRANT_TYPE = os.getenv("GRANT_TYPE")
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-# START_DATE = "2025-01-10T00:00:00Z"
-# END_DATE = "2025-01-16T00:00:00Z"
-# START_DATE = "2025-01-16T00:00:00Z"
-# END_DATE = "2025-01-27T00:00:00Z"
-START_DATE = "2024-10-01T00:00:00Z"
-END_DATE = "2025-10-30T00:00:00Z"
+START_DATE = "2025-03-27T00:00:00Z"
+END_DATE = "2025-03-29T00:00:00Z"
 
 
 # DHIS2
@@ -114,6 +110,7 @@ screening_required = None
 referral_place = ""
 TRACKED_ENTITY_TYPE = config["TRACKED_ENTITY_TYPE"]
 TEI_ATTR_PHN = config["TEI_ATTR_PHN"]
+TEI_ATTR_FHIRID = config["TEI_ATTR_FHIRID"]
 tei_id = ""
 tei_ou = ""
 tei_event_followup = ("Registration_Completed","Screening_Completed") 
@@ -165,7 +162,7 @@ with open("orgunits.json") as f:
 ##### Patient setup #####
 
 patients_response = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Patient?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass",
+    f"{FHIR_SERVER_URL}/fhir/Patient?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 patients_data = patients_response.json()
@@ -220,7 +217,7 @@ for patient_info in patients_bundle:
         error_message = f"TEI mapping error: {e}, Patient Id: {patient_id}, Error: {mapping_response.json()}"
         log_error(error_message)
         continue
-    if patient_origin == "2.0.2-diabetesCompass" or patient_origin == "2.0.0-diabetesCompass":
+    if patient_origin == "2.0.2-diabetesCompass" or patient_origin == "2.0.0-diabetesCompass" or patient_origin == "2.1.1-diabetesCompass" or patient_origin == "2.1.0-diabetesCompass":
         data_origin = "Community_Screening_App"
     else:
         data_origin = "Clinic_App"
@@ -241,7 +238,7 @@ for patient_info in patients_bundle:
         event_date = None
         try:
             encounters = requests.get(
-                f"{FHIR_SERVER_URL}/fhir/Encounter?subject={patient_id}&type=184047000&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass",
+                f"{FHIR_SERVER_URL}/fhir/Encounter?subject={patient_id}&type=184047000&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass",
                 headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
             )
             encounter_response_data = encounters.json()
@@ -261,17 +258,19 @@ for patient_info in patients_bundle:
     
     params = {
         'fields': 'trackedEntityInstance,attributes[attribute,value]',
-        'ou': ou,
+        'ouMode': 'ACCESSIBLE',
         'trackedEntityType': TRACKED_ENTITY_TYPE,
-        'filter': TEI_ATTR_PHN + ':eq:' + phn
+        'filter': TEI_ATTR_FHIRID + ':eq:' + patient_id
     }
     tei_response = api.get('trackedEntityInstances', params=params)
     tei_response_json = tei_response.json()
-    
+    print("Res: ", tei_response_json)
     if not tei_response_json['trackedEntityInstances']:
+        print("Patient2: ", patient_id)
         tei_post_response = ''
         try:
             tei_post_response = api.post('trackedEntityInstances', json=mapping_result)
+            print(tei_post_response.json())
             if tei_post_response.status_code != 200:
                 print(f"TEI Registration failed: ", tei_post_response.json())
             else:
@@ -329,9 +328,10 @@ tracked_entity_instances = []
 facility_id = ''
 referral_ou_id = ''
 refer = None
+patient_id = None
 ### Community Screening ###
 questionnaireResponse = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/QuestionnaireResponse?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&questionnaire=dc-diabetes-screening",
+    f"{FHIR_SERVER_URL}/fhir/QuestionnaireResponse?_count=4000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&questionnaire=dc-diabetes-screening&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 
@@ -342,6 +342,7 @@ if questionnaireResponse.status_code == 200:
 
     # Process each QuestionnaireResponse
     for entry in qr_bundle:
+        patient_id = None
         resource = entry.get('resource', {})
         questionnaire_response_id = resource.get('id')
         patient_reference = resource.get('subject', {}).get('reference')
@@ -451,7 +452,11 @@ if questionnaireResponse.status_code == 200:
                     if page_3_data:
                         for sub_item in page_3_data['item']:
                             if sub_item['linkId'] == "continue-screening-choice":
-                                screening_required = str(sub_item['answer'][0]['valueBoolean']).lower()
+                                print(sub_item)
+                                try:
+                                    screening_required = str(sub_item['answer'][0]['valueBoolean']).lower()
+                                except Exception as e:
+                                    error_message = f"Error: {e}, Error"
                            
                     # Define the keys for the nested extraction
                     page5 = next((tag["item"] for tag in questionnaire_response["item"] if tag["linkId"] == "page-5"), None)
@@ -475,10 +480,8 @@ if questionnaireResponse.status_code == 200:
 
                 if entry["resource"]["resourceType"] == "Patient":   
                     patient_response = entry["resource"] 
-                    # Define the keys for the nested extraction
-                    screening_phn_keys = ["identifier", 0, "value"]
-                    # Extract the screening phn
-                    screening_phn = get_nested_value(patient_response, screening_phn_keys, default="N/A")
+                    patient_id = patient_response["id"]
+                    print("Patiet3: ", patient_id)
                     # Extract the Practitioner Location code
                     location_keys = ["meta", "tag", 4, "code"]
                     location_code = get_nested_value(patient_response, location_keys, default="N/A")
@@ -505,7 +508,7 @@ if questionnaireResponse.status_code == 200:
             'fields': 'trackedEntityInstance,attributes[attribute,value],orgUnit',
             'ouMode': 'ACCESSIBLE',
             'trackedEntityType': TRACKED_ENTITY_TYPE,
-            'filter': TEI_ATTR_PHN + ':eq:' + screening_phn
+            'filter': TEI_ATTR_FHIRID + ':eq:' + patient_id
         }
         tei_response = api.get('trackedEntityInstances', params=params)
         tei_response_json = tei_response.json()
@@ -570,10 +573,11 @@ if questionnaireResponse.status_code == 200:
             # Create community screening event
             try:
                 res = api.post('events', json=screening_event)
+                print("Code: ", res.status_code)
                 print(f"Community screening event creation successful")
             except Exception as e:
                 print(f"Community screening event create failed: {str(e)}")
-            print("Code: ", res.status_code)
+            
             if res.status_code == 200:
                 # Fetch Event
                 event_params = {
