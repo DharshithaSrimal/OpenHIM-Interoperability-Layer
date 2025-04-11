@@ -32,6 +32,7 @@ UNIQUE_ID = config["UNIQUE_ID"]
 TRACKED_ENTITY_TYPE = config["TRACKED_ENTITY_TYPE"]
 TEI_ATTR_PHN = config['TEI_ATTR_PHN']
 screening_phn = None
+
 # Program Stages
 HLC_SCREENING = config["HLC_SCREENING"]
 FOLLOWUP = config["FOLLOWUP"]
@@ -41,10 +42,19 @@ tei_event_followup = ("Phone_Calls_Completed", "Home_Visits_Completed", "HLC_Vis
 FACILITY = "PKT0010413"
 # Orgunit
 ORGUNIT = "DG1qjOGmxzl"
-# #FHIR Location
-# FACILITY = "PKT0010322"
-# # Orgunit
-# ORGUNIT = "WoFlqQmqtSR"
+
+## Observation types
+FOOT_COMPLICATION=config["foot_complication"]
+# Snowmed Codes
+BLOOD_PRESSURE_CODE=config["BLOOD_PRESSURE_CODE"]
+BLOOD_SUGAR_CODE=config["BLOOD_SUGAR_CODE"]
+RBG_CODE=config["RBG_CODE"]
+HBA1C_CODE=config["HBA1C_CODE"]
+SYSTOLIC_BLOOD_PRESSURE_CODE = config["SYSTOLIC_BLOOD_PRESSURE_CODE"]
+DIASTOLIC_BLOOD_PRESSURE_CODE = config["DIASTOLIC_BLOOD_PRESSURE_CODE"]
+OPHTHALMIC_DISORDER_CODE = config["OPHTHALMIC_DISORDER_CODE"]
+FOOT_COMPLICATION_CODE = config["FOOT_COMPLICATION_CODE"]
+CKD_CODE = config["CKD_CODE"]
 
 # Date range to loop over (2022-09-15 to 2022-09-30)
 start_date_range = datetime(2000, 1, 1)
@@ -71,10 +81,9 @@ def get_nested_value(data, keys, default=None):
 # current_date = start_date_range  03:05
 # START_DATE = current_date.strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = (current_date + timedelta(days=1)).strftime("%Y-%m-%dT00:00:00Z")
-START_DATE = "2017-12-20T00:00:00"
-END_DATE = "2025-03-23T23:59:00"
-# START_DATE = "2024-08-28T00:00:00"
-# END_DATE = "2024-10-28T00:00:00"
+START_DATE = "2025-04-10T00:00:00Z"
+END_DATE = "2025-04-11T00:00:00Z"
+
 print(f"Processing date range: {START_DATE} to {END_DATE}")
     
 # Get Keycloak token
@@ -87,13 +96,13 @@ ACCESS_TOKEN = token_response.json().get("access_token")
 
 # Encounters count
 encounters = requests.get(
-f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&_count=0&date=ge{START_DATE}&date=le{END_DATE}&_tag={FACILITY}&subject=c3e7d6ab-079f-4818-9ccc-dc5ee70d8b68,71725535-f8f4-4ac2-8d5c-5eb7796a0fa8,d6703fd8-2f5b-4d75-8ea6-0c6f6e8f0702,abfba34a-6eb1-4bf1-a4d8-1eb4c45d9b8c,e111f8d3-109d-4319-b12d-e3359fdb544a,eef4604e-47f1-40be-b317-19a815b99b73,013d9ca5-98ca-4964-85c0-89cd6216bc80,b041a441-f03d-437a-b71f-451f91050ff9,d64d2285-7a5a-420d-9b00-2a768865465e,83730f6c-b678-4c5d-ab22-e004a6ef163d,154dc1a0-0f74-4974-8254-6450d23faffc,dc591201-3f46-497a-870e-62f0fb60268b",
+f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&_count=0&date=ge{START_DATE}&date=le{END_DATE}&_tag={FACILITY}",
 headers={"Authorization": f"Bearer {ACCESS_TOKEN}"})
 encounter_count = encounters.json().get("total")
 print("Count: ", encounter_count)
 # FHIR encounters
 encounter_response = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&date=ge{START_DATE}&date=le{END_DATE}&_count={encounter_count}&_tag={FACILITY}&_sort=date&subject=c3e7d6ab-079f-4818-9ccc-dc5ee70d8b68,71725535-f8f4-4ac2-8d5c-5eb7796a0fa8,d6703fd8-2f5b-4d75-8ea6-0c6f6e8f0702,abfba34a-6eb1-4bf1-a4d8-1eb4c45d9b8c,e111f8d3-109d-4319-b12d-e3359fdb544a,eef4604e-47f1-40be-b317-19a815b99b73,013d9ca5-98ca-4964-85c0-89cd6216bc80,b041a441-f03d-437a-b71f-451f91050ff9,d64d2285-7a5a-420d-9b00-2a768865465e,83730f6c-b678-4c5d-ab22-e004a6ef163d,154dc1a0-0f74-4974-8254-6450d23faffc,dc591201-3f46-497a-870e-62f0fb60268b",
+    f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&date=ge{START_DATE}&date=le{END_DATE}&_count={encounter_count}&_tag={FACILITY}&_sort=date",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 
@@ -112,9 +121,12 @@ for encounter_info in encounter_response_bundle:
 
         diabetes_present, hypertension_present = "false", "false"
         blood_pressure_systolic, blood_pressure_diastolic= "", ""
-        blood_sugar_value,  rbg_value = "", ""
+        blood_sugar_value,  rbg_value, hba1c_value = "", "", ""
         foot_complication, ophthalmic_disorder = "", ""
         ckd_value1, ckd_value2, ckd_value3 = "", "", "" 
+        medication_dm_injectable1, medication_dm_injectable2, medication_dm_injectable3 = "","",""
+        medication_dm_oral, medication_dm_oral, medication_dm_oral = "","",""
+        medication_htn1, medication_htn2, medication_htn3 = "","",""
         # encounter_end = encounter_info["resource"]["period"]["end"].split('T')
         patient = None
         if patient_id:
@@ -164,8 +176,9 @@ for encounter_info in encounter_response_bundle:
                 "resourceType": "Bundle",
                 "type": "batch",
                 "entry": [
-                    {"request": {"method": "GET", "url": f"Observation?subject=Patient/{patient_id}&date=ge{encounter_date}&date=le{encounter_dayend}&_tag={FACILITY}&code=271062006,75367002,36228007,284384005,709044004,foot_complication"}},
-                    {"request": {"method": "GET", "url": f"Condition?subject=Patient/{patient_id}&date=ge{encounter_date}&date=le{encounter_dayend}&_tag={FACILITY}"}}
+                    {"request": {"method": "GET", "url": f"Observation?subject=Patient/{patient_id}&date=ge{encounter_date}&date=le{encounter_dayend}&_tag={FACILITY}&code={BLOOD_SUGAR_CODE},{BLOOD_PRESSURE_CODE},{OPHTHALMIC_DISORDER_CODE},{FOOT_COMPLICATION_CODE},{CKD_CODE},{FOOT_COMPLICATION},{RBG_CODE},{HBA1C_CODE}"}},
+                    {"request": {"method": "GET", "url": f"Condition?subject=Patient/{patient_id}&_tag={FACILITY}"}},
+                    {"request": {"method": "GET", "url": f"MedicationRequest?subject=Patient/{patient_id}&_tag={FACILITY}&_lastUpdated=ge{encounter_date}&_lastUpdated=le{encounter_dayend}"}}
                 ]
             }
         
@@ -196,7 +209,7 @@ for encounter_info in encounter_response_bundle:
             for entry_ in bundle["entry"]:
                 
                 # print("test_", entry_)
-                if "entry" in entry_["resource"]:
+                if "entry" in entry_.get("resource", {}):
                     for entry in entry_["resource"]["entry"]:  
                         if entry["resource"]["resourceType"] == "Condition":   
                             condition_resource = entry.get("resource", {})
@@ -209,38 +222,83 @@ for encounter_info in encounter_response_bundle:
                         if entry["resource"]["resourceType"] == "Observation":   
                             observation_resource = entry.get("resource", {})
                             # Blood Sugar Value - you may need to adjust the code based on the LOINC code or system you're using
-                            blood_sugar_code = "271062006"  # LOINC code for blood glucose measurement, replace with relevant code
-                            rbg_code = "271061004" #Random Blood Sugar
+
                             for component in observation_resource.get("component", []):
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == blood_sugar_code:
-                                    blood_sugar_value = component.get("valueQuantity", {}).get("value")
-                                    blood_sugar_value = round(blood_sugar_value)
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == rbg_code:
+                                if component.get("code", {}).get("coding", [{}])[0].get("code") == BLOOD_SUGAR_CODE:
+                                    try:
+                                        blood_sugar_value = observation_resource.get("valueString")
+                                        blood_sugar_value = int(blood_sugar_value)
+                                        blood_sugar_value = round(blood_sugar_value)
+                                    except Exception as e:
+                                        error_message = f"Error bs not a string: {e}, Error"
+                                        print(error_message)
+                                    if blood_sugar_value == "":
+                                        try:
+                                            blood_sugar_value = component.get("valueQuantity", {}).get("value")
+                                            blood_sugar_value = round(blood_sugar_value)
+                                        except Exception as e:
+                                            error_message = f"Error bs not a number: {e}, Error"
+                                            print(error_message) 
+                                    
+                                if component.get("code", {}).get("coding", [{}])[0].get("code") == RBG_CODE:
                                     rbg_value = component.get("valueQuantity", {}).get("value")
                                     rbg_value = round(rbg_value)
-                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == blood_sugar_code:
-                                    blood_sugar_value = observation_resource.get("valueQuantity", {}).get("value")
-                                    blood_sugar_value = round(blood_sugar_value)
-                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == rbg_code:
-                                    rbg_value = observation_resource.get("valueQuantity", {}).get("value")
-                                    rbg_value = round(rbg_value)
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == BLOOD_SUGAR_CODE:
+                                    try:
+                                        blood_sugar_value = observation_resource.get("valueString")
+                                        blood_sugar_value= int(blood_sugar_value) 
+                                        blood_sugar_value = round(blood_sugar_value)
+                                    except Exception as e:
+                                        error_message = f"Error bs not a string: {e}, Error"
+                                        print(error_message)
+                                    if blood_sugar_value == "":
+                                        try:
+                                            blood_sugar_value = observation_resource.get("valueQuantity", {}).get("value")
+                                            blood_sugar_value = round(blood_sugar_value)
+                                        except Exception as e:
+                                            error_message = f"Error bs not a number: {e}, Error"
+                                            print(error_message) 
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == RBG_CODE:
+                                    try:
+                                        rbg_value = observation_resource.get("valueString")
+                                        rbg_value = int(rbg_value)
+                                        rbg_value = round(rbg_value)
+                                    except Exception as e:
+                                        error_message = f"Error rbg not a string: {e}, Error"
+                                        print(error_message)
+                                    if rbg_value == "":
+                                        try:
+                                            rbg_value = observation_resource.get("valueQuantity", {}).get("value")
+                                            rbg_value = round(rbg_value)
+                                        except Exception as e:
+                                            error_message = f"Error rbg not a number: {e}, Error"
+                                            print(error_message) 
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == HBA1C_CODE:
+                                    try:
+                                        hba1c_value = observation_resource.get("valueString")
+                                        hba1c_value = float(hba1c_value)
+                                        # hba1c_value = round(hba1c_value)
+                                    except Exception as e:
+                                        error_message = f"Error hba1c not a string: {e}, Error"
+                                        print(error_message)
+                                    if hba1c_value == "":
+                                        try:
+                                            hba1c_value = observation_resource.get("valueQuantity", {}).get("value")
+                                            hba1c_value = round(hba1c_value)
+                                        except Exception as e:
+                                            error_message = f"Error hba1c not a number: {e}, Error"
+                                            print(error_message) 
 
                             # Blood Pressure Value - usually involves systolic and diastolic measurements
-                            
-                            systolic_blood_pressure_code = "271649006"  # LOINC code for blood pressure, replace with relevant code
-                            diastolic_blood_pressure_code = "271650006"
-                            ophthalmic_disorder_code = "36228007"
-                            foot_complication_code = "284384005"
-                            ckd_code = "709044004"
 
                             for component in observation_resource.get("component", []):
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == systolic_blood_pressure_code:
+                                if component.get("code", {}).get("coding", [{}])[0].get("code") == SYSTOLIC_BLOOD_PRESSURE_CODE:
                                     blood_pressure_systolic = component.get("valueQuantity", {}).get("value")
                                     blood_pressure_systolic = round(blood_pressure_systolic)
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == diastolic_blood_pressure_code:
+                                if component.get("code", {}).get("coding", [{}])[0].get("code") == DIASTOLIC_BLOOD_PRESSURE_CODE:
                                     blood_pressure_diastolic = component.get("valueQuantity", {}).get("value")
                                     blood_pressure_diastolic = round(blood_pressure_diastolic)
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == ophthalmic_disorder_code:
+                                if component.get("code", {}).get("coding", [{}])[0].get("code") == OPHTHALMIC_DISORDER_CODE:
                                     ophthalmic_disorder = component.get("valueCodeableConcept", {}).get("coding", [{}][0]).get("code")
                                     if ophthalmic_disorder == "no":
                                         ophthalmic_disorder = "false"
@@ -248,7 +306,7 @@ for encounter_info in encounter_response_bundle:
                                         ophthalmic_disorder = "true"
                                     else:
                                         ophthalmic_disorder = ""
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == foot_complication_code:
+                                if component.get("code", {}).get("coding", [{}])[0].get("code") == FOOT_COMPLICATION_CODE:
                                     foot_complication = component.get("valueCodeableConcept", {}).get("coding", [{}][0]).get("code")
                                     if foot_complication == "no":
                                         foot_complication = "false"
@@ -264,28 +322,26 @@ for encounter_info in encounter_response_bundle:
                                         foot_complication = "true"
                                     else:
                                         foot_complication = ""
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == ckd_code:
+                                if component.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
                                     ckd_value1 = component.get("valueQuantity", {}).get("value")
-                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == systolic_blood_pressure_code:
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == SYSTOLIC_BLOOD_PRESSURE_CODE:
                                     blood_pressure_systolic = observation_resource.get("valueQuantity", {}).get("value")
                                     blood_pressure_systolic = round(blood_pressure_systolic)
-                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == diastolic_blood_pressure_code:
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == DIASTOLIC_BLOOD_PRESSURE_CODE:
                                     blood_pressure_diastolic = observation_resource.get("valueQuantity", {}).get("value")
                                     blood_pressure_diastolic = round(blood_pressure_diastolic)
 
                             # Eye complications
-                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == ophthalmic_disorder_code:
-                                    ophthalmic_disorder = observation_resource.get("valueCodeableConcept", {}).get("coding", [{}][0]).get("code")
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == OPHTHALMIC_DISORDER_CODE:
+                                    ophthalmic_disorder = observation_resource.get("valueCodeableConcept", {}).get("coding", [{}])[0].get("code")
                                     if ophthalmic_disorder == "no":
                                         ophthalmic_disorder = "false"
                                     elif ophthalmic_disorder == "yes":
                                         ophthalmic_disorder = "true"
-                                    else:
-                                        ophthalmic_disorder = ""
 
                             # Foot complications
-                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == foot_complication_code:
-                                    foot_complication = observation_resource.get("valueCodeableConcept", {}).get("coding", [{}][0]).get("code")
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == FOOT_COMPLICATION_CODE:
+                                    foot_complication = observation_resource.get("valueCodeableConcept", {}).get("coding", [{}])[0].get("code")
                                     if foot_complication == "no":
                                         foot_complication = "false"
                                     elif foot_complication == "yes":
@@ -303,19 +359,21 @@ for encounter_info in encounter_response_bundle:
 
                             # CKD
                             if ckd_value1 == "":
-                                if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == ckd_code:
+                                if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
                                     ckd_value1 = observation_resource.get("valueQuantity", {}).get("value")
+                                    ckd_value1 = float(ckd_value1)
                             elif ckd_value2 == "":
-                                if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == ckd_code:
+                                if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
                                     ckd_value2 = observation_resource.get("valueQuantity", {}).get("value")
+                                    ckd_value2 = float(ckd_value2)
                             elif ckd_value3 == "":
-                                if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == ckd_code:
+                                if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
                                     ckd_value3 = observation_resource.get("valueQuantity", {}).get("value")
-                            # Output the results
-                            # if blood_sugar_value:
-                            #     print(f"Blood Sugar Value: {blood_sugar_value}")
-                            # if blood_pressure_systolic and blood_pressure_diastolic:
-                            #     print(f"Blood Pressure: {blood_pressure_systolic}/{blood_pressure_diastolic}")
+                                    ckd_value3 = float(ckd_value3)
+                        if entry["resource"]["resourceType"] == "MedicationRequest": 
+                            medication_request_resource = entry.get("resource", {})
+                            ckd_value3 = medication_request_resource.get("medicationReference", {}).get("display")
+                            
 
         
             if (tei_id and enrollment):
@@ -329,9 +387,6 @@ for encounter_info in encounter_response_bundle:
                                         {
                                         "dataElement": "lX3Mr4fDzt7",
                                         "value": blood_sugar_value
-                                        },
-                                        {
-                                        "dataElement": "akdaaNwuAWT"
                                         },
                                         {
                                         "dataElement": "ooWz0VBNypG",
@@ -354,20 +409,12 @@ for encounter_info in encounter_response_bundle:
                                         "value": foot_complication
                                         },
                                         {
-                                        "dataElement": "ZH64mqMBDkS",
-                                        "value": ckd_value1
-                                        },
-                                        {
-                                        "dataElement": "q4mxgnjB2Dy",
-                                        "value": ckd_value2
-                                        },
-                                        {
-                                        "dataElement": "UhG7KvnsQBS",
-                                        "value": ckd_value3
-                                        },
-                                        {
                                         "dataElement": "akdaaNwuAWT",
-                                        "value": ckd_value3
+                                        "value": rbg_value
+                                        },
+                                        {
+                                        "dataElement": "kbURDwIMGAX",
+                                        "value": hba1c_value
                                         }
                                     ],
 
@@ -384,13 +431,20 @@ for encounter_info in encounter_response_bundle:
                                 
                 try:
                     print(event_payload)
-                    res = api.post('events', json=event_payload)
-                    if res.status_code == 200:
-                         print("Event creation successful")
-                    if res.status_code != 200:
-                        error_message = f"HLC screening, Followup events creation failed : {res.json()}, Encounter: {encounter_id}"
-                        log_error(error_message)
-                        print(error_message)
+                    # Remove attributes without a "value" key
+                    event_payload["dataValues"] = [de for de in event_payload["dataValues"] if "value" in de]
+                    # res = api.post('events', json=event_payload)
+                    # if res.status_code == 200:
+                    #      print("Event creation successful")
+                    # if res.status_code != 200:
+                    #     error_message = f"HLC screening, Followup events creation failed : {res.json()}, Encounter: {encounter_id}"
+                    #     log_error(error_message)
+                    #     print(error_message)
+                    diabetes_present, hypertension_present = "false", "false"
+                    blood_pressure_systolic, blood_pressure_diastolic= "", ""
+                    blood_sugar_value,  rbg_value, hba1c_value = "", "", ""
+                    foot_complication, ophthalmic_disorder = "", ""
+                    ckd_value1, ckd_value2, ckd_value3 = "", "", "" 
                 except Exception as e:
                     error_message = f"Community screening event failed: : {str(e)}, Encounter: {encounter_id}"
                     print(f"Community screening event create failed: {str(e)}")
