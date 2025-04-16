@@ -157,9 +157,9 @@ for encounter_info in encounter_response_bundle:
             if (tei_id):
                 # Fetch TEI
                 params = {
-                                'fields': 'trackedEntityInstance,enrollment,orgUnit',
-                                'ou': ORGUNIT,
-                                'trackedEntityInstance': tei_id
+                            'fields': 'trackedEntityInstance,enrollment,orgUnit',
+                            'ou': ORGUNIT,
+                            'trackedEntityInstance': tei_id
                 }
                 tei_enrollment = api.get('enrollments', params=params)
                 tei_enrollment_json = tei_enrollment.json()
