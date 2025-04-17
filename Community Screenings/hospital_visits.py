@@ -38,13 +38,17 @@ HLC_SCREENING = config["HLC_SCREENING"]
 FOLLOWUP = config["FOLLOWUP"]
 tei_event_followup = ("Phone_Calls_Completed", "Home_Visits_Completed", "HLC_Visit_Completed")
 
+dm_medication_oral = ("Metformin","Sitagliptin","Glibenclamide")
+dm_medication_injectable = ("Insulinshortacting","Insulinlongacting")
+htn_medication = ("Amlodipine","Atenolol","Captopril","Carvedilol","Hydralazine","Lisinopril","Losartan","Methyldopa","Aspirin","Atorvastatin","Diltiazem","Enalapril maleate","Glyceryl Trinitrate","Hydrochlorothiazide","ISMN","Nifedipine","Prazosin","Propranolol","Spironolactone")
+
 #FHIR Location
 FACILITY = "PKT0010413"
 # Orgunit
 ORGUNIT = "DG1qjOGmxzl"
 
 ## Observation types
-FOOT_COMPLICATION=config["foot_complication"]
+FOOT_COMPLICATION=config["FOOT_COMPLICATION"]
 # Snowmed Codes
 BLOOD_PRESSURE_CODE=config["BLOOD_PRESSURE_CODE"]
 BLOOD_SUGAR_CODE=config["BLOOD_SUGAR_CODE"]
@@ -82,7 +86,7 @@ def get_nested_value(data, keys, default=None):
 # START_DATE = current_date.strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = (current_date + timedelta(days=1)).strftime("%Y-%m-%dT00:00:00Z")
 START_DATE = "2025-04-10T00:00:00Z"
-END_DATE = "2025-04-11T00:00:00Z"
+END_DATE = "2025-04-17T23:59:59Z"
 
 print(f"Processing date range: {START_DATE} to {END_DATE}")
     
@@ -96,13 +100,13 @@ ACCESS_TOKEN = token_response.json().get("access_token")
 
 # Encounters count
 encounters = requests.get(
-f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&_count=0&date=ge{START_DATE}&date=le{END_DATE}&_tag={FACILITY}",
+f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&_count=0&date=ge{START_DATE}&date=le{END_DATE}&_tag={FACILITY}&_tag=2.1.3-diabetesCompassClinic",
 headers={"Authorization": f"Bearer {ACCESS_TOKEN}"})
 encounter_count = encounters.json().get("total")
 print("Count: ", encounter_count)
 # FHIR encounters
 encounter_response = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&date=ge{START_DATE}&date=le{END_DATE}&_count={encounter_count}&_tag={FACILITY}&_sort=date",
+    f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&date=ge{START_DATE}&date=le{END_DATE}&_count={encounter_count}&_tag={FACILITY}&_tag=2.1.3-diabetesCompassClinic&_sort=date",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 
@@ -123,9 +127,10 @@ for encounter_info in encounter_response_bundle:
         blood_pressure_systolic, blood_pressure_diastolic= "", ""
         blood_sugar_value,  rbg_value, hba1c_value = "", "", ""
         foot_complication, ophthalmic_disorder = "", ""
-        ckd_value1, ckd_value2, ckd_value3 = "", "", "" 
+        ckd_value1, ckd_value2, ckd_value3 = "", "", ""
+        medication = ""
         medication_dm_injectable1, medication_dm_injectable2, medication_dm_injectable3 = "","",""
-        medication_dm_oral, medication_dm_oral, medication_dm_oral = "","",""
+        medication_dm_oral1, medication_dm_oral2, medication_dm_oral3 = "","",""
         medication_htn1, medication_htn2, medication_htn3 = "","",""
         # encounter_end = encounter_info["resource"]["period"]["end"].split('T')
         patient = None
@@ -205,7 +210,7 @@ for encounter_info in encounter_response_bundle:
         if event_exist_json['events']:
             events_range = event_exist_json['events']
         # Check if the response contains RiskAssessment resources and extract values
-        if "entry" in bundle and tei_id and enrollment and not events_range:
+        if "entry" in bundle and tei_id and enrollment:
             for entry_ in bundle["entry"]:
                 
                 # print("test_", entry_)
@@ -372,10 +377,30 @@ for encounter_info in encounter_response_bundle:
                                     ckd_value3 = float(ckd_value3)
                         if entry["resource"]["resourceType"] == "MedicationRequest": 
                             medication_request_resource = entry.get("resource", {})
-                            ckd_value3 = medication_request_resource.get("medicationReference", {}).get("display")
+                            medication = medication_request_resource.get("medicationReference", {}).get("display")
+                            if medication in dm_medication_injectable:
+                                if medication_dm_injectable1 == "":
+                                    medication_dm_injectable1 = medication
+                                elif medication_dm_injectable2 == "":
+                                    medication_dm_injectable2 = medication
+                                elif medication_dm_injectable3 == "":
+                                    medication_dm_injectable3 = medication
+                            if medication in dm_medication_oral:
+                                if medication_dm_oral1 == "":
+                                    medication_dm_oral1 = medication
+                                elif medication_dm_oral2 == "":
+                                    medication_dm_oral2 = medication
+                                elif medication_dm_oral3 == "":
+                                    medication_dm_oral3 = medication
+                            if medication in htn_medication:
+                                if medication_htn1 == "":
+                                    htn_medication1 = medication
+                                elif medication_htn2 == "":
+                                    medication_htn2 = medication
+                                elif medication_htn3 == "":
+                                    medication_htn3 = medication
                             
-
-        
+                            
             if (tei_id and enrollment):
                 event_payload = {
                                     
@@ -415,6 +440,42 @@ for encounter_info in encounter_response_bundle:
                                         {
                                         "dataElement": "kbURDwIMGAX",
                                         "value": hba1c_value
+                                        },
+                                        {
+                                        "dataElement": "vNGg7vjAJCN",
+                                        "value": medication_dm_injectable1
+                                        },
+                                        {
+                                        "dataElement": "fiFiMtjC6p2",
+                                        "value": medication_dm_injectable2
+                                        },
+                                        {
+                                        "dataElement": "SLfRrBhmser",
+                                        "value": medication_dm_injectable3
+                                        },
+                                        {
+                                        "dataElement": "l28yuue6vIp",
+                                        "value": medication_dm_oral1
+                                        },
+                                        {
+                                        "dataElement": "qedugIZqhWi",
+                                        "value": medication_dm_oral2
+                                        },
+                                        {
+                                        "dataElement": "X2l64jCBEXu",
+                                        "value": medication_dm_oral3
+                                        },
+                                        {
+                                        "dataElement": "wuWLanPwym8",
+                                        "value": medication_htn1
+                                        },
+                                        {
+                                        "dataElement": "oGlGvYyxWGL",
+                                        "value": medication_htn2
+                                        },
+                                        {
+                                        "dataElement": "lziliDRM4J0",
+                                        "value": medication_htn3
                                         }
                                     ],
 
@@ -425,26 +486,58 @@ for encounter_info in encounter_response_bundle:
                                         "completedDate": encounter_start_date,
                                         "dueDate": encounter_start_date,
                                         "orgUnit": ORGUNIT,
-                                        "trackedEntityInstance": tei_id
-                                    
+                                        "trackedEntityInstance": tei_id                              
                             }
                                 
                 try:
-                    print(event_payload)
+                    # Check for existing events
+                    event_params = {
+                    'fields': 'event, completedDate, orgUnit, trackedEntityInstance, status, eventDate, programStage, program, dataValues[dataElement,value]',
+                    'orgUnit': ORGUNIT,
+                    'trackedEntityInstance': tei_id,
+                    'programStage': 'Qpuicl4a94s',
+                    'program': 'jwn5nGdUepW',
+                    'eventDate': '2025-04-09T00:00:00.000'
+                    }
+                    tei_event_response, hospital_visit_events, res = "", "", ""
+                    try:
+                        tei_event_response = api.get('events', params=event_params)
+                        hospital_visit_events = tei_event_response.json()
+
+                    except Exception as e:
+                        print(f"Hospital visit event fetch failed: {str(e)}")
+
                     # Remove attributes without a "value" key
                     event_payload["dataValues"] = [de for de in event_payload["dataValues"] if "value" in de]
-                    # res = api.post('events', json=event_payload)
-                    # if res.status_code == 200:
-                    #      print("Event creation successful")
-                    # if res.status_code != 200:
-                    #     error_message = f"HLC screening, Followup events creation failed : {res.json()}, Encounter: {encounter_id}"
-                    #     log_error(error_message)
-                    #     print(error_message)
+                    # print("Existing: "+hospital_visit_events['events'][0])
+                    if hospital_visit_events['events']:
+                        hospital_visit_event = hospital_visit_events['events'][0]
+                        event_id = hospital_visit_event['event']
+                        print("Event ID: ", event_id)
+                        res = api.put('events/' + event_id, json=event_payload)
+                        if res.status_code == 200:
+                            print("Event update successful")
+                        if res.status_code != 200:
+                            error_message = f"Hospital visit event update failed : {res.json()}, Encounter: {encounter_id}"
+                            log_error(error_message)
+                            print(error_message)
+                    if not hospital_visit_events['events']:
+                        res = api.post('events', json=event_payload)
+                        if res.status_code == 200:
+                            print("Event creation successful")
+                        if res.status_code != 200:
+                            error_message = f"Hospital visit event events creation failed : {res.json()}, Encounter: {encounter_id}"
+                            log_error(error_message)
+                            print(error_message)
                     diabetes_present, hypertension_present = "false", "false"
                     blood_pressure_systolic, blood_pressure_diastolic= "", ""
                     blood_sugar_value,  rbg_value, hba1c_value = "", "", ""
                     foot_complication, ophthalmic_disorder = "", ""
                     ckd_value1, ckd_value2, ckd_value3 = "", "", "" 
+                    medication = ""
+                    medication_dm_injectable1, medication_dm_injectable2, medication_dm_injectable3 = "","",""
+                    medication_dm_oral1, medication_dm_oral2, medication_dm_oral3 = "","",""
+                    medication_htn1, medication_htn2, medication_htn3 = "","",""
                 except Exception as e:
                     error_message = f"Community screening event failed: : {str(e)}, Encounter: {encounter_id}"
                     print(f"Community screening event create failed: {str(e)}")
