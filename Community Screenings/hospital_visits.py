@@ -5,7 +5,7 @@ import requests
 from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 from dhis2 import Api
-# 9.18
+
 tei_id, org_unit = "", ""
 config = {
     **dotenv_values(".env.shared")
@@ -38,10 +38,12 @@ HLC_SCREENING = config["HLC_SCREENING"]
 FOLLOWUP = config["FOLLOWUP"]
 tei_event_followup = ("Phone_Calls_Completed", "Home_Visits_Completed", "HLC_Visit_Completed")
 
-dm_medication_oral = ("Metformin","Sitagliptin","Glibenclamide")
+dm_medication_oral = ("Metformin","Gliclazide","Sitagliptin","Glibenclamide","Canagliflozin","Dapagliflozin","Empagliflozin","Glimepiride","Linagliptin","Pioglitazone")
 dm_medication_injectable = ("Insulinshortacting","Insulinlongacting")
-htn_medication = ("Amlodipine","Atenolol","Captopril","Carvedilol","Hydralazine","Lisinopril","Losartan","Methyldopa","Aspirin","Atorvastatin","Diltiazem","Enalapril maleate","Glyceryl Trinitrate","Hydrochlorothiazide","ISMN","Nifedipine","Prazosin","Propranolol","Spironolactone")
-
+dm_medication_extention_injectable = ("Insulin, short acting","Insulin, long acting","Mixtard insulin")
+dm_medication_extention = ("Metformin modified release","Metformin sustained release (850 mg)","Gliclazide modified released")
+htn_medication = ("Nifedipine","ISMN","Furosemide","Enalapril maleate","Diltiazem","Amlodipine","Atenolol","Captopril","Carvedilol","Hydralazine","Lisinopril","Losartan","Methyldopa","Aspirin","Atorvastatin","Glyceryl Trinitrate","Hydrochlorothiazide","Prazosin","Propranolol","Spironolactone","Candesartan","Chlortalidone","Imidapril","Ramipril","Perindopril","Olmesartan","Metoprolol","Telmisartan","Isosorbide mononitrate","Clopidogrel","Bisoprolol","Irbesartan","Labetalol","Valsartan","Verapamil")
+htn_medication_extention = ("Nifedipine extended/slow release","Isosorbide mononitrate prolonged-released ", "Furosemide Tablet","Enalapril","Diltiazem long acting/extended-release")
 #FHIR Location
 FACILITY = "PKT0010413"
 # Orgunit
@@ -59,6 +61,7 @@ DIASTOLIC_BLOOD_PRESSURE_CODE = config["DIASTOLIC_BLOOD_PRESSURE_CODE"]
 OPHTHALMIC_DISORDER_CODE = config["OPHTHALMIC_DISORDER_CODE"]
 FOOT_COMPLICATION_CODE = config["FOOT_COMPLICATION_CODE"]
 CKD_CODE = config["CKD_CODE"]
+
 
 # Date range to loop over (2022-09-15 to 2022-09-30)
 start_date_range = datetime(2000, 1, 1)
@@ -85,8 +88,8 @@ def get_nested_value(data, keys, default=None):
 # current_date = start_date_range  03:05
 # START_DATE = current_date.strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = (current_date + timedelta(days=1)).strftime("%Y-%m-%dT00:00:00Z")
-START_DATE = "2025-04-10T00:00:00Z"
-END_DATE = "2025-04-17T23:59:59Z"
+START_DATE = "2023-12-01T23:59:59Z"
+END_DATE = "2024-02-01T23:59:59Z"
 
 print(f"Processing date range: {START_DATE} to {END_DATE}")
     
@@ -100,13 +103,13 @@ ACCESS_TOKEN = token_response.json().get("access_token")
 
 # Encounters count
 encounters = requests.get(
-f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&_count=0&date=ge{START_DATE}&date=le{END_DATE}&_tag={FACILITY}&_tag=2.1.3-diabetesCompassClinic",
+f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&_count=0&date=ge{START_DATE}&date=le{END_DATE}&_tag={FACILITY}&_tag:not=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass",
 headers={"Authorization": f"Bearer {ACCESS_TOKEN}"})
 encounter_count = encounters.json().get("total")
 print("Count: ", encounter_count)
 # FHIR encounters
 encounter_response = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&date=ge{START_DATE}&date=le{END_DATE}&_count={encounter_count}&_tag={FACILITY}&_tag=2.1.3-diabetesCompassClinic&_sort=date",
+    f"{FHIR_SERVER_URL}/fhir/Encounter?type=184047000,facility_visit,FOLLOWUP&date=ge{START_DATE}&date=le{END_DATE}&_count={encounter_count}&_tag={FACILITY}&_tag:not=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass&_sort=date",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 
@@ -124,14 +127,15 @@ for encounter_info in encounter_response_bundle:
         print("start: ", encounter_date, " end: ", encounter_dayend)
 
         diabetes_present, hypertension_present = "false", "false"
-        blood_pressure_systolic, blood_pressure_diastolic= "", ""
-        blood_sugar_value,  rbg_value, hba1c_value = "", "", ""
-        foot_complication, ophthalmic_disorder = "", ""
-        ckd_value1, ckd_value2, ckd_value3 = "", "", ""
-        medication = ""
-        medication_dm_injectable1, medication_dm_injectable2, medication_dm_injectable3 = "","",""
-        medication_dm_oral1, medication_dm_oral2, medication_dm_oral3 = "","",""
-        medication_htn1, medication_htn2, medication_htn3 = "","",""
+        blood_pressure_systolic, blood_pressure_diastolic= None, None
+        blood_sugar_value,  rbg_value, hba1c_value = None, None, None
+        foot_complication, ophthalmic_disorder = None, None
+        ckd_value1, ckd_value2, ckd_value3 = None, None, None
+        medication = None
+        medication_dm_injectable1, medication_dm_injectable2, medication_dm_injectable3 = None, None, None
+        medication_dm_oral1, medication_dm_oral2, medication_dm_oral3 = None, None, None
+        medication_htn1, medication_htn2, medication_htn3 = None, None, None
+        medication_other = None
         # encounter_end = encounter_info["resource"]["period"]["end"].split('T')
         patient = None
         if patient_id:
@@ -183,7 +187,7 @@ for encounter_info in encounter_response_bundle:
                 "entry": [
                     {"request": {"method": "GET", "url": f"Observation?subject=Patient/{patient_id}&date=ge{encounter_date}&date=le{encounter_dayend}&_tag={FACILITY}&code={BLOOD_SUGAR_CODE},{BLOOD_PRESSURE_CODE},{OPHTHALMIC_DISORDER_CODE},{FOOT_COMPLICATION_CODE},{CKD_CODE},{FOOT_COMPLICATION},{RBG_CODE},{HBA1C_CODE}"}},
                     {"request": {"method": "GET", "url": f"Condition?subject=Patient/{patient_id}&_tag={FACILITY}"}},
-                    {"request": {"method": "GET", "url": f"MedicationRequest?subject=Patient/{patient_id}&_tag={FACILITY}&_lastUpdated=ge{encounter_date}&_lastUpdated=le{encounter_dayend}"}}
+                    {"request": {"method": "GET", "url": f"MedicationRequest?subject=Patient/{patient_id}&_tag={FACILITY}&authoredon=ge{encounter_date}&authoredon=le{encounter_dayend}"}}
                 ]
             }
         
@@ -228,26 +232,38 @@ for encounter_info in encounter_response_bundle:
                             observation_resource = entry.get("resource", {})
                             # Blood Sugar Value - you may need to adjust the code based on the LOINC code or system you're using
 
-                            for component in observation_resource.get("component", []):
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == BLOOD_SUGAR_CODE:
-                                    try:
-                                        blood_sugar_value = observation_resource.get("valueString")
-                                        blood_sugar_value = int(blood_sugar_value)
-                                        blood_sugar_value = round(blood_sugar_value)
-                                    except Exception as e:
-                                        error_message = f"Error bs not a string: {e}, Error"
-                                        print(error_message)
-                                    if blood_sugar_value == "":
-                                        try:
-                                            blood_sugar_value = component.get("valueQuantity", {}).get("value")
-                                            blood_sugar_value = round(blood_sugar_value)
-                                        except Exception as e:
-                                            error_message = f"Error bs not a number: {e}, Error"
-                                            print(error_message) 
+                            # for component in observation_resource.get("component", []):
+                            #     if component.get("code", {}).get("coding", [{}])[0].get("code") == BLOOD_SUGAR_CODE:
+                            #         try:
+                            #             blood_sugar_value = observation_resource.get("valueString")
+                            #             blood_sugar_value = int(blood_sugar_value)
+                            #             blood_sugar_value = round(blood_sugar_value)
+                            #         except Exception as e:
+                            #             error_message = f"Error BS not a string: {e}, Error"
+                            #             print(error_message)
+                            #         if blood_sugar_value == None:
+                            #             try:
+                            #                 blood_sugar_value = component.get("valueQuantity", {}).get("value")
+                            #             except Exception as e:
+                            #                 error_message = f"Error BS not a number: {e}, Error"
+                            #                 print(error_message) 
                                     
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == RBG_CODE:
-                                    rbg_value = component.get("valueQuantity", {}).get("value")
-                                    rbg_value = round(rbg_value)
+                            #     if component.get("code", {}).get("coding", [{}])[0].get("code") == RBG_CODE:
+                            #         try:
+                            #             rbg_value = component.get("valueString")
+                            #             rbg_value = int(rbg_value)
+                            #             rbg_value = round(rbg_value)
+                            #         except Exception as e:
+                            #             error_message = f"Error RBG not a String: {e}, Error"
+                            #             print(error_message)
+                            #         if blood_sugar_value == None:
+                            #             try:
+                            #                 rbg_value = component.get("valueQuantity", {}).get("value")
+                            #                 rbg_value = round(rbg_value)
+                            #             except Exception as e:
+                            #                 error_message = f"Error RBG not a number: {e}, Error"
+                            #                 print(error_message)
+                                    
                             if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == BLOOD_SUGAR_CODE:
                                     try:
                                         blood_sugar_value = observation_resource.get("valueString")
@@ -256,7 +272,7 @@ for encounter_info in encounter_response_bundle:
                                     except Exception as e:
                                         error_message = f"Error bs not a string: {e}, Error"
                                         print(error_message)
-                                    if blood_sugar_value == "":
+                                    if blood_sugar_value == None:
                                         try:
                                             blood_sugar_value = observation_resource.get("valueQuantity", {}).get("value")
                                             blood_sugar_value = round(blood_sugar_value)
@@ -269,24 +285,24 @@ for encounter_info in encounter_response_bundle:
                                         rbg_value = int(rbg_value)
                                         rbg_value = round(rbg_value)
                                     except Exception as e:
-                                        error_message = f"Error rbg not a string: {e}, Error"
+                                        error_message = f"Error RBG not a string: {e}, Error"
                                         print(error_message)
-                                    if rbg_value == "":
+                                    if rbg_value == None:
                                         try:
                                             rbg_value = observation_resource.get("valueQuantity", {}).get("value")
                                             rbg_value = round(rbg_value)
                                         except Exception as e:
-                                            error_message = f"Error rbg not a number: {e}, Error"
+                                            error_message = f"Error RBG not a number: {e}, Error"
                                             print(error_message) 
                             if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == HBA1C_CODE:
                                     try:
                                         hba1c_value = observation_resource.get("valueString")
                                         hba1c_value = float(hba1c_value)
-                                        # hba1c_value = round(hba1c_value)
+                                        hba1c_value = round(hba1c_value)
                                     except Exception as e:
                                         error_message = f"Error hba1c not a string: {e}, Error"
                                         print(error_message)
-                                    if hba1c_value == "":
+                                    if hba1c_value == None:
                                         try:
                                             hba1c_value = observation_resource.get("valueQuantity", {}).get("value")
                                             hba1c_value = round(hba1c_value)
@@ -302,33 +318,9 @@ for encounter_info in encounter_response_bundle:
                                     blood_pressure_systolic = round(blood_pressure_systolic)
                                 if component.get("code", {}).get("coding", [{}])[0].get("code") == DIASTOLIC_BLOOD_PRESSURE_CODE:
                                     blood_pressure_diastolic = component.get("valueQuantity", {}).get("value")
-                                    blood_pressure_diastolic = round(blood_pressure_diastolic)
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == OPHTHALMIC_DISORDER_CODE:
-                                    ophthalmic_disorder = component.get("valueCodeableConcept", {}).get("coding", [{}][0]).get("code")
-                                    if ophthalmic_disorder == "no":
-                                        ophthalmic_disorder = "false"
-                                    elif ophthalmic_disorder == "yes":
-                                        ophthalmic_disorder = "true"
-                                    else:
-                                        ophthalmic_disorder = ""
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == FOOT_COMPLICATION_CODE:
-                                    foot_complication = component.get("valueCodeableConcept", {}).get("coding", [{}][0]).get("code")
-                                    if foot_complication == "no":
-                                        foot_complication = "false"
-                                    elif foot_complication == "yes":
-                                        foot_complication = "true"
-                                    else:
-                                        foot_complication = ""
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == "foot_complication":
-                                    foot_complication = component.get("valueString")
-                                    if foot_complication == "no":
-                                        foot_complication = "false"
-                                    elif foot_complication == "yes":
-                                        foot_complication = "true"
-                                    else:
-                                        foot_complication = ""
-                                if component.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
-                                    ckd_value1 = component.get("valueQuantity", {}).get("value")
+                                    blood_pressure_diastolic = round(blood_pressure_diastolic)            
+                                
+                            # BP
                             if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == SYSTOLIC_BLOOD_PRESSURE_CODE:
                                     blood_pressure_systolic = observation_resource.get("valueQuantity", {}).get("value")
                                     blood_pressure_systolic = round(blood_pressure_systolic)
@@ -352,26 +344,26 @@ for encounter_info in encounter_response_bundle:
                                     elif foot_complication == "yes":
                                         foot_complication = "true"
                                     else:
-                                        foot_complication = ""
-                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == "foot_complication":
+                                        foot_complication = None
+                            if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == FOOT_COMPLICATION:
                                     foot_complication = observation_resource.get("valueString")
                                     if foot_complication == "no":
                                         foot_complication = "false"
                                     elif foot_complication == "yes":
                                         foot_complication = "true"
                                     else:
-                                        foot_complication = ""
+                                        foot_complication = None
 
                             # CKD
-                            if ckd_value1 == "":
+                            if ckd_value1 == None:
                                 if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
                                     ckd_value1 = observation_resource.get("valueQuantity", {}).get("value")
                                     ckd_value1 = float(ckd_value1)
-                            elif ckd_value2 == "":
+                            elif ckd_value2 == None:
                                 if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
                                     ckd_value2 = observation_resource.get("valueQuantity", {}).get("value")
                                     ckd_value2 = float(ckd_value2)
-                            elif ckd_value3 == "":
+                            elif ckd_value3 == None:
                                 if observation_resource.get("code", {}).get("coding", [{}])[0].get("code") == CKD_CODE:
                                     ckd_value3 = observation_resource.get("valueQuantity", {}).get("value")
                                     ckd_value3 = float(ckd_value3)
@@ -379,27 +371,53 @@ for encounter_info in encounter_response_bundle:
                             medication_request_resource = entry.get("resource", {})
                             medication = medication_request_resource.get("medicationReference", {}).get("display")
                             if medication in dm_medication_injectable:
-                                if medication_dm_injectable1 == "":
+                                if medication == dm_medication_extention_injectable[0]:
+                                    medication = dm_medication_injectable[0]
+                                elif medication == dm_medication_extention_injectable[1]:
+                                    medication = dm_medication_injectable[1]
+                                elif medication == dm_medication_extention_injectable[2]:
+                                    medication = dm_medication_injectable[0]
+
+                                if medication_dm_injectable1 == None:
                                     medication_dm_injectable1 = medication
-                                elif medication_dm_injectable2 == "":
+                                elif medication_dm_injectable2 == None:
                                     medication_dm_injectable2 = medication
-                                elif medication_dm_injectable3 == "":
+                                elif medication_dm_injectable3 == None:
                                     medication_dm_injectable3 = medication
-                            if medication in dm_medication_oral:
-                                if medication_dm_oral1 == "":
+                                
+                            if medication in dm_medication_oral or medication in dm_medication_extention:
+                                if medication == dm_medication_extention[0] or medication == dm_medication_extention[1]:
+                                    medication = dm_medication_oral[0]
+                                elif medication == dm_medication_extention[2]:
+                                    medication = dm_medication_oral[1]
+                                    
+                                if medication_dm_oral1 == None:
                                     medication_dm_oral1 = medication
-                                elif medication_dm_oral2 == "":
+                                elif medication_dm_oral2 == None:
                                     medication_dm_oral2 = medication
-                                elif medication_dm_oral3 == "":
+                                elif medication_dm_oral3 == None:
                                     medication_dm_oral3 = medication
-                            if medication in htn_medication:
-                                if medication_htn1 == "":
+
+                            if medication in htn_medication or medication in htn_medication_extention:
+                                if medication == htn_medication_extention[0]:
+                                    medication = htn_medication[0]
+                                elif medication == htn_medication_extention[1]:
+                                    medication = htn_medication[1]
+                                elif medication == htn_medication_extention[2]:
+                                    medication = htn_medication[2]
+                                elif medication == htn_medication_extention[4]:
+                                    medication = htn_medication[4]
+
+                                if medication_htn1 == None:
                                     htn_medication1 = medication
-                                elif medication_htn2 == "":
+                                elif medication_htn2 == None:
                                     medication_htn2 = medication
-                                elif medication_htn3 == "":
+                                elif medication_htn3 == None:
                                     medication_htn3 = medication
-                            
+
+                            if medication not in dm_medication_injectable or medication not in dm_medication_extention_injectable or medication not in dm_medication_oral or medication not in dm_medication_extention or medication not in htn_medication or medication not in htn_medication_extention:
+                                medication_other = medication_other + ", " + medication
+
                             
             if (tei_id and enrollment):
                 event_payload = {
@@ -476,6 +494,10 @@ for encounter_info in encounter_response_bundle:
                                         {
                                         "dataElement": "lziliDRM4J0",
                                         "value": medication_htn3
+                                        },
+                                        {
+                                        "dataElement": "muOBWtJfqkK",
+                                        "value": medication_other
                                         }
                                     ],
 
@@ -491,13 +513,15 @@ for encounter_info in encounter_response_bundle:
                                 
                 try:
                     # Check for existing events
+                    print(patient_id)
                     event_params = {
                     'fields': 'event, completedDate, orgUnit, trackedEntityInstance, status, eventDate, programStage, program, dataValues[dataElement,value]',
                     'orgUnit': ORGUNIT,
                     'trackedEntityInstance': tei_id,
                     'programStage': 'Qpuicl4a94s',
                     'program': 'jwn5nGdUepW',
-                    'eventDate': '2025-04-09T00:00:00.000'
+                    'startDate': encounter_date,
+                    'endDate': encounter_dayend
                     }
                     tei_event_response, hospital_visit_events, res = "", "", ""
                     try:
@@ -508,13 +532,17 @@ for encounter_info in encounter_response_bundle:
                         print(f"Hospital visit event fetch failed: {str(e)}")
 
                     # Remove attributes without a "value" key
-                    event_payload["dataValues"] = [de for de in event_payload["dataValues"] if "value" in de]
+                    # event_payload["dataValues"] = [de for de in event_payload["dataValues"] if "value" in de]
+                    event_payload["dataValues"] = [de for de in event_payload["dataValues"] if de.get("value") not in [None, ""]]
+
+                    print(hospital_visit_events)
                     # print("Existing: "+hospital_visit_events['events'][0])
                     if hospital_visit_events['events']:
                         hospital_visit_event = hospital_visit_events['events'][0]
                         event_id = hospital_visit_event['event']
                         print("Event ID: ", event_id)
                         res = api.put('events/' + event_id, json=event_payload)
+                        # res = api.delete('events/' + event_id)
                         if res.status_code == 200:
                             print("Event update successful")
                         if res.status_code != 200:
@@ -529,15 +557,18 @@ for encounter_info in encounter_response_bundle:
                             error_message = f"Hospital visit event events creation failed : {res.json()}, Encounter: {encounter_id}"
                             log_error(error_message)
                             print(error_message)
+
+                    print(event_payload)
                     diabetes_present, hypertension_present = "false", "false"
-                    blood_pressure_systolic, blood_pressure_diastolic= "", ""
-                    blood_sugar_value,  rbg_value, hba1c_value = "", "", ""
-                    foot_complication, ophthalmic_disorder = "", ""
-                    ckd_value1, ckd_value2, ckd_value3 = "", "", "" 
-                    medication = ""
-                    medication_dm_injectable1, medication_dm_injectable2, medication_dm_injectable3 = "","",""
-                    medication_dm_oral1, medication_dm_oral2, medication_dm_oral3 = "","",""
-                    medication_htn1, medication_htn2, medication_htn3 = "","",""
+                    blood_pressure_systolic, blood_pressure_diastolic= None, None
+                    blood_sugar_value,  rbg_value, hba1c_value = None, None, None
+                    foot_complication, ophthalmic_disorder = None, None
+                    ckd_value1, ckd_value2, ckd_value3 = None, None, None 
+                    medication = None
+                    medication_dm_injectable1, medication_dm_injectable2, medication_dm_injectable3,medication_dm_injectable = None, None, None
+                    medication_dm_oral1, medication_dm_oral2, medication_dm_oral3 = None, None, None
+                    medication_htn1, medication_htn2, medication_htn3 = None, None, None
+                    medication_other = None
                 except Exception as e:
                     error_message = f"Community screening event failed: : {str(e)}, Encounter: {encounter_id}"
                     print(f"Community screening event create failed: {str(e)}")
