@@ -68,8 +68,8 @@ GRANT_TYPE = os.getenv("GRANT_TYPE")
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-START_DATE = "2025-04-09T00:00:00Z"
-END_DATE = "2025-04-10T00:00:00Z"
+START_DATE = "2025-05-15T00:00:00Z"
+END_DATE = "2025-07-01T00:00:00Z"
 
 
 # DHIS2
