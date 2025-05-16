@@ -68,8 +68,8 @@ GRANT_TYPE = os.getenv("GRANT_TYPE")
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-START_DATE = "2025-05-01T00:00:00Z"
-END_DATE = "2025-07-01T00:00:00Z"
+START_DATE = "2025-05-16T00:00:00Z"
+END_DATE = "2025-05-17T00:00:00Z"
 
 
 # DHIS2
@@ -162,7 +162,7 @@ with open("orgunits.json") as f:
 ##### Patient setup #####
 
 patients_response = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/Patient?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass",
+    f"{FHIR_SERVER_URL}/fhir/Patient?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass,2.1.3-diabetesCompass",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 patients_data = patients_response.json()
@@ -176,7 +176,7 @@ for patient_info in patients_bundle:
 
     # Extract the Practitioner Location code
     practitioner_location_code = next((tag["code"] for tag in patient_resource["meta"]["tag"] if tag["system"] == "https://smartregister.org/location-tag-id"), None)
-    
+    print("practitioner_location_code: ", practitioner_location_code)
     # Fetch the location
     ou_params = {
         'filter': 'code' + ':eq:' + practitioner_location_code
@@ -217,7 +217,7 @@ for patient_info in patients_bundle:
         error_message = f"TEI mapping error: {e}, Patient Id: {patient_id}, Error: {mapping_response.json()}"
         log_error(error_message)
         continue
-    if patient_origin == "2.0.2-diabetesCompass" or patient_origin == "2.0.0-diabetesCompass" or patient_origin == "2.1.1-diabetesCompass" or patient_origin == "2.1.0-diabetesCompass":
+    if patient_origin == "2.0.2-diabetesCompass" or patient_origin == "2.0.0-diabetesCompass" or patient_origin == "2.1.1-diabetesCompass" or patient_origin == "2.1.0-diabetesCompass" or patient_origin == "2.1.3-diabetesCompass":
         data_origin = "Community_Screening_App"
     else:
         data_origin = "Clinic_App"
@@ -238,7 +238,7 @@ for patient_info in patients_bundle:
         event_date = None
         try:
             encounters = requests.get(
-                f"{FHIR_SERVER_URL}/fhir/Encounter?subject={patient_id}&type=184047000&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass",
+                f"{FHIR_SERVER_URL}/fhir/Encounter?subject={patient_id}&type=184047000&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass,2.1.3-diabetesCompass",
                 headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
             )
             encounter_response_data = encounters.json()
@@ -331,7 +331,7 @@ refer = None
 patient_id = None
 ### Community Screening ###
 questionnaireResponse = requests.get(
-    f"{FHIR_SERVER_URL}/fhir/QuestionnaireResponse?_count=4000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&questionnaire=dc-diabetes-screening&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass",
+    f"{FHIR_SERVER_URL}/fhir/QuestionnaireResponse?_count=4000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&questionnaire=dc-diabetes-screening&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass,2.1.3-diabetesCompass",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
 
