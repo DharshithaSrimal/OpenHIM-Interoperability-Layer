@@ -68,8 +68,8 @@ GRANT_TYPE = os.getenv("GRANT_TYPE")
 
 # START_DATE = datetime.now().strftime("%Y-%m-%dT00:00:00Z")
 # END_DATE = datetime.now().strftime("%Y-%m-%dT23:59:59Z")
-START_DATE = "2025-05-16T00:00:00Z"
-END_DATE = "2025-05-17T00:00:00Z"
+START_DATE = "2025-05-29T00:00:00Z"
+END_DATE = "2025-06-02T00:00:00Z"
 
 
 # DHIS2
@@ -165,6 +165,10 @@ patients_response = requests.get(
     f"{FHIR_SERVER_URL}/fhir/Patient?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&_tag=2.0.0-diabetesCompass,2.0.2-diabetesCompass,2.1.0-diabetesCompass,2.1.1-diabetesCompass,2.1.3-diabetesCompass",
     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
 )
+# patients_response = requests.get(
+#     f"{FHIR_SERVER_URL}/fhir/Patient?_count=1000&_lastUpdated=ge{START_DATE}&_lastUpdated=le{END_DATE}&_tag=gnd-700,gnd-705,706A",
+#     headers={"Authorization": f"Bearer {ACCESS_TOKEN}"}
+# )
 patients_data = patients_response.json()
 patients_bundle = patients_data.get("entry", [])
 
@@ -265,6 +269,7 @@ for patient_info in patients_bundle:
     tei_response = api.get('trackedEntityInstances', params=params)
     tei_response_json = tei_response.json()
     print("Res: ", tei_response_json)
+    # if tei_response_json['trackedEntityInstances']:
     if not tei_response_json['trackedEntityInstances']:
         print("Patient2: ", patient_id)
         tei_post_response = ''
@@ -306,9 +311,13 @@ for patient_info in patients_bundle:
             }]}
             
             # hlc_event_data_json = hlc_event_data.json()
-            res = api.post('events', json=hlc_event_data)
-            if res.status_code != 200:
-                print("HLC screening, Followup events creation failed ", res)
+            try:
+                res = api.post('events', json=hlc_event_data)
+                if res.status_code != 200:
+                    print("HLC screening, Followup events creation failed ", res)
+            except Exception as e:
+                print(f"TEI Registration Failed: {str(e)}")
+            
 
             # mapping__ = requests.post(
             #     "http://localhost:5001/dhis2",
@@ -317,11 +326,20 @@ for patient_info in patients_bundle:
             #     json=hlc_event_data
             # )
             
-    # else:
-    #     # Send PATCH request to update the existing TEI
-    #     tei_id = tei_response_json['trackedEntityInstances'][0]['trackedEntityInstance']
-    #     patch_endpoint = "trackedEntityInstances/" + tei_id
-    #     # patch_response = api.put(patch_endpoint, json=mapping_result)
+    if tei_response_json['trackedEntityInstances']:
+        # Send PATCH request to update the existing TEI
+        tei_id = tei_response_json['trackedEntityInstances'][0]['trackedEntityInstance']
+        put_endpoint = "trackedEntityInstances/" + tei_id
+        put_response = ""
+        try:
+            put_response = api.put(put_endpoint, json=mapping_result)
+            if put_response.status_code != 200:
+                    print(f"TEI Registration update failed: ", put_response.json())
+            else:
+                    print("Update Success")
+                    time.sleep(1)
+        except Exception as e:
+                print(f"TEI Update Failed: {str(e)}")
 
 # List to hold the tracked entity instances
 tracked_entity_instances = []
